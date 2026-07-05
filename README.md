@@ -38,7 +38,7 @@ _source/                      기존 사이트 원본 HTML + 원본 이미지 29
 ## 디자인 시스템
 
 - **컬러:** Charcoal Void `#141414` / Graphite `#1E1E1E` / Steel `#262626` / Bright Alloy `#F5F5F5` / Muted Zinc `#8A8A8A` / **Arterial Red `#C8102E`** (단일 액센트)
-- **타이포:** Space Grotesk (헤드라인) · Pretendard (본문) · JetBrains Mono (스펙·수치)
+- **타이포:** Pretendard 단일 통일 (헤드라인·본문·수치), 수치는 tabular-nums로 정렬. 한글 줄바꿈은 `word-break: keep-all`
 - **언어:** 한국어 기본 / 영어 토글 (`KO · EN`, 로컬스토리지 유지)
 
 ## 개발

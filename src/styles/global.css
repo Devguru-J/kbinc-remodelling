@@ -4,9 +4,19 @@
 
 :root { color-scheme: dark; }
 html { scroll-behavior: smooth; }
-body { font-family: "Pretendard Variable", Pretendard, "Hanken Grotesk", sans-serif; }
-.font-display { font-family: "Space Grotesk", "Pretendard Variable", sans-serif; }
-.font-mono { font-family: "JetBrains Mono", "Pretendard Variable", monospace; }
+
+/* Unified typography — Pretendard everywhere */
+body {
+  font-family: "Pretendard Variable", Pretendard, sans-serif;
+  word-break: keep-all;      /* 한글 단어 단위 줄바꿈 */
+  overflow-wrap: break-word; /* 긴 영문/URL 토큰은 필요 시 분리 */
+}
+.font-display { font-family: "Pretendard Variable", Pretendard, sans-serif; }
+.font-mono {
+  font-family: "Pretendard Variable", Pretendard, sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
 
 /* Language toggle: show one language at a time */
 .lang-en [data-ko-only] { display: none !important; }
@@ -46,8 +56,10 @@ html:not(.lang-en) [data-en-only] { display: none !important; }
 .spec-table th, .spec-table td {
   border: 1px solid rgba(245,245,245,0.10);
   padding: 0.7rem 1rem;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 13px;
+  font-family: "Pretendard Variable", Pretendard, sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  font-size: 13.5px;
   vertical-align: top;
 }
 .spec-table thead th { background: #262626; color: #F5F5F5; text-align: left; letter-spacing: 0.02em; }

@@ -18,9 +18,9 @@ export default {
       maxWidth: { container: '1400px' },
       spacing: { 'section-v': 'clamp(4rem, 10vw, 8rem)', gutter: '1.5rem' },
       fontFamily: {
-        display: ['Space Grotesk', 'Pretendard Variable', 'Pretendard', 'sans-serif'],
-        body: ['Pretendard Variable', 'Pretendard', 'Hanken Grotesk', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Pretendard Variable', 'monospace'],
+        display: ['Pretendard Variable', 'Pretendard', 'sans-serif'],
+        body: ['Pretendard Variable', 'Pretendard', 'sans-serif'],
+        mono: ['Pretendard Variable', 'Pretendard', 'sans-serif'],
       },
       letterSpacing: { tightest: '-0.03em' },
       keyframes: {
