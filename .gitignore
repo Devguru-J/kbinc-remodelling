@@ -1,0 +1,16 @@
+# dependencies
+node_modules/
+
+# build output (Astro, later)
+dist/
+.astro/
+
+# os / editor
+.DS_Store
+Thumbs.db
+*.log
+
+# env
+.env
+.env.*
+!.env.example

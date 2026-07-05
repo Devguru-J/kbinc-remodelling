@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html class="dark" lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>문의 | 케이비(주) KB Inc.</title>
+<meta name="description" content="케이비(주) 제품·견적 문의. 전화 031-357-4250 · kbi@kbinc.kr" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="assets/js/theme.js"></script>
+<link href="assets/css/custom.css" rel="stylesheet" />
+</head>
+<body class="bg-charcoal-void text-bright-alloy min-h-screen flex flex-col antialiased">
+
+<!-- ================= NAV ================= -->
+<header class="fixed top-0 inset-x-0 z-50 border-b border-hairline-steel bg-charcoal-void/95 backdrop-blur">
+  <div class="max-w-container mx-auto px-gutter h-16 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2.5 font-display font-bold text-lg tracking-tightest text-bright-alloy">
+      <span class="text-arterial-red">/</span>
+      <span>케이비<span class="text-muted-zinc">(주)</span></span>
+      <span class="text-muted-zinc font-mono text-xs tracking-widest pt-0.5">KB INC.</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-9 font-mono text-[13px]">
+      <a href="about.html" class="text-muted-zinc hover:text-bright-alloy transition-colors"><span data-ko-only>회사소개</span><span data-en-only>ABOUT</span></a>
+      <a href="products.html" class="text-muted-zinc hover:text-bright-alloy transition-colors"><span data-ko-only>제품소개</span><span data-en-only>PRODUCTS</span></a>
+      <a href="location.html" class="text-muted-zinc hover:text-bright-alloy transition-colors"><span data-ko-only>오시는 길</span><span data-en-only>LOCATION</span></a>
+      <a href="contact.html" class="text-bright-alloy border-b-2 border-arterial-red pb-1"><span data-ko-only>문의</span><span data-en-only>CONTACT</span></a>
+    </nav>
+    <div class="flex items-center gap-4">
+      <button data-lang-toggle class="font-mono text-xs tracking-widest border-l border-hairline-steel pl-4">
+        <span data-ko class="text-bright-alloy">KO</span><span class="text-muted-zinc"> / </span><span data-en class="text-muted-zinc">EN</span>
+      </button>
+      <button data-menu-toggle class="md:hidden text-bright-alloy" aria-label="menu"><span class="material-symbols-outlined">menu</span></button>
+    </div>
+  </div>
+  <div id="mobile-nav" class="hidden md:hidden border-t border-hairline-steel bg-charcoal-void px-gutter py-4 flex-col gap-4 font-mono text-sm">
+    <a href="about.html" class="block py-2 text-muted-zinc"><span data-ko-only>회사소개</span><span data-en-only>ABOUT</span></a>
+    <a href="products.html" class="block py-2 text-muted-zinc"><span data-ko-only>제품소개</span><span data-en-only>PRODUCTS</span></a>
+    <a href="location.html" class="block py-2 text-muted-zinc"><span data-ko-only>오시는 길</span><span data-en-only>LOCATION</span></a>
+    <a href="contact.html" class="block py-2 text-bright-alloy"><span data-ko-only>문의</span><span data-en-only>CONTACT</span></a>
+  </div>
+</header>
+
+<main class="flex-grow pt-16">
+
+<!-- ================= PAGE HEADER ================= -->
+<section class="border-b border-hairline-steel relative overflow-hidden">
+  <div class="absolute top-0 right-0 w-1/2 h-full bg-graphite-surface opacity-40 -skew-x-12 translate-x-1/3 pointer-events-none"></div>
+  <div class="relative z-10 max-w-container mx-auto px-gutter pt-20 pb-16" data-reveal>
+    <p class="font-mono text-[13px] text-arterial-red mb-4 flex items-center gap-3"><span class="w-8 h-px bg-arterial-red"></span>문의 / CONTACT</p>
+    <h1 class="font-display font-bold text-bright-alloy tracking-tightest text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.1]">
+      <span data-ko-only>제품·견적 문의</span><span data-en-only>Product &amp; quote inquiry</span>
+    </h1>
+    <p class="text-muted-zinc text-lg mt-5 max-w-2xl leading-relaxed">
+      <span data-ko-only>필요하신 제품과 사양을 남겨주시면 담당자가 신속히 회신드립니다.</span>
+      <span data-en-only>Tell us the product and specification you need — our team will respond promptly.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ================= CONTACT + FORM ================= -->
+<section class="border-b border-hairline-steel">
+  <div class="max-w-container mx-auto px-gutter py-section-v grid lg:grid-cols-[minmax(0,20rem)_1fr] gap-10 lg:gap-20">
+    <!-- direct contact -->
+    <div class="flex flex-col gap-8" data-reveal>
+      <div>
+        <p class="font-mono text-[13px] text-arterial-red mb-3">DIRECT</p>
+        <h2 class="font-display font-bold text-2xl text-bright-alloy"><span data-ko-only>바로 연락하기</span><span data-en-only>Reach us directly</span></h2>
+      </div>
+      <div class="flex flex-col gap-5">
+        <a href="tel:0313574250" class="border-t border-hairline-steel pt-4 group">
+          <span class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc block mb-2">TEL</span>
+          <span class="font-mono text-lg text-bright-alloy group-hover:text-arterial-red transition-colors">031-357-4250</span>
+        </a>
+        <div class="border-t border-hairline-steel pt-4">
+          <span class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc block mb-2">FAX</span>
+          <span class="font-mono text-lg text-bright-alloy">031-357-7250</span>
+        </div>
+        <a href="mailto:kbi@kbinc.kr" class="border-t border-hairline-steel pt-4 group">
+          <span class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc block mb-2">EMAIL</span>
+          <span class="font-mono text-lg text-bright-alloy group-hover:text-arterial-red transition-colors">kbi@kbinc.kr</span>
+        </a>
+        <div class="border-t border-hairline-steel pt-4">
+          <span class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc block mb-2"><span data-ko-only>주소</span><span data-en-only>ADDRESS</span></span>
+          <span class="text-[15px] text-bright-alloy leading-relaxed"><span data-ko-only>경기도 화성시 마도면 청원로 136-18</span><span data-en-only>136-18 Cheongwon-ro, Mado-myeon, Hwaseong-si</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- form -->
+    <form id="inquiry-form" class="flex flex-col gap-6" data-reveal
+          action="https://formspree.io/f/yourFormID" method="POST">
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div class="flex flex-col gap-2">
+          <label for="name" class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc"><span data-ko-only>이름 *</span><span data-en-only>NAME *</span></label>
+          <input id="name" name="name" required class="bg-steel-panel border border-hairline-steel text-bright-alloy px-4 py-3 focus:border-arterial-red focus:ring-1 focus:ring-arterial-red outline-none transition-colors" />
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="company" class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc"><span data-ko-only>회사명</span><span data-en-only>COMPANY</span></label>
+          <input id="company" name="company" class="bg-steel-panel border border-hairline-steel text-bright-alloy px-4 py-3 focus:border-arterial-red focus:ring-1 focus:ring-arterial-red outline-none transition-colors" />
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="email" class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc">EMAIL *</label>
+          <input id="email" name="email" type="email" required class="bg-steel-panel border border-hairline-steel text-bright-alloy px-4 py-3 focus:border-arterial-red focus:ring-1 focus:ring-arterial-red outline-none transition-colors" />
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="phone" class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc"><span data-ko-only>연락처</span><span data-en-only>PHONE</span></label>
+          <input id="phone" name="phone" class="bg-steel-panel border border-hairline-steel text-bright-alloy px-4 py-3 focus:border-arterial-red focus:ring-1 focus:ring-arterial-red outline-none transition-colors" />
+        </div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <label for="product" class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc"><span data-ko-only>관심 제품</span><span data-en-only>PRODUCT OF INTEREST</span></label>
+        <select id="product" name="product" class="bg-steel-panel border border-hairline-steel text-bright-alloy px-4 py-3 focus:border-arterial-red focus:ring-1 focus:ring-arterial-red outline-none transition-colors">
+          <option value="" data-ko-only>선택하세요</option>
+          <option value="Air Suspension">에어서스펜션 (VDL Weweler)</option>
+          <option value="Axles">액슬 (VALX)</option>
+          <option value="Hydraulic Cylinders">유압실린더 (HS Penta)</option>
+          <option value="Other">기타</option>
+        </select>
+      </div>
+      <div class="flex flex-col gap-2">
+        <label for="message" class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc"><span data-ko-only>문의 내용 *</span><span data-en-only>MESSAGE *</span></label>
+        <textarea id="message" name="message" rows="6" required class="bg-steel-panel border border-hairline-steel text-bright-alloy px-4 py-3 focus:border-arterial-red focus:ring-1 focus:ring-arterial-red outline-none transition-colors resize-y"></textarea>
+      </div>
+      <div class="flex items-center gap-4">
+        <button type="submit" class="inline-flex items-center gap-2 bg-arterial-red text-bright-alloy font-mono text-sm px-8 py-4 hover:bg-arterial-red-dim active:translate-y-px transition-all">
+          <span data-ko-only>문의 보내기</span><span data-en-only>SEND INQUIRY</span><span class="material-symbols-outlined text-[18px]">send</span>
+        </button>
+        <p id="form-status" class="font-mono text-[13px] text-muted-zinc"></p>
+      </div>
+    </form>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-charcoal-void border-t border-hairline-steel">
+  <div class="max-w-container mx-auto px-gutter py-16 grid md:grid-cols-4 gap-10">
+    <div class="md:col-span-2 flex flex-col gap-5">
+      <div class="font-display font-bold text-lg flex items-center gap-2"><span class="text-arterial-red">/</span> 케이비<span class="text-muted-zinc">(주)</span> <span class="font-mono text-xs text-muted-zinc tracking-widest pt-1">KB INC.</span></div>
+      <div class="font-mono text-[13px] text-muted-zinc leading-relaxed">
+        <p><span data-ko-only>경기도 화성시 마도면 청원로 136-18 (청원리, 3동) 우18543</span><span data-en-only>136-18 Cheongwon-ro, Mado-myeon, Hwaseong-si, Gyeonggi-do, Korea 18543</span></p>
+        <p class="mt-2">TEL <span class="text-bright-alloy">031-357-4250</span> &nbsp; FAX 031-357-7250</p>
+        <p>EMAIL <span class="text-bright-alloy">kbi@kbinc.kr</span></p>
+      </div>
+    </div>
+    <div class="flex flex-col gap-3">
+      <h4 class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc mb-1">SITEMAP</h4>
+      <a href="about.html" class="font-mono text-[13px] text-muted-zinc hover:text-arterial-red transition-colors"><span data-ko-only>회사소개</span><span data-en-only>ABOUT</span></a>
+      <a href="products.html" class="font-mono text-[13px] text-muted-zinc hover:text-arterial-red transition-colors"><span data-ko-only>제품소개</span><span data-en-only>PRODUCTS</span></a>
+      <a href="location.html" class="font-mono text-[13px] text-muted-zinc hover:text-arterial-red transition-colors"><span data-ko-only>오시는 길</span><span data-en-only>LOCATION</span></a>
+      <a href="contact.html" class="font-mono text-[13px] text-muted-zinc hover:text-arterial-red transition-colors"><span data-ko-only>문의</span><span data-en-only>CONTACT</span></a>
+    </div>
+    <div class="flex flex-col gap-3">
+      <h4 class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc mb-1">PRODUCTS</h4>
+      <a href="products.html#suspension" class="font-mono text-[13px] text-muted-zinc hover:text-arterial-red transition-colors">AIR SUSPENSION</a>
+      <a href="products.html#axle" class="font-mono text-[13px] text-muted-zinc hover:text-arterial-red transition-colors">AXLES</a>
+      <a href="products.html#cylinder" class="font-mono text-[13px] text-muted-zinc hover:text-arterial-red transition-colors">HYDRAULIC CYLINDERS</a>
+    </div>
+    <div class="md:col-span-4 pt-8 border-t border-hairline-steel">
+      <p class="font-mono text-[12px] text-muted-zinc">© 2026 KB, Inc. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Inquiry form. Default: opens the visitor's mail client pre-filled (zero backend).
+   To deliver straight to an inbox instead, set the <form action> to a Formspree
+   endpoint (or a Cloudflare Pages Function at /api/contact) and delete this block. */
+(function () {
+  var form = document.getElementById("inquiry-form");
+  if (!form) return;
+  var usesRealEndpoint = form.getAttribute("action").indexOf("yourFormID") === -1;
+  if (usesRealEndpoint) return; // a real endpoint is configured — let it POST normally
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var g = function (n) { var el = form.elements[n]; return el ? el.value.trim() : ""; };
+    var subject = "[웹문의] " + (g("product") || "제품 문의") + " - " + (g("name") || "");
+    var body =
+      "이름: " + g("name") + "\n" +
+      "회사명: " + g("company") + "\n" +
+      "이메일: " + g("email") + "\n" +
+      "연락처: " + g("phone") + "\n" +
+      "관심 제품: " + g("product") + "\n\n" +
+      "문의 내용:\n" + g("message") + "\n";
+    var status = document.getElementById("form-status");
+    if (status) status.textContent = "메일 앱을 여는 중…";
+    window.location.href =
+      "mailto:kbi@kbinc.kr?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(body);
+  });
+})();
+</script>
+</body>
+</html>

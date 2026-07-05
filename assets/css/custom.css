@@ -1,0 +1,76 @@
+/* KB Inc. — custom styles layered on top of Tailwind utilities */
+
+:root { color-scheme: dark; }
+html { scroll-behavior: smooth; }
+body { font-family: "Pretendard Variable", Pretendard, "Hanken Grotesk", sans-serif; }
+.font-display { font-family: "Space Grotesk", "Pretendard Variable", sans-serif; }
+.font-mono { font-family: "JetBrains Mono", "Pretendard Variable", monospace; }
+
+/* Language toggle: show one language at a time */
+.lang-en [data-ko-only] { display: none !important; }
+html:not(.lang-en) [data-en-only] { display: none !important; }
+
+/* Product render halo — subtle radial so transparent renders sit on light, not float in void */
+.render-stage {
+  background:
+    radial-gradient(120% 120% at 50% 35%, rgba(245,245,245,0.06) 0%, rgba(245,245,245,0.015) 45%, transparent 70%);
+}
+
+/* Partner-logo chip: real (mixed-contrast) logos read reliably on a light chip */
+.logo-chip {
+  background: #F5F5F5;
+  filter: grayscale(100%);
+  opacity: 0.65;
+  transition: filter .3s ease, opacity .3s ease, transform .3s ease;
+}
+.logo-chip:hover { filter: grayscale(0%); opacity: 1; transform: translateY(-2px); }
+
+/* Scroll reveal */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s cubic-bezier(.16,.84,.28,1), transform .7s cubic-bezier(.16,.84,.28,1);
+  will-change: opacity, transform;
+}
+[data-reveal].is-in { opacity: 1; transform: none; }
+[data-reveal-x] {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity .8s cubic-bezier(.16,.84,.28,1), transform .8s cubic-bezier(.16,.84,.28,1);
+}
+[data-reveal-x].is-in { opacity: 1; transform: none; }
+
+/* Skeleton shimmer (for any lazy image placeholders) */
+.shimmer::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(245,245,245,0.06), transparent);
+  transform: translateX(-100%);
+  animation: shimmer 1.6s infinite;
+}
+@keyframes shimmer { 100% { transform: translateX(100%); } }
+
+/* Spec tables */
+.spec-table { border-collapse: collapse; width: 100%; }
+.spec-table th, .spec-table td {
+  border: 1px solid rgba(245,245,245,0.10);
+  padding: 0.7rem 1rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  vertical-align: top;
+}
+.spec-table thead th {
+  background: #262626; color: #F5F5F5; text-align: left; letter-spacing: 0.02em;
+}
+.spec-table thead th.is-featured { color: #C8102E; }
+.spec-table tbody th {
+  background: transparent; color: #8A8A8A; font-weight: 400; text-align: left; white-space: nowrap;
+}
+.spec-table tbody td { color: #F5F5F5; }
+.spec-table tbody tr:nth-child(odd) td,
+.spec-table tbody tr:nth-child(odd) th { background: rgba(38,38,38,0.35); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-float { animation: none !important; }
+}
