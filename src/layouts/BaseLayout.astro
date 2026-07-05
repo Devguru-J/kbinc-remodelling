@@ -1,0 +1,80 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const {
+  title = '케이비(주) KB Inc.',
+  description = '케이비(주)는 VDL Weweler 에어서스펜션, VALX 액슬, HS Penta 유압실린더 등 유럽·미주 선진국의 검증된 특장차 핵심 부품을 국내에 공급합니다.',
+  active = null,
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html class="dark" lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet" />
+</head>
+<body class="bg-charcoal-void text-bright-alloy min-h-screen flex flex-col antialiased">
+  <Nav active={active} />
+  <main class="flex-grow pt-16">
+    <slot />
+  </main>
+  <Footer />
+
+  <script>
+    // Language toggle, mobile menu, staggered scroll reveal.
+    const root = document.documentElement;
+    let saved = null;
+    try { saved = localStorage.getItem('kb-lang'); } catch (e) {}
+    if (saved === 'en') root.classList.add('lang-en');
+
+    function syncToggle() {
+      const en = root.classList.contains('lang-en');
+      document.querySelectorAll('[data-lang-toggle]').forEach((btn) => {
+        const ko = btn.querySelector('[data-ko]');
+        const enEl = btn.querySelector('[data-en]');
+        if (ko) { ko.classList.toggle('text-bright-alloy', !en); ko.classList.toggle('text-muted-zinc', en); }
+        if (enEl) { enEl.classList.toggle('text-bright-alloy', en); enEl.classList.toggle('text-muted-zinc', !en); }
+      });
+      root.setAttribute('lang', en ? 'en' : 'ko');
+    }
+    document.querySelectorAll('[data-lang-toggle]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        root.classList.toggle('lang-en');
+        try { localStorage.setItem('kb-lang', root.classList.contains('lang-en') ? 'en' : 'ko'); } catch (e) {}
+        syncToggle();
+      });
+    });
+    syncToggle();
+
+    const mnav = document.getElementById('mobile-nav');
+    document.querySelectorAll('[data-menu-toggle]').forEach((b) => {
+      b.addEventListener('click', () => { if (mnav) mnav.classList.toggle('hidden'); });
+    });
+
+    const els = document.querySelectorAll('[data-reveal],[data-reveal-x]');
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach((el, i) => {
+        (el as HTMLElement).style.transitionDelay = (Math.min(i % 4, 3) * 80) + 'ms';
+        io.observe(el);
+      });
+    } else {
+      els.forEach((el) => el.classList.add('is-in'));
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const mapSrc = 'https://www.google.com/maps?q=' + encodeURIComponent('경기도 화성시 마도면 청원로 136-18') + '&z=15&output=embed';
+const naverSrc = 'https://map.naver.com/p/search/' + encodeURIComponent('경기도 화성시 마도면 청원로 136-18');
+---
+<BaseLayout
+  title="오시는 길 | 케이비(주) KB Inc."
+  description="케이비(주) 본사 — 경기도 화성시 마도면 청원로 136-18. 전화 031-357-4250."
+  active="location"
+>
+  <section class="border-b border-hairline-steel relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-1/2 h-full bg-graphite-surface opacity-40 -skew-x-12 translate-x-1/3 pointer-events-none"></div>
+    <div class="relative z-10 max-w-container mx-auto px-gutter pt-20 pb-16" data-reveal>
+      <p class="font-mono text-[13px] text-arterial-red mb-4 flex items-center gap-3"><span class="w-8 h-px bg-arterial-red"></span>오시는 길 / LOCATION</p>
+      <h1 class="font-display font-bold text-bright-alloy tracking-tightest text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.1]">
+        <span data-ko-only>찾아오시는 길</span><span data-en-only>Find us</span>
+      </h1>
+    </div>
+  </section>
+
+  <section class="border-b border-hairline-steel">
+    <div class="max-w-container mx-auto px-gutter py-section-v grid lg:grid-cols-[1fr_minmax(0,24rem)] gap-10">
+      <div class="border border-hairline-steel bg-graphite-surface overflow-hidden min-h-[360px]" data-reveal>
+        <iframe
+          title="케이비(주) 위치 지도"
+          class="w-full h-full min-h-[360px] grayscale contrast-125"
+          style="border:0"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src={mapSrc}></iframe>
+      </div>
+      <div class="flex flex-col gap-8" data-reveal>
+        <div class="flex flex-col gap-3">
+          <span class="font-mono text-[13px] text-arterial-red">HEAD OFFICE</span>
+          <h2 class="font-display font-bold text-2xl text-bright-alloy"><span data-ko-only>케이비 주식회사</span><span data-en-only>KB Inc.</span></h2>
+        </div>
+        <dl class="flex flex-col gap-5">
+          <div class="border-t border-hairline-steel pt-4">
+            <dt class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc mb-2"><span data-ko-only>주소</span><span data-en-only>ADDRESS</span></dt>
+            <dd class="text-bright-alloy leading-relaxed"><span data-ko-only>경기도 화성시 마도면 청원로 136-18<br />(청원리, 3동) 우18543</span><span data-en-only>136-18 Cheongwon-ro, Mado-myeon,<br />Hwaseong-si, Gyeonggi-do, Korea 18543</span></dd>
+          </div>
+          <div class="border-t border-hairline-steel pt-4">
+            <dt class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc mb-2">TEL / FAX</dt>
+            <dd class="font-mono text-bright-alloy">031-357-4250<span class="text-muted-zinc"> · FAX </span>031-357-7250</dd>
+          </div>
+          <div class="border-t border-hairline-steel pt-4">
+            <dt class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc mb-2">EMAIL</dt>
+            <dd class="font-mono text-bright-alloy">kbi@kbinc.kr</dd>
+          </div>
+        </dl>
+        <a href={naverSrc} target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 bg-arterial-red text-bright-alloy font-mono text-sm px-6 py-4 hover:bg-arterial-red-dim active:translate-y-px transition-all">
+          <span class="material-symbols-outlined text-[18px]">map</span><span data-ko-only>지도에서 보기</span><span data-en-only>OPEN IN MAP</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

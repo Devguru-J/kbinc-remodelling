@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="문의 | 케이비(주) KB Inc."
+  description="케이비(주) 제품·견적 문의. 전화 031-357-4250 · kbi@kbinc.kr"
+  active="contact"
+>
+  <section class="border-b border-hairline-steel relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-1/2 h-full bg-graphite-surface opacity-40 -skew-x-12 translate-x-1/3 pointer-events-none"></div>
+    <div class="relative z-10 max-w-container mx-auto px-gutter pt-20 pb-16" data-reveal>
+      <p class="font-mono text-[13px] text-arterial-red mb-4 flex items-center gap-3"><span class="w-8 h-px bg-arterial-red"></span>문의 / CONTACT</p>
+      <h1 class="font-display font-bold text-bright-alloy tracking-tightest text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.1]">
+        <span data-ko-only>제품·견적 문의</span><span data-en-only>Product &amp; quote inquiry</span>
+      </h1>
+      <p class="text-muted-zinc text-lg mt-5 max-w-2xl leading-relaxed">
+        <span data-ko-only>필요하신 제품과 사양을 남겨주시면 담당자가 신속히 회신드립니다.</span>
+        <span data-en-only>Tell us the product and specification you need — our team will respond promptly.</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-hairline-steel">
+    <div class="max-w-container mx-auto px-gutter py-section-v grid lg:grid-cols-[minmax(0,20rem)_1fr] gap-10 lg:gap-20">
+      <div class="flex flex-col gap-8" data-reveal>
+        <div>
+          <p class="font-mono text-[13px] text-arterial-red mb-3">DIRECT</p>
+          <h2 class="font-display font-bold text-2xl text-bright-alloy"><span data-ko-only>바로 연락하기</span><span data-en-only>Reach us directly</span></h2>
+        </div>
+        <div class="flex flex-col gap-5">
+          <a href="tel:0313574250" class="border-t border-hairline-steel pt-4 group">
+            <span class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc block mb-2">TEL</span>
+            <span class="font-mono text-lg text-bright-alloy group-hover:text-arterial-red transition-colors">031-357-4250</span>
+          </a>
+          <div class="border-t border-hairline-steel pt-4">
+            <span class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc block mb-2">FAX</span>
+            <span class="font-mono text-lg text-bright-alloy">031-357-7250</span>
+          </div>
+          <a href="mailto:kbi@kbinc.kr" class="border-t border-hairline-steel pt-4 group">
+            <span class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc block mb-2">EMAIL</span>
+            <span class="font-mono text-lg text-bright-alloy group-hover:text-arterial-red transition-colors">kbi@kbinc.kr</span>
+          </a>
+          <div class="border-t border-hairline-steel pt-4">
+            <span class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc block mb-2"><span data-ko-only>주소</span><span data-en-only>ADDRESS</span></span>
+            <span class="text-[15px] text-bright-alloy leading-relaxed"><span data-ko-only>경기도 화성시 마도면 청원로 136-18</span><span data-en-only>136-18 Cheongwon-ro, Mado-myeon, Hwaseong-si</span></span>
+          </div>
+        </div>
+      </div>
+
+      <form id="inquiry-form" class="flex flex-col gap-6" data-reveal action="/api/contact" method="POST">
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div class="flex flex-col gap-2">
+            <label for="name" class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc"><span data-ko-only>이름 *</span><span data-en-only>NAME *</span></label>
+            <input id="name" name="name" required class="bg-steel-panel border border-hairline-steel text-bright-alloy px-4 py-3 focus:border-arterial-red focus:ring-1 focus:ring-arterial-red outline-none transition-colors" />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="company" class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc"><span data-ko-only>회사명</span><span data-en-only>COMPANY</span></label>
+            <input id="company" name="company" class="bg-steel-panel border border-hairline-steel text-bright-alloy px-4 py-3 focus:border-arterial-red focus:ring-1 focus:ring-arterial-red outline-none transition-colors" />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="email" class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc">EMAIL *</label>
+            <input id="email" name="email" type="email" required class="bg-steel-panel border border-hairline-steel text-bright-alloy px-4 py-3 focus:border-arterial-red focus:ring-1 focus:ring-arterial-red outline-none transition-colors" />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="phone" class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc"><span data-ko-only>연락처</span><span data-en-only>PHONE</span></label>
+            <input id="phone" name="phone" class="bg-steel-panel border border-hairline-steel text-bright-alloy px-4 py-3 focus:border-arterial-red focus:ring-1 focus:ring-arterial-red outline-none transition-colors" />
+          </div>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="product" class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc"><span data-ko-only>관심 제품</span><span data-en-only>PRODUCT OF INTEREST</span></label>
+          <select id="product" name="product" class="bg-steel-panel border border-hairline-steel text-bright-alloy px-4 py-3 focus:border-arterial-red focus:ring-1 focus:ring-arterial-red outline-none transition-colors">
+            <option value="">선택하세요 / Select</option>
+            <option value="Air Suspension">에어서스펜션 (VDL Weweler)</option>
+            <option value="Axles">액슬 (VALX)</option>
+            <option value="Hydraulic Cylinders">유압실린더 (HS Penta)</option>
+            <option value="Other">기타 / Other</option>
+          </select>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="message" class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc"><span data-ko-only>문의 내용 *</span><span data-en-only>MESSAGE *</span></label>
+          <textarea id="message" name="message" rows="6" required class="bg-steel-panel border border-hairline-steel text-bright-alloy px-4 py-3 focus:border-arterial-red focus:ring-1 focus:ring-arterial-red outline-none transition-colors resize-y"></textarea>
+        </div>
+        <div class="flex items-center gap-4 flex-wrap">
+          <button type="submit" class="inline-flex items-center gap-2 bg-arterial-red text-bright-alloy font-mono text-sm px-8 py-4 hover:bg-arterial-red-dim active:translate-y-px transition-all disabled:opacity-50">
+            <span data-ko-only>문의 보내기</span><span data-en-only>SEND INQUIRY</span><span class="material-symbols-outlined text-[18px]">send</span>
+          </button>
+          <p id="form-status" class="font-mono text-[13px] text-muted-zinc"></p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    // Progressive enhancement: POST to the Cloudflare Pages Function at /api/contact.
+    // If the endpoint isn't configured yet (503) or the network fails, fall back to
+    // opening the visitor's mail client so an inquiry is never lost.
+    const form = document.getElementById('inquiry-form') as HTMLFormElement | null;
+    const status = document.getElementById('form-status');
+    function val(n: string) { const el = form?.elements.namedItem(n) as HTMLInputElement | null; return el ? el.value.trim() : ''; }
+    function mailtoFallback() {
+      const subject = '[웹문의] ' + (val('product') || '제품 문의') + ' - ' + val('name');
+      const body =
+        '이름: ' + val('name') + '\n회사명: ' + val('company') + '\n이메일: ' + val('email') +
+        '\n연락처: ' + val('phone') + '\n관심 제품: ' + val('product') + '\n\n문의 내용:\n' + val('message') + '\n';
+      window.location.href = 'mailto:kbi@kbinc.kr?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    }
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type=submit]') as HTMLButtonElement;
+      btn.disabled = true;
+      if (status) { status.textContent = '전송 중…'; status.className = 'font-mono text-[13px] text-muted-zinc'; }
+      try {
+        const res = await fetch('/api/contact', { method: 'POST', body: new FormData(form) });
+        if (res.ok) {
+          form.reset();
+          if (status) { status.textContent = '문의가 접수되었습니다. 감사합니다.'; status.className = 'font-mono text-[13px] text-bright-alloy'; }
+        } else if (res.status === 503) {
+          mailtoFallback();
+          if (status) status.textContent = '메일 앱으로 전송합니다…';
+        } else {
+          throw new Error('bad status');
+        }
+      } catch (err) {
+        mailtoFallback();
+        if (status) { status.textContent = '메일 앱으로 전송합니다…'; status.className = 'font-mono text-[13px] text-muted-zinc'; }
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  </script>
+</BaseLayout>

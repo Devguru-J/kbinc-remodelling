@@ -3,22 +3,37 @@
 특장차(트럭·트레일러) 핵심 부품 유통사 **케이비(주)** 의 공식 웹사이트 리뉴얼.
 기존 2014년 Dreamweaver 템플릿 사이트(`kbinc.kr`)를 **모던 인더스트리얼** 디자인으로 재구축했습니다.
 
-## 구성
+**스택:** [Astro](https://astro.build) (정적 출력) · Tailwind CSS · Cloudflare Pages
+(+ Pages Functions로 문의 폼 처리)
 
-정적 멀티페이지 사이트 (빌드 불필요, 그대로 배포 가능).
+## 페이지
 
-| 파일 | 내용 |
-|------|------|
-| `index.html` | 메인 — 히어로 · 취급 브랜드 · 제품 3종 · 회사 강점 |
-| `about.html` | 회사소개 — 인사말 · 사업개요 · 세 가지 약속 |
-| `products.html` | 제품 — 에어서스펜션(Weweler) · 액슬(VALX 스펙표) · 유압실린더(HS Penta) |
-| `location.html` | 오시는 길 — 본사 지도 · 연락처 |
-| `contact.html` | 문의 — 문의 폼 · 직접 연락처 |
-| `assets/css/custom.css` | 커스텀 스타일 (스펙표, 스크롤 리빌, 로고칩 등) |
-| `assets/js/theme.js` | Tailwind 설정 · 한/영 토글 · 모바일 메뉴 · 스크롤 애니메이션 |
-| `assets/img/` | 제품 렌더 · 브랜드 로고 (실제 자산) |
-| `DESIGN.md` | 디자인 시스템 정의 (색상·타이포·컴포넌트·모션) |
-| `_source/` | 기존 사이트 원본 HTML + 원본 이미지 29종 (아카이브) |
+| 라우트 | 내용 |
+|--------|------|
+| `/` | 메인 — 히어로 · 취급 브랜드 · 제품 3종 · 회사 강점 |
+| `/about` | 회사소개 — 인사말 · 사업개요 · 세 가지 약속 |
+| `/products` | 제품 — 에어서스펜션(Weweler) · 액슬(VALX 스펙표) · 유압실린더(HS Penta) |
+| `/location` | 오시는 길 — 본사 지도 · 연락처 |
+| `/contact` | 문의 — 문의 폼 · 직접 연락처 |
+
+## 구조
+
+```
+src/
+  layouts/BaseLayout.astro   공통 head·nav·footer·스크립트(한/영 토글, 스크롤 리빌)
+  components/Nav.astro        네비게이션 (active 하이라이트)
+  components/Footer.astro     푸터
+  pages/*.astro               5개 페이지
+  styles/global.css           Tailwind + 커스텀(스펙표, 로고칩, 리빌)
+public/
+  assets/img/                 제품 렌더 · 브랜드 로고 (실제 자산)
+  favicon.svg
+functions/
+  api/contact.js              Cloudflare Pages Function — 문의 폼 → 이메일
+tailwind.config.mjs           디자인 토큰(색상·폰트·간격)
+DESIGN.md                     디자인 시스템 정의
+_source/                      기존 사이트 원본 HTML + 원본 이미지 29종 (아카이브)
+```
 
 ## 디자인 시스템
 
@@ -26,31 +41,37 @@
 - **타이포:** Space Grotesk (헤드라인) · Pretendard (본문) · JetBrains Mono (스펙·수치)
 - **언어:** 한국어 기본 / 영어 토글 (`KO · EN`, 로컬스토리지 유지)
 
-## 로컬 미리보기
+## 개발
 
 ```bash
-python3 -m http.server 8000
-# → http://localhost:8000
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # → dist/
+npm run preview  # 빌드 결과 미리보기
 ```
 
 ## 배포 (Cloudflare Pages)
 
-빌드 과정이 없는 순수 정적 사이트입니다.
-
 1. Cloudflare Pages → **Connect to Git** → 이 리포 선택
 2. 빌드 설정:
-   - **Framework preset:** `None`
-   - **Build command:** *(비움)*
-   - **Build output directory:** `/`
-3. 배포
+   - **Framework preset:** `Astro`
+   - **Build command:** `npm run build`
+   - **Build output directory:** `dist`
+3. 배포. `functions/` 디렉터리는 Pages가 자동 인식하여 `/api/*` 로 서빙합니다.
 
-## 문의 폼 연동 (선택)
+## 문의 폼 이메일 연동
 
-`contact.html` 의 폼은 기본적으로 방문자의 메일 앱을 여는 `mailto` 방식으로 동작합니다.
-받은편지함으로 직접 수신하려면 아래 중 하나로 교체하세요:
+`functions/api/contact.js` 는 [Resend](https://resend.com)로 `kbi@kbinc.kr` 에 메일을 보냅니다.
+Cloudflare Pages → Settings → **Environment variables** 에 아래를 설정하세요:
 
-- **Cloudflare Pages Functions** — `/functions/api/contact.js` 작성 후 폼 `action="/api/contact"`
-- **Formspree** — 폼 `action="https://formspree.io/f/{FORM_ID}"` (해당 시 mailto 스크립트 자동 비활성화)
+| 변수 | 설명 |
+|------|------|
+| `RESEND_API_KEY` | Resend API 키 |
+| `CONTACT_TO` | 수신 주소 (기본 `kbi@kbinc.kr`) |
+| `CONTACT_FROM` | 인증된 발신자, 예: `KB Inc. <no-reply@kbinc.kr>` (도메인 Resend 인증 필요) |
+
+> `RESEND_API_KEY` 미설정 시 폼은 자동으로 방문자의 메일 앱을 여는 `mailto` 방식으로 폴백하므로,
+> 이메일 연동 전에도 문의가 유실되지 않습니다.
 
 ## 연락처
 

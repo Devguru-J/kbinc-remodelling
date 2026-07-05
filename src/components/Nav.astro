@@ -1,0 +1,45 @@
+---
+const { active } = Astro.props;
+const items = [
+  { href: '/about',     ko: '회사소개',  en: 'ABOUT',    key: 'about' },
+  { href: '/products',  ko: '제품소개',  en: 'PRODUCTS', key: 'products' },
+  { href: '/location',  ko: '오시는 길', en: 'LOCATION', key: 'location' },
+  { href: '/contact',   ko: '문의',      en: 'CONTACT',  key: 'contact' },
+];
+---
+<header class="fixed top-0 inset-x-0 z-50 border-b border-hairline-steel bg-charcoal-void/95 backdrop-blur">
+  <div class="max-w-container mx-auto px-gutter h-16 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2.5 font-display font-bold text-lg tracking-tightest text-bright-alloy">
+      <span class="text-arterial-red">/</span>
+      <span>케이비<span class="text-muted-zinc">(주)</span></span>
+      <span class="text-muted-zinc font-mono text-xs tracking-widest pt-0.5">KB INC.</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-9 font-mono text-[13px]">
+      {items.map((it) => (
+        <a
+          href={it.href}
+          class={active === it.key
+            ? 'text-bright-alloy border-b-2 border-arterial-red pb-1'
+            : 'text-muted-zinc hover:text-bright-alloy transition-colors'}
+        >
+          <span data-ko-only>{it.ko}</span><span data-en-only>{it.en}</span>
+        </a>
+      ))}
+    </nav>
+    <div class="flex items-center gap-4">
+      <button data-lang-toggle class="font-mono text-xs tracking-widest border-l border-hairline-steel pl-4" aria-label="Toggle language">
+        <span data-ko class="text-bright-alloy">KO</span><span class="text-muted-zinc"> / </span><span data-en class="text-muted-zinc">EN</span>
+      </button>
+      <button data-menu-toggle class="md:hidden text-bright-alloy" aria-label="Toggle menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-nav" class="hidden md:hidden border-t border-hairline-steel bg-charcoal-void px-gutter py-4 flex-col gap-4 font-mono text-sm">
+    {items.map((it) => (
+      <a href={it.href} class={active === it.key ? 'block py-2 text-bright-alloy' : 'block py-2 text-muted-zinc'}>
+        <span data-ko-only>{it.ko}</span><span data-en-only>{it.en}</span>
+      </a>
+    ))}
+  </div>
+</header>
