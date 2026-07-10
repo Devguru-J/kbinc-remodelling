@@ -189,19 +189,25 @@ const catalogs = [
     </div>
   </section>
 
-  <!-- PDF VIEWER MODAL -->
-  <div id="pdf-modal" class="fixed inset-0 z-[100] hidden flex-col bg-charcoal-void/90 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="pdf-modal-title">
-    <div class="flex items-center justify-between gap-4 h-16 px-5 md:px-8 border-b border-hairline-steel bg-charcoal-void shrink-0">
-      <div class="flex items-baseline gap-4 min-w-0">
-        <span id="pdf-modal-brand" class="font-mono text-[11px] tracking-[0.2em] text-arterial-red whitespace-nowrap"></span>
-        <h2 id="pdf-modal-title" class="font-display font-bold text-bright-alloy text-base md:text-lg truncate"></h2>
+  <!-- PDF VIEWER MODAL (PDF.js custom renderer — works on every device) -->
+  <div id="pdf-modal" class="fixed inset-0 z-[100] flex flex-col bg-charcoal-void/90 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300" role="dialog" aria-modal="true" aria-labelledby="pdf-modal-title">
+    <div class="flex items-center justify-between gap-3 h-16 px-4 md:px-8 border-b border-hairline-steel bg-charcoal-void shrink-0">
+      <div class="flex items-baseline gap-3 md:gap-4 min-w-0">
+        <span id="pdf-modal-brand" class="hidden sm:inline font-mono text-[11px] tracking-[0.2em] text-arterial-red whitespace-nowrap"></span>
+        <h2 id="pdf-modal-title" class="font-display font-bold text-bright-alloy text-[15px] md:text-lg truncate"></h2>
       </div>
-      <div class="flex items-center gap-2 shrink-0">
-        <a id="pdf-modal-download" href="#" download class="inline-flex items-center gap-2 font-mono text-[12px] text-muted-zinc border border-hairline-steel px-4 py-2 hover:border-arterial-red hover:text-bright-alloy transition-colors">
+      <div class="flex items-center gap-1.5 md:gap-2 shrink-0">
+        <div class="hidden md:flex items-center border border-hairline-steel">
+          <button id="pdf-zoom-out" class="w-9 h-9 flex items-center justify-center text-muted-zinc hover:text-bright-alloy transition-colors" aria-label="축소"><span class="material-symbols-outlined text-[18px]">remove</span></button>
+          <span id="pdf-zoom-label" class="font-mono text-[11px] text-muted-zinc w-12 text-center select-none">100%</span>
+          <button id="pdf-zoom-in" class="w-9 h-9 flex items-center justify-center text-muted-zinc hover:text-bright-alloy transition-colors" aria-label="확대"><span class="material-symbols-outlined text-[18px]">add</span></button>
+        </div>
+        <span id="pdf-page-label" class="font-mono text-[11px] text-muted-zinc px-2 whitespace-nowrap select-none">– / –</span>
+        <a id="pdf-modal-download" href="#" download class="inline-flex items-center gap-2 h-9 font-mono text-[12px] text-muted-zinc border border-hairline-steel px-3 hover:border-arterial-red hover:text-bright-alloy transition-colors">
           <span class="material-symbols-outlined text-[16px]">download</span>
-          <span class="hidden sm:inline"><span data-ko-only>다운로드</span><span data-en-only>DOWNLOAD</span></span>
+          <span class="hidden lg:inline"><span data-ko-only>다운로드</span><span data-en-only>DOWNLOAD</span></span>
         </a>
-        <a id="pdf-modal-newtab" href="#" target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-mono text-[12px] text-muted-zinc border border-hairline-steel px-4 py-2 hover:border-arterial-red hover:text-bright-alloy transition-colors" aria-label="새 탭에서 열기">
+        <a id="pdf-modal-newtab" href="#" target="_blank" rel="noopener" class="hidden sm:inline-flex items-center justify-center w-9 h-9 font-mono text-[12px] text-muted-zinc border border-hairline-steel hover:border-arterial-red hover:text-bright-alloy transition-colors" aria-label="새 탭에서 열기">
           <span class="material-symbols-outlined text-[16px]">open_in_new</span>
         </a>
         <button id="pdf-modal-close" class="inline-flex items-center justify-center text-bright-alloy border border-hairline-steel w-9 h-9 hover:border-arterial-red hover:text-arterial-red transition-colors" aria-label="닫기">
@@ -209,61 +215,179 @@ const catalogs = [
         </button>
       </div>
     </div>
-    <div class="flex-grow relative bg-graphite-surface">
-      <p id="pdf-modal-loading" class="absolute inset-0 flex items-center justify-center font-mono text-[13px] text-muted-zinc pointer-events-none">
-        <span data-ko-only>불러오는 중…</span><span data-en-only>Loading…</span>
-      </p>
-      <iframe id="pdf-frame" title="PDF 카탈로그 뷰어" class="relative w-full h-full border-0"></iframe>
+    <div id="pdf-scroll" class="flex-grow relative overflow-y-auto overscroll-contain bg-graphite-surface">
+      <div id="pdf-loading" class="absolute inset-0 flex flex-col items-center justify-center gap-4 pointer-events-none">
+        <span class="pdf-spinner"></span>
+        <p class="font-mono text-[13px] text-muted-zinc"><span data-ko-only>카탈로그를 불러오는 중</span><span data-en-only>Loading catalog</span> <span id="pdf-progress"></span></p>
+      </div>
+      <div id="pdf-pages" class="flex flex-col items-center gap-5 px-4 py-8"></div>
     </div>
   </div>
 
   <script>
-    // In-site PDF viewer: on desktop, intercept catalog links into a full-screen
-    // modal (browser-native PDF rendering). On small/touch screens the links keep
-    // their default target=_blank behavior, which is more reliable on mobile.
+    // In-site PDF viewer, rendered page-by-page with PDF.js onto canvases —
+    // consistent full-document viewing on desktop and mobile alike (iOS Safari
+    // can't scroll iframe-embedded PDFs, so we draw them ourselves). The library
+    // is dynamically imported on first open, so the page itself stays light.
     const modal = document.getElementById('pdf-modal') as HTMLElement;
-    const frame = document.getElementById('pdf-frame') as HTMLIFrameElement;
+    const scroller = document.getElementById('pdf-scroll') as HTMLElement;
+    const pagesEl = document.getElementById('pdf-pages') as HTMLElement;
+    const loadingEl = document.getElementById('pdf-loading') as HTMLElement;
+    const progressEl = document.getElementById('pdf-progress') as HTMLElement;
     const titleEl = document.getElementById('pdf-modal-title') as HTMLElement;
     const brandEl = document.getElementById('pdf-modal-brand') as HTMLElement;
+    const pageLabel = document.getElementById('pdf-page-label') as HTMLElement;
+    const zoomLabel = document.getElementById('pdf-zoom-label') as HTMLElement;
     const dlEl = document.getElementById('pdf-modal-download') as HTMLAnchorElement;
     const ntEl = document.getElementById('pdf-modal-newtab') as HTMLAnchorElement;
-    const loadingEl = document.getElementById('pdf-modal-loading') as HTMLElement;
     const closeBtn = document.getElementById('pdf-modal-close') as HTMLButtonElement;
 
-    function openViewer(url: string, ko: string, en: string, brand: string) {
+    let pdfjsPromise: Promise<any> | null = null;
+    function loadPdfjs() {
+      if (!pdfjsPromise) {
+        pdfjsPromise = (async () => {
+          const [pdfjs, worker] = await Promise.all([
+            import('pdfjs-dist'),
+            import('pdfjs-dist/build/pdf.worker.min.mjs?url'),
+          ]);
+          pdfjs.GlobalWorkerOptions.workerSrc = (worker as any).default;
+          return pdfjs;
+        })();
+      }
+      return pdfjsPromise;
+    }
+
+    let currentDoc: any = null;
+    let currentTask: any = null;
+    let renderToken = 0;
+    let openSeq = 0;
+    let zoom = 1;
+
+    function fitWidth() {
+      // page width that fills the scroller, capped for readability on wide screens
+      return Math.min(scroller.clientWidth - 32, 920);
+    }
+
+    async function renderDoc() {
+      if (!currentDoc) return;
+      const doc = currentDoc;
+      const token = ++renderToken;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      pagesEl.replaceChildren();
+      try {
+        for (let i = 1; i <= doc.numPages; i++) {
+          if (token !== renderToken) return; // superseded by zoom/close/reopen
+          const page = await doc.getPage(i);
+          if (token !== renderToken) return;
+          const base = page.getViewport({ scale: 1 });
+          const scale = (fitWidth() / base.width) * zoom;
+          const vp = page.getViewport({ scale });
+          const canvas = document.createElement('canvas');
+          canvas.width = Math.floor(vp.width * dpr);
+          canvas.height = Math.floor(vp.height * dpr);
+          canvas.style.width = vp.width + 'px';
+          canvas.style.height = vp.height + 'px';
+          canvas.className = 'pdf-page-canvas';
+          canvas.dataset.page = String(i);
+          pagesEl.appendChild(canvas);
+          await page.render({
+            canvasContext: canvas.getContext('2d'),
+            viewport: vp,
+            transform: dpr !== 1 ? [dpr, 0, 0, dpr, 0, 0] : undefined,
+          }).promise;
+          if (i === 1) loadingEl.style.display = 'none';
+        }
+      } catch (e) {
+        // a superseded run's in-flight render rejects on cancel — not a failure
+        if (token === renderToken) throw e;
+      }
+    }
+
+    function setZoom(z: number) {
+      zoom = Math.min(2.5, Math.max(0.5, z));
+      zoomLabel.textContent = Math.round(zoom * 100) + '%';
+      renderDoc();
+    }
+
+    function updatePageLabel() {
+      if (!currentDoc) return;
+      const mid = scroller.scrollTop + scroller.clientHeight / 2;
+      let cur = 1;
+      pagesEl.querySelectorAll('canvas').forEach((c) => {
+        if ((c as HTMLElement).offsetTop <= mid) cur = Number((c as HTMLElement).dataset.page);
+      });
+      pageLabel.textContent = cur + ' / ' + currentDoc.numPages;
+    }
+    scroller.addEventListener('scroll', updatePageLabel, { passive: true });
+
+    async function openViewer(url: string, ko: string, en: string, brand: string) {
+      const myOpen = ++openSeq;
       const isEn = document.documentElement.classList.contains('lang-en');
       titleEl.textContent = isEn ? en : ko;
       brandEl.textContent = brand;
       dlEl.href = url;
       ntEl.href = url;
+      pageLabel.textContent = '– / –';
+      progressEl.textContent = '';
       loadingEl.style.display = '';
-      frame.src = url + '#view=FitH';
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
+      pagesEl.replaceChildren();
+      modal.classList.remove('opacity-0', 'pointer-events-none');
       document.body.style.overflow = 'hidden';
       closeBtn.focus();
-    }
-    function closeViewer() {
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-      frame.src = '';
-      document.body.style.overflow = '';
+      try {
+        const pdfjs = await loadPdfjs();
+        const task = pdfjs.getDocument({ url });
+        currentTask = task;
+        task.onProgress = (p: any) => {
+          if (p.total) progressEl.textContent = Math.round((p.loaded / p.total) * 100) + '%';
+        };
+        currentDoc = await task.promise;
+        zoom = 1;
+        zoomLabel.textContent = '100%';
+        pageLabel.textContent = '1 / ' + currentDoc.numPages;
+        await renderDoc();
+      } catch (err) {
+        // Only fall back when THIS open attempt genuinely failed — a close or
+        // reopen mid-render also rejects, and must not spawn a stray tab.
+        if (myOpen !== openSeq) return;
+        closeViewer();
+        window.open(url, '_blank', 'noopener');
+      }
     }
 
-    frame.addEventListener('load', () => { if (frame.src) loadingEl.style.display = 'none'; });
+    function closeViewer() {
+      openSeq++;
+      renderToken++;
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = '';
+      currentDoc = null;
+      if (currentTask) { try { currentTask.destroy(); } catch (e) {} currentTask = null; }
+      // let the fade-out finish before dropping the canvases
+      setTimeout(() => { if (!currentDoc) pagesEl.replaceChildren(); }, 300);
+    }
 
     document.querySelectorAll<HTMLAnchorElement>('[data-pdf]').forEach((a) => {
       a.addEventListener('click', (e) => {
-        if (!window.matchMedia('(min-width: 768px)').matches) return; // mobile: new tab
         e.preventDefault();
         openViewer(a.getAttribute('href') || '', a.dataset.titleKo || '', a.dataset.titleEn || '', a.dataset.brand || '');
       });
     });
 
     closeBtn.addEventListener('click', closeViewer);
-    modal.addEventListener('click', (e) => { if (e.target === modal) closeViewer(); });
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal || e.target === scroller || e.target === pagesEl) closeViewer();
+    });
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeViewer();
+      if (e.key === 'Escape' && !modal.classList.contains('opacity-0')) closeViewer();
+    });
+    (document.getElementById('pdf-zoom-in') as HTMLButtonElement).addEventListener('click', () => setZoom(zoom + 0.25));
+    (document.getElementById('pdf-zoom-out') as HTMLButtonElement).addEventListener('click', () => setZoom(zoom - 0.25));
+
+    let resizeTimer: ReturnType<typeof setTimeout>;
+    window.addEventListener('resize', () => {
+      if (!currentDoc || modal.classList.contains('opacity-0')) return;
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(renderDoc, 250);
     });
   </script>
 </BaseLayout>

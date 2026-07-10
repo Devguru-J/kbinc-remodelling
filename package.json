@@ -9,8 +9,9 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "astro": "^4.16.18",
     "@astrojs/tailwind": "^5.1.5",
+    "astro": "^4.16.18",
+    "pdfjs-dist": "^6.1.200",
     "tailwindcss": "^3.4.17"
   }
 }
