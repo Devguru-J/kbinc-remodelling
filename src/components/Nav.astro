@@ -1,10 +1,11 @@
 ---
 const { active } = Astro.props;
 const items = [
-  { href: '/about',     ko: '회사소개',  en: 'ABOUT',    key: 'about' },
-  { href: '/products',  ko: '제품소개',  en: 'PRODUCTS', key: 'products' },
-  { href: '/location',  ko: '오시는 길', en: 'LOCATION', key: 'location' },
-  { href: '/contact',   ko: '문의',      en: 'CONTACT',  key: 'contact' },
+  { href: '/about',     ko: '회사소개',  en: 'COMPANY',   key: 'about' },
+  { href: '/products',  ko: '제품소개',  en: 'PRODUCTS',  key: 'products' },
+  { href: '/resources', ko: '자료실',    en: 'RESOURCES', key: 'resources' },
+  { href: '/news',      ko: '뉴스',      en: 'NEWS',      key: 'news' },
+  { href: '/contact',   ko: '연락처',    en: 'CONTACT',   key: 'contact' },
 ];
 ---
 <header class="fixed top-0 inset-x-0 z-50 border-b border-hairline-steel bg-charcoal-void/95 backdrop-blur">

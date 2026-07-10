@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout
-  title="케이비(주) KB Inc. | 특장차 핵심 부품 — 에어서스펜션·액슬·유압실린더"
+  title="케이비(주) KB Inc. | 특장차 핵심 부품 — 에어서스펜션·액슬·랜딩 레그"
   active={null}
 >
   <!-- HERO -->
@@ -18,8 +18,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <span data-en-only>Heavy-vehicle parts<br />the world <span class="text-arterial-red">relies on</span></span>
         </h1>
         <p class="text-muted-zinc text-lg leading-relaxed max-w-md">
-          <span data-ko-only>유럽과 미국의 검증된 공급처로부터 에어서스펜션·액슬·유압실린더를 국내 특장차 시장에 안정적으로 공급합니다.</span>
-          <span data-en-only>We supply air suspensions, axles, and hydraulic cylinders from proven European and American manufacturers to Korea's special-vehicle industry.</span>
+          <span data-ko-only>유럽과 미국의 검증된 공급처로부터 에어서스펜션·액슬·랜딩 레그 등 핵심 부품을 국내 특장차 시장에 안정적으로 공급합니다.</span>
+          <span data-en-only>We supply air suspensions, axles, landing legs, and more from proven European and American manufacturers to Korea's special-vehicle industry.</span>
         </p>
         <a href="/products" class="group inline-flex items-center gap-2 bg-arterial-red text-bright-alloy font-mono text-sm px-8 py-4 active:translate-y-px hover:bg-arterial-red-dim transition-all">
           <span data-ko-only>제품 보기</span><span data-en-only>VIEW PRODUCTS</span>
@@ -27,7 +27,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </a>
       </div>
       <div class="relative render-stage flex items-center justify-center md:min-h-[60vh]" data-reveal-x>
-        <img src="/assets/img/mbs_hd_12t.gif" alt="VDL Weweler MBS-HD 12T 에어서스펜션" class="w-full max-w-[560px] h-auto object-contain drop-shadow-2xl animate-float" />
+        <img src="/assets/img/mbs_omega.png" alt="VDL Weweler MBS Omega 에어서스펜션" class="w-full max-w-[560px] h-auto object-contain drop-shadow-2xl animate-float" />
       </div>
     </div>
   </section>
@@ -36,12 +36,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="border-b border-hairline-steel bg-graphite-surface">
     <div class="max-w-container mx-auto px-gutter py-8 flex flex-col md:flex-row md:items-center gap-8">
       <span class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc whitespace-nowrap">PARTNER BRANDS</span>
-      <div class="flex-grow grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+      <div class="flex-grow grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div class="logo-chip flex items-center justify-center h-16 px-4"><img src="/assets/img/VDL_Weweler_logo.gif" alt="VDL Weweler" class="max-h-7 w-auto" /></div>
         <div class="logo-chip flex items-center justify-center h-16 px-4"><img src="/assets/img/valx_logo.gif" alt="VALX" class="max-h-9 w-auto" /></div>
-        <div class="logo-chip flex items-center justify-center h-16 px-4"><img src="/assets/img/penta_logo.gif" alt="HS Penta" class="max-h-9 w-auto" /></div>
         <div class="logo-chip flex items-center justify-center h-16 px-4"><img src="/assets/img/rolls_logo.gif" alt="ROLLS" class="max-h-12 w-auto" /></div>
-        <div class="logo-chip flex items-center justify-center h-16 px-4 col-span-2 sm:col-span-1"><img src="/assets/img/logo_civaconclear.png" alt="CIVACON" class="max-h-9 max-w-full w-auto object-contain" /></div>
+        <div class="logo-chip flex items-center justify-center h-16 px-4"><img src="/assets/img/logo_civaconclear.png" alt="CIVACON" class="max-h-9 max-w-full w-auto object-contain" /></div>
       </div>
     </div>
   </section>
@@ -49,27 +48,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <!-- PRODUCT LINEUP -->
   <section id="products" class="border-b border-hairline-steel">
     <div class="max-w-container mx-auto px-gutter py-section-v">
-      <div class="flex items-end justify-between mb-16" data-reveal>
+      <div class="flex items-end justify-between gap-6 mb-16" data-reveal>
         <div>
           <p class="font-mono text-[13px] text-arterial-red mb-3">01 / PRODUCTS</p>
           <h2 class="font-display font-bold text-bright-alloy tracking-tightest text-[clamp(1.8rem,4vw,2.8rem)]">
-            <span data-ko-only>특장차 3대 핵심 부품</span><span data-en-only>Three core components</span>
+            <span data-ko-only>특장차 핵심 부품</span><span data-en-only>Core components</span>
           </h2>
         </div>
+        <a href="/products#lineup" class="hidden sm:inline-flex items-center gap-2 font-mono text-[13px] text-muted-zinc hover:text-arterial-red transition-colors whitespace-nowrap pb-1">
+          <span data-ko-only>전체 라인업 보기</span><span data-en-only>FULL LINEUP</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+        </a>
       </div>
 
       <div class="flex flex-col gap-24 lg:gap-32">
         <!-- Row 01 suspension -->
         <article class="grid md:grid-cols-2 gap-8 lg:gap-16 items-center group" data-reveal>
           <a href="/products#suspension" class="order-1 render-stage border border-hairline-steel bg-graphite-surface p-8 flex items-center justify-center overflow-hidden group-hover:border-arterial-red transition-colors">
-            <img src="/assets/img/mbs_hd_12t.gif" alt="에어서스펜션" class="w-full max-h-[360px] object-contain group-hover:scale-105 transition-transform duration-700" />
+            <img src="/assets/img/mbs_omega_arm.png" alt="VDL Weweler MBS Omega 에어서스펜션" class="w-full max-h-[360px] object-contain group-hover:scale-105 transition-transform duration-700" />
           </a>
           <div class="order-2 flex flex-col items-start gap-5 border-l border-hairline-steel pl-8 group-hover:border-arterial-red transition-colors">
             <span class="font-mono text-[13px] text-arterial-red">01 / AIR SUSPENSION · VDL WEWELER</span>
             <h3 class="font-display font-bold text-3xl text-bright-alloy"><span data-ko-only>에어서스펜션</span><span data-en-only>Air Suspension</span></h3>
             <p class="text-muted-zinc leading-relaxed max-w-md">
-              <span data-ko-only>90여 년 역사의 네덜란드 VDL Weweler. 유럽 시장 점유율 30% 이상, 완전 자동화된 최신 생산시설에서 생산되어 전 세계 모든 대륙에 공급됩니다.</span>
-              <span data-en-only>Netherlands-based VDL Weweler, with over 90 years of history and a 30%+ European market share, produced in fully automated facilities and shipped to every continent.</span>
+              <span data-ko-only>100년 역사의 네덜란드 VDL Weweler. 최신 모듈러 볼트온 시스템 MBS Omega와 트럭·버스용 보조 액슬 솔루션(Truck &amp; Bus)을 공급합니다.</span>
+              <span data-en-only>Netherlands-based VDL Weweler, with 100 years of history. We carry the modular bolt-on MBS Omega range and the Truck &amp; Bus auxiliary axle solutions.</span>
             </p>
             <a href="/products#suspension" class="font-mono text-sm text-muted-zinc hover:text-arterial-red inline-flex items-center gap-2 mt-2">
               <span data-ko-only>자세히</span><span data-en-only>DETAILS</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>
@@ -80,14 +82,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <!-- Row 02 axle -->
         <article class="grid md:grid-cols-2 gap-8 lg:gap-16 items-center group" data-reveal>
           <a href="/products#axle" class="order-2 md:order-1 render-stage border border-hairline-steel bg-graphite-surface p-8 flex items-center justify-center overflow-hidden group-hover:border-arterial-red transition-colors">
-            <img src="/assets/img/valx_disc500.gif" alt="VALX 액슬" class="w-full max-h-[240px] object-contain group-hover:scale-105 transition-transform duration-700" />
+            <img src="/assets/img/valx_disk_hub.png" alt="VALX DISK 액슬" class="w-full max-h-[300px] object-contain group-hover:scale-105 transition-transform duration-700" />
           </a>
           <div class="order-1 md:order-2 flex flex-col items-start gap-5 border-l border-hairline-steel pl-8 group-hover:border-arterial-red transition-colors">
             <span class="font-mono text-[13px] text-arterial-red">02 / AXLES · VALX</span>
-            <h3 class="font-display font-bold text-3xl text-bright-alloy"><span data-ko-only>액슬</span><span data-en-only>Axles</span></h3>
+            <h3 class="font-display font-bold text-3xl text-bright-alloy"><span data-ko-only>액슬 · 랜딩 레그</span><span data-en-only>Axles &amp; Landing Legs</span></h3>
             <p class="text-muted-zinc leading-relaxed max-w-md">
-              <span data-ko-only>유럽 최고 기술로 설계·제작된 네덜란드 VALX 고품질 액슬. 드럼·디스크 브레이크 전 라인업에 Textar·WABCO·SKF·TIMKEN 등 세계적 부품을 채택했습니다.</span>
-              <span data-en-only>High-quality VALX axles engineered in the Netherlands. Both drum and disc-brake lines use world-class components — Textar, WABCO, SKF, and TIMKEN.</span>
+              <span data-ko-only>네덜란드에서 설계·시험된 VALX DISK 디스크 브레이크 액슬. 유지보수 프리 설계에 WABCO 캘리퍼를 표준 장착했으며, VALX 랜딩 레그도 취급 예정입니다.</span>
+              <span data-en-only>VALX DISK disc-brake axles, designed and tested in the Netherlands — maintenance-free with WABCO callipers as standard. VALX landing legs are coming soon.</span>
             </p>
             <a href="/products#axle" class="font-mono text-sm text-muted-zinc hover:text-arterial-red inline-flex items-center gap-2 mt-2">
               <span data-ko-only>자세히</span><span data-en-only>DETAILS</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>
@@ -95,31 +97,34 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
         </article>
 
-        <!-- Row 03 cylinder -->
-        <article class="grid md:grid-cols-2 gap-8 lg:gap-16 items-center group" data-reveal>
-          <a href="/products#cylinder" class="order-1 render-stage border border-hairline-steel bg-graphite-surface p-8 flex items-center justify-center overflow-hidden group-hover:border-arterial-red transition-colors">
-            <img src="/assets/img/penta_cylinders200.png" alt="HS Penta 유압실린더" class="w-full max-h-[360px] object-contain group-hover:scale-105 transition-transform duration-700" />
-          </a>
-          <div class="order-2 flex flex-col items-start gap-5 border-l border-hairline-steel pl-8 group-hover:border-arterial-red transition-colors">
-            <span class="font-mono text-[13px] text-arterial-red">03 / HYDRAULIC CYLINDERS · HS PENTA</span>
-            <h3 class="font-display font-bold text-3xl text-bright-alloy"><span data-ko-only>유압실린더</span><span data-en-only>Hydraulic Cylinders</span></h3>
-            <p class="text-muted-zinc leading-relaxed max-w-md">
-              <span data-ko-only>이탈리아 HS Penta (Inter Pump Group). 용접 없이 통 강관 내·외경을 직접 가공하여 대부분 200bar 압력에서 사용 가능한 고강성 다단 실린더를 생산합니다.</span>
-              <span data-en-only>Italy's HS Penta (Inter Pump Group). Seamless tubes machined inside and out — no welds — for high-rigidity multi-stage cylinders rated for most applications at 200 bar.</span>
-            </p>
-            <a href="/products#cylinder" class="font-mono text-sm text-muted-zinc hover:text-arterial-red inline-flex items-center gap-2 mt-2">
-              <span data-ko-only>자세히</span><span data-en-only>DETAILS</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-            </a>
-          </div>
-        </article>
       </div>
+    </div>
+  </section>
+
+  <!-- RESOURCES TEASER -->
+  <section class="border-b border-hairline-steel bg-graphite-surface">
+    <div class="max-w-container mx-auto px-gutter py-16 grid md:grid-cols-[1fr_auto] gap-8 items-center" data-reveal>
+      <div class="flex flex-col gap-4">
+        <p class="font-mono text-[13px] text-arterial-red">02 / RESOURCES</p>
+        <h2 class="font-display font-bold text-bright-alloy tracking-tightest text-[clamp(1.6rem,3.5vw,2.4rem)]">
+          <span data-ko-only>제품 카탈로그를 바로 열람하세요</span><span data-en-only>Browse our product catalogs</span>
+        </h2>
+        <p class="text-muted-zinc leading-relaxed max-w-xl">
+          <span data-ko-only>VALX 액슬, VDL Weweler 에어서스펜션 공식 카탈로그를 사이트에서 바로 보고 PDF로 다운로드할 수 있습니다.</span>
+          <span data-en-only>View the official VALX axle and VDL Weweler air-suspension catalogs right on the site, and download them as PDF.</span>
+        </p>
+      </div>
+      <a href="/resources" class="inline-flex items-center gap-2 border border-bright-alloy text-bright-alloy font-mono text-sm px-8 py-4 hover:bg-bright-alloy hover:text-charcoal-void active:translate-y-px transition-all justify-self-start md:justify-self-end">
+        <span class="material-symbols-outlined text-[18px]">import_contacts</span>
+        <span data-ko-only>자료실 바로가기</span><span data-en-only>OPEN RESOURCES</span>
+      </a>
     </div>
   </section>
 
   <!-- WHY KB -->
   <section class="border-b border-hairline-steel">
     <div class="max-w-container mx-auto px-gutter py-16 border-b border-hairline-steel" data-reveal>
-      <p class="font-mono text-[13px] text-arterial-red mb-3">02 / CORE VALUES</p>
+      <p class="font-mono text-[13px] text-arterial-red mb-3">03 / CORE VALUES</p>
       <h2 class="font-display font-bold text-bright-alloy tracking-tightest text-[clamp(1.8rem,4vw,2.8rem)]">
         <span data-ko-only>케이비(주)를 선택하는 이유</span><span data-en-only>Why KB Inc.</span>
       </h2>

@@ -1,15 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+const mapSrc = 'https://www.google.com/maps?q=' + encodeURIComponent('경기도 화성시 마도면 청원로 136-18') + '&z=15&output=embed';
+const naverSrc = 'https://map.naver.com/p/search/' + encodeURIComponent('경기도 화성시 마도면 청원로 136-18');
 ---
 <BaseLayout
-  title="문의 | 케이비(주) KB Inc."
-  description="케이비(주) 제품·견적 문의. 전화 031-357-4250 · kbi@kbinc.kr"
+  title="연락처 | 케이비(주) KB Inc."
+  description="케이비(주) 연락처와 오시는 길. 경기도 화성시 마도면 청원로 136-18 · 전화 031-357-4250 · kbi@kbinc.kr"
   active="contact"
 >
   <section class="border-b border-hairline-steel relative overflow-hidden">
     <div class="absolute top-0 right-0 w-1/2 h-full bg-graphite-surface opacity-40 -skew-x-12 translate-x-1/3 pointer-events-none"></div>
     <div class="relative z-10 max-w-container mx-auto px-gutter pt-20 pb-16" data-reveal>
-      <p class="font-mono text-[13px] text-arterial-red mb-4 flex items-center gap-3"><span class="w-8 h-px bg-arterial-red"></span>문의 / CONTACT</p>
+      <p class="font-mono text-[13px] text-arterial-red mb-4 flex items-center gap-3"><span class="w-8 h-px bg-arterial-red"></span>연락처 / CONTACT</p>
       <h1 class="font-display font-bold text-bright-alloy tracking-tightest text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.1]">
         <span data-ko-only>제품·견적 문의</span><span data-en-only>Product &amp; quote inquiry</span>
       </h1>
@@ -42,7 +44,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </a>
           <div class="border-t border-hairline-steel pt-4">
             <span class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc block mb-2"><span data-ko-only>주소</span><span data-en-only>ADDRESS</span></span>
-            <span class="text-[15px] text-bright-alloy leading-relaxed"><span data-ko-only>경기도 화성시 마도면 청원로 136-18</span><span data-en-only>136-18 Cheongwon-ro, Mado-myeon, Hwaseong-si</span></span>
+            <span class="text-[15px] text-bright-alloy leading-relaxed"><span data-ko-only>경기도 화성시 마도면 청원로 136-18<br />(청원리, 3동) 우18543</span><span data-en-only>Bldg #3, 136-18 Cheongwon-ro, Mado-myeon,<br />Hwaseong-si, Gyeonggi-do, 18543 Korea</span></span>
           </div>
         </div>
       </div>
@@ -70,9 +72,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <label for="product" class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc"><span data-ko-only>관심 제품</span><span data-en-only>PRODUCT OF INTEREST</span></label>
           <select id="product" name="product" class="bg-steel-panel border border-hairline-steel text-bright-alloy px-4 py-3 focus:border-arterial-red focus:ring-1 focus:ring-arterial-red outline-none transition-colors">
             <option value="">선택하세요 / Select</option>
-            <option value="Air Suspension">에어서스펜션 (VDL Weweler)</option>
-            <option value="Axles">액슬 (VALX)</option>
-            <option value="Hydraulic Cylinders">유압실린더 (HS Penta)</option>
+            <option value="Air Suspension">에어서스펜션 (VDL Weweler MBS Omega · Truck &amp; Bus)</option>
+            <option value="Axles">액슬 · 랜딩 레그 (VALX)</option>
+            <option value="Additives and Oils">첨가제·윤활유 (Hot Shot's Secret)</option>
             <option value="Other">기타 / Other</option>
           </select>
         </div>
@@ -87,6 +89,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <p id="form-status" class="font-mono text-[13px] text-muted-zinc"></p>
         </div>
       </form>
+    </div>
+  </section>
+
+  <!-- LOCATION MAP -->
+  <section class="border-b border-hairline-steel">
+    <div class="max-w-container mx-auto px-gutter py-section-v">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10" data-reveal>
+        <div>
+          <p class="font-mono text-[13px] text-arterial-red mb-3">LOCATION</p>
+          <h2 class="font-display font-bold text-3xl text-bright-alloy"><span data-ko-only>찾아오시는 길</span><span data-en-only>Find us</span></h2>
+        </div>
+        <a href={naverSrc} target="_blank" rel="noopener" class="inline-flex items-center gap-2 border border-hairline-steel text-muted-zinc font-mono text-[13px] px-6 py-3 hover:border-arterial-red hover:text-bright-alloy transition-colors self-start md:self-auto">
+          <span class="material-symbols-outlined text-[16px]">map</span><span data-ko-only>지도 앱에서 보기</span><span data-en-only>OPEN IN MAP</span>
+        </a>
+      </div>
+      <div class="border border-hairline-steel bg-graphite-surface overflow-hidden" data-reveal>
+        <iframe
+          title="케이비(주) 위치 지도"
+          class="w-full h-[420px]"
+          style="border:0"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src={mapSrc}></iframe>
+      </div>
     </div>
   </section>
 

@@ -1,9 +1,19 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const lineup = [
+  { ko: '첨가제 및 윤활유',        en: 'Additives & Oils',            brands: 'LSI — Hot Shot’s Secret',              pki: false },
+  { ko: '액슬 및 서스펜션',        en: 'Axles & Suspensions',         brands: 'FUWA · ROR · VALX · VDL Weweler',      pki: false },
+  { ko: '브레이크 챔버·부스터',    en: 'Brake Chambers & Boosters',   brands: 'SAND',                                 pki: false },
+  { ko: '하네스 및 라이팅',        en: 'Harness & Lighting',          brands: 'PHILLIPS · Truck-Lite',                pki: false },
+  { ko: '머드가드 및 툴박스',      en: 'Mudguards & Toolboxes',       brands: 'CO.PAR. · PARLOK',                     pki: true },
+  { ko: '타이어 및 휠',            en: 'Tires & Wheels',              brands: 'Continental · POMLEAD · XINGMIN',     pki: true },
+  { ko: '탱커 부품',               en: 'Tanker Equipment',            brands: 'OPW — CIVACON',                        pki: true },
+];
 ---
 <BaseLayout
-  title="제품소개 | 케이비(주) KB Inc. — 에어서스펜션·액슬·유압실린더"
-  description="VDL Weweler 에어서스펜션(MBS-HD 12T·GF·Lite S), VALX 드럼·디스크 액슬 상세 스펙, HS Penta 유압실린더(Light·Heavy·Front Mount)."
+  title="제품소개 | 케이비(주) KB Inc. — 에어서스펜션·액슬·랜딩 레그"
+  description="VDL Weweler MBS Omega 에어서스펜션·Truck & Bus 보조 액슬 솔루션, VALX DISK 액슬 상세 스펙, VALX 랜딩 레그(취급 예정)."
   active="products"
 >
   <!-- PAGE HEADER + SUBNAV -->
@@ -12,17 +22,47 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="relative z-10 max-w-container mx-auto px-gutter pt-20 pb-10" data-reveal>
       <p class="font-mono text-[13px] text-arterial-red mb-4 flex items-center gap-3"><span class="w-8 h-px bg-arterial-red"></span>제품소개 / PRODUCTS</p>
       <h1 class="font-display font-bold text-bright-alloy tracking-tightest text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.1]">
-        <span data-ko-only>특장차 3대 핵심 부품</span><span data-en-only>Three core components</span>
+        <span data-ko-only>특장차 핵심 부품</span><span data-en-only>Core components</span>
       </h1>
       <p class="text-muted-zinc text-lg mt-5 max-w-2xl leading-relaxed">
-        <span data-ko-only>에어서스펜션 · 액슬 · 유압실린더 — 유럽·미국 최고 브랜드의 검증된 제품군.</span>
-        <span data-en-only>Air suspension · axles · hydraulic cylinders — proven ranges from Europe and America's leading brands.</span>
+        <span data-ko-only>에어서스펜션 · 액슬 · 랜딩 레그 — 유럽 최고 브랜드의 검증된 제품군.</span>
+        <span data-en-only>Air suspension · axles · landing legs — proven ranges from Europe's leading brands.</span>
       </p>
     </div>
     <div class="relative z-10 max-w-container mx-auto px-gutter pb-6 flex flex-wrap gap-3 font-mono text-[13px]">
-      <a href="#suspension" class="px-4 py-2 border border-hairline-steel text-muted-zinc hover:border-arterial-red hover:text-bright-alloy transition-colors">에어서스펜션</a>
-      <a href="#axle" class="px-4 py-2 border border-hairline-steel text-muted-zinc hover:border-arterial-red hover:text-bright-alloy transition-colors">액슬</a>
-      <a href="#cylinder" class="px-4 py-2 border border-hairline-steel text-muted-zinc hover:border-arterial-red hover:text-bright-alloy transition-colors">유압실린더</a>
+      <a href="#lineup" class="px-4 py-2 border border-hairline-steel text-muted-zinc hover:border-arterial-red hover:text-bright-alloy transition-colors"><span data-ko-only>전체 라인업</span><span data-en-only>FULL LINEUP</span></a>
+      <a href="#suspension" class="px-4 py-2 border border-hairline-steel text-muted-zinc hover:border-arterial-red hover:text-bright-alloy transition-colors"><span data-ko-only>에어서스펜션</span><span data-en-only>AIR SUSPENSION</span></a>
+      <a href="#axle" class="px-4 py-2 border border-hairline-steel text-muted-zinc hover:border-arterial-red hover:text-bright-alloy transition-colors"><span data-ko-only>액슬 · 랜딩 레그</span><span data-en-only>AXLES · LANDING LEGS</span></a>
+    </div>
+  </section>
+
+  <!-- 00 FULL LINEUP -->
+  <section id="lineup" class="border-b border-hairline-steel scroll-mt-16">
+    <div class="max-w-container mx-auto px-gutter py-section-v">
+      <div class="mb-12" data-reveal>
+        <p class="font-mono text-[13px] text-arterial-red mb-3">00 / FULL LINEUP</p>
+        <h2 class="font-display font-bold text-[clamp(1.8rem,4vw,2.6rem)] text-bright-alloy tracking-tightest">
+          <span data-ko-only>전체 제품 라인업</span><span data-en-only>Full product lineup</span>
+        </h2>
+        <p class="text-muted-zinc text-lg mt-4 max-w-2xl leading-relaxed">
+          <span data-ko-only>케이비는 자매회사 파코(PKI)와 함께 아래 제품군을 공급합니다.</span>
+          <span data-en-only>KBI, together with its sister company PKI, supplies the following product ranges.</span>
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-hairline-steel border border-hairline-steel" data-reveal>
+        {lineup.map((item, i) => (
+          <div class="bg-charcoal-void p-7 flex flex-col gap-4 group hover:bg-graphite-surface/60 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[13px] text-arterial-red">{String(i + 1).padStart(2, '0')}</span>
+              {item.pki && <span class="font-mono text-[10px] tracking-[0.15em] text-muted-zinc border border-hairline-steel px-2 py-1">BY PKI</span>}
+            </div>
+            <h3 class="font-display font-bold text-lg text-bright-alloy leading-snug">
+              <span data-ko-only>{item.ko}</span><span data-en-only>{item.en}</span>
+            </h3>
+            <p class="font-mono text-[12.5px] text-muted-zinc leading-relaxed mt-auto border-t border-hairline-steel pt-3">{item.brands}</p>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -34,191 +74,139 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <span class="font-mono text-[13px] text-arterial-red">01 / AIR SUSPENSION · VDL WEWELER</span>
           <h2 class="font-display font-bold text-[clamp(1.8rem,4vw,2.6rem)] text-bright-alloy tracking-tightest"><span data-ko-only>에어서스펜션</span><span data-en-only>Air Suspension</span></h2>
           <p class="text-muted-zinc leading-relaxed max-w-md">
-            <span data-ko-only>90여 년 역사의 네덜란드 VDL Weweler. 유럽 시장 점유율 30% 이상, 완전 자동화된 최신 생산시설에서 생산되어 전 세계 모든 대륙에 수출·사용되고 있습니다.</span>
-            <span data-en-only>Netherlands-based VDL Weweler, with 90+ years of history and a 30%+ European market share, produced in fully automated facilities and exported across every continent.</span>
+            <span data-ko-only>100년 역사의 네덜란드 VDL Weweler. 유럽 시장 점유율 30% 이상, 완전 자동화된 최신 생산시설에서 생산되어 전 세계 모든 대륙에 수출·사용되고 있습니다. 현재 케이비가 취급·공급하는 라인업은 MBS Omega와 Truck &amp; Bus 보조 액슬 솔루션입니다.</span>
+            <span data-en-only>Netherlands-based VDL Weweler — 100 years of history, a 30%+ European market share, fully automated production, exported across every continent. KBI currently carries the MBS Omega range and the Truck &amp; Bus auxiliary axle solutions.</span>
           </p>
         </div>
         <div class="order-1 md:order-2 render-stage border border-hairline-steel bg-graphite-surface p-8 flex items-center justify-center" data-reveal-x>
-          <img src="/assets/img/mbs_hd_12t.gif" alt="VDL Weweler 에어서스펜션" class="w-full max-h-[340px] object-contain" />
+          <img src="/assets/img/mbs_omega.png" alt="VDL Weweler MBS Omega 에어서스펜션" class="w-full max-h-[340px] object-contain" />
         </div>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-px bg-hairline-steel border border-hairline-steel" data-reveal>
-        <div class="bg-charcoal-void p-7 flex flex-col gap-5">
-          <div class="render-stage h-32 flex items-center justify-center"><img src="/assets/img/mbs_hd_12t.gif" alt="MBS-HD 12T" class="max-h-28 object-contain" /></div>
-          <div class="flex items-baseline justify-between border-b border-hairline-steel pb-3">
-            <h3 class="font-display font-bold text-xl text-bright-alloy">MBS-HD 12T</h3>
-            <span class="font-mono text-xs text-arterial-red">12 T</span>
-          </div>
-          <dl class="font-mono text-[12.5px] flex flex-col gap-2">
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>최대하중</span><span data-en-only>Max load</span></dt><dd class="text-bright-alloy text-right">12 톤</dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>트레일링암</span><span data-en-only>Trailing arm</span></dt><dd class="text-bright-alloy text-right">100×59mm</dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>라이드하이트</span><span data-en-only>Ride height</span></dt><dd class="text-bright-alloy text-right">385–575mm</dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>에어스프링</span><span data-en-only>Air spring</span></dt><dd class="text-bright-alloy text-right">Ø350mm</dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>옵셋</span><span data-en-only>Offset</span></dt><dd class="text-bright-alloy text-right">30/50/95mm</dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>중량</span><span data-en-only>Weight</span></dt><dd class="text-bright-alloy text-right">185–210kg</dd></div>
-          </dl>
-        </div>
-        <div class="bg-charcoal-void p-7 flex flex-col gap-5">
-          <div class="render-stage h-32 flex items-center justify-center"><img src="/assets/img/mbs_gf.gif" alt="MBS-GF" class="max-h-28 object-contain" /></div>
-          <div class="flex items-baseline justify-between border-b border-hairline-steel pb-3">
-            <h3 class="font-display font-bold text-xl text-bright-alloy">MBS-GF</h3>
-            <span class="font-mono text-xs text-arterial-red">9 T</span>
-          </div>
-          <dl class="font-mono text-[12.5px] flex flex-col gap-2">
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>최대하중</span><span data-en-only>Max load</span></dt><dd class="text-bright-alloy text-right">9 톤</dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>트레일링암</span><span data-en-only>Trailing arm</span></dt><dd class="text-bright-alloy text-right"><span data-ko-only>단조</span><span data-en-only>Forged</span></dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>액슬</span><span data-en-only>Axle</span></dt><dd class="text-bright-alloy text-right">Ø146mm</dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>라이드하이트</span><span data-en-only>Ride height</span></dt><dd class="text-bright-alloy text-right">310–460mm</dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>에어스프링</span><span data-en-only>Air spring</span></dt><dd class="text-bright-alloy text-right">Ø300/335mm</dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>중량</span><span data-en-only>Weight</span></dt><dd class="text-bright-alloy text-right">128–150kg</dd></div>
-          </dl>
-        </div>
-        <div class="bg-charcoal-void p-7 flex flex-col gap-5">
-          <div class="render-stage h-32 flex items-center justify-center"><img src="/assets/img/mbs_lite_s.gif" alt="MBS-Lite S" class="max-h-28 object-contain" /></div>
-          <div class="flex items-baseline justify-between border-b border-hairline-steel pb-3">
-            <h3 class="font-display font-bold text-xl text-bright-alloy">MBS-Lite S</h3>
+      <div class="grid md:grid-cols-2 gap-px bg-hairline-steel border border-hairline-steel" data-reveal>
+        <!-- MBS OMEGA -->
+        <article class="bg-charcoal-void p-8 flex flex-col gap-6">
+          <div class="render-stage h-48 flex items-center justify-center"><img src="/assets/img/mbs_omega.png" alt="VDL Weweler MBS Omega" class="max-h-44 object-contain" /></div>
+          <div class="flex items-baseline justify-between border-b border-hairline-steel pb-4">
+            <h3 class="font-display font-bold text-2xl text-bright-alloy">MBS OMEGA</h3>
             <span class="font-mono text-xs text-arterial-red">9 / 10 T</span>
           </div>
+          <p class="text-muted-zinc text-[15px] leading-relaxed">
+            <span data-ko-only>에어서스펜션 설계의 최신 혁신, 모듈러 볼트온 시스템. 특허받은 리세스 클램핑으로 시중 대부분의 Ø146 액슬빔에 적용되며, 오메가 형상 스프링강 트레일링암으로 축당 약 100kg — 유럽 시장 최경량급의 무정비(maintenance-free) 서스펜션입니다.</span>
+            <span data-en-only>The latest revolution in air-suspension design — a modular bolt-on system. Patented recess clamping fits virtually any Ø146 axle beam, and the Omega-shaped spring-steel trailing arm keeps weight to ~100 kg per axle row: among the lightest, maintenance-free systems in the European market.</span>
+          </p>
           <dl class="font-mono text-[12.5px] flex flex-col gap-2">
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>최대하중</span><span data-en-only>Max load</span></dt><dd class="text-bright-alloy text-right">9 / 10 톤</dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>트레일링암</span><span data-en-only>Trailing arm</span></dt><dd class="text-bright-alloy text-right">95×49mm</dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>라이드하이트</span><span data-en-only>Ride height</span></dt><dd class="text-bright-alloy text-right">240–540mm</dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>에어스프링</span><span data-en-only>Air spring</span></dt><dd class="text-bright-alloy text-right">Ø330/335mm</dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>옵셋</span><span data-en-only>Offset</span></dt><dd class="text-bright-alloy text-right">20/50mm</dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>중량</span><span data-en-only>Weight</span></dt><dd class="text-bright-alloy text-right">135–155kg</dd></div>
+            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>하중</span><span data-en-only>Capacity</span></dt><dd class="text-bright-alloy text-right">9 / 10 <span data-ko-only>톤</span><span data-en-only>tonnes</span></dd></div>
+            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>라이드하이트</span><span data-en-only>Ride height</span></dt><dd class="text-bright-alloy text-right">180–550mm</dd></div>
+            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>축당 중량</span><span data-en-only>Weight / axle row</span></dt><dd class="text-bright-alloy text-right">≈100kg</dd></div>
+            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>적용</span><span data-en-only>Application</span></dt><dd class="text-bright-alloy text-right"><span data-ko-only>온·오프로드 9T / 10T</span><span data-en-only>On/off-road 9T / 10T</span></dd></div>
+            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>옵션</span><span data-en-only>Options</span></dt><dd class="text-bright-alloy text-right"><span data-ko-only>BLADE 브래킷 · 경량 특허 액슬리프트</span><span data-en-only>BLADE bracket · patented axle lifts</span></dd></div>
           </dl>
-        </div>
+        </article>
+        <!-- TRUCK & BUS -->
+        <article class="bg-charcoal-void p-8 flex flex-col gap-6">
+          <div class="render-stage h-48 flex items-center justify-center"><img src="/assets/img/weweler_truck_bus.png" alt="VDL Weweler Truck &amp; Bus 보조 액슬 솔루션" class="max-h-44 object-contain" /></div>
+          <div class="flex items-baseline justify-between border-b border-hairline-steel pb-4">
+            <h3 class="font-display font-bold text-2xl text-bright-alloy">TRUCK &amp; BUS</h3>
+            <span class="font-mono text-xs text-arterial-red">4 – 10 T</span>
+          </div>
+          <p class="text-muted-zinc text-[15px] leading-relaxed">
+            <span data-ko-only>트럭·버스용 보조 액슬(푸셔·태그) 토탈 솔루션. 액슬·서스펜션·휠엔드·브레이크가 완전 조립 상태로 공급되며, 조향식(ETS 전자 조향)과 비조향식을 모두 지원합니다. 앤티롤바·판하드로드가 필요 없는 경량 2-피벗 설계입니다.</span>
+            <span data-en-only>Complete auxiliary pusher and tag axle solutions for trucks and buses — delivered fully pre-assembled with axle, suspension, wheelends, and brakes, steered (ETS electronic steering) or non-steered. A lightweight two-pivot design with no anti-roll bars or Panhard rods.</span>
+          </p>
+          <dl class="font-mono text-[12.5px] flex flex-col gap-2">
+            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>축하중</span><span data-en-only>Axle loads</span></dt><dd class="text-bright-alloy text-right">4 – 10 <span data-ko-only>톤</span><span data-en-only>tonnes</span></dd></div>
+            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>액슬빔</span><span data-en-only>Axle beam</span></dt><dd class="text-bright-alloy text-right">Ø127mm</dd></div>
+            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>휠엔드</span><span data-en-only>Wheelends</span></dt><dd class="text-bright-alloy text-right">17.5&quot; / 19.5&quot; / 22.5&quot;</dd></div>
+            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>조향</span><span data-en-only>Steering</span></dt><dd class="text-bright-alloy text-right">ETS MK3 · ISO26262 · Fail-Safe</dd></div>
+            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>옵션</span><span data-en-only>Options</span></dt><dd class="text-bright-alloy text-right"><span data-ko-only>통합 액슬리프트 · IATF 인증</span><span data-en-only>Integrated axle lift · IATF certified</span></dd></div>
+          </dl>
+        </article>
       </div>
-      <div class="mt-6 flex items-center gap-4 font-mono text-[13px] text-muted-zinc" data-reveal>
-        <img src="/assets/img/axle_lift.gif" alt="Axle Lift" class="h-12 w-auto opacity-80" />
-        <p><span class="text-bright-alloy"><span data-ko-only>볼트온 액슬리프트</span><span data-en-only>Bolt-on axle lift</span></span> — AL-456 (<span data-ko-only>드럼</span><span data-en-only>drum</span>) / AL-457 (<span data-ko-only>디스크</span><span data-en-only>disc</span>)</p>
+
+      <div class="mt-6 flex flex-col sm:flex-row sm:items-center gap-4 justify-between" data-reveal>
+        <p class="font-mono text-[13px] text-muted-zinc">
+          <span data-ko-only>E-Drive 액슬용 서스펜션, 경상용차(LCV) 맞춤 솔루션도 지원합니다.</span>
+          <span data-en-only>Suspension solutions for E-Drive axles and custom LCV solutions are also available.</span>
+        </p>
+        <div class="flex flex-wrap items-center gap-3 font-mono text-[12px]">
+          <span class="text-muted-zinc tracking-[0.15em]">VDL WEWELER</span>
+          <a href="https://www.vdlweweler.nl/products/developments" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 border border-hairline-steel px-3 py-2 text-muted-zinc hover:border-arterial-red hover:text-bright-alloy transition-colors"><span data-ko-only>개발 동향</span><span data-en-only>DEVELOPMENTS</span><span class="material-symbols-outlined text-[14px]">open_in_new</span></a>
+          <a href="https://www.vdlweweler.nl/services/rolling-road" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 border border-hairline-steel px-3 py-2 text-muted-zinc hover:border-arterial-red hover:text-bright-alloy transition-colors"><span data-ko-only>롤링 로드 테스트</span><span data-en-only>ROLLING ROAD</span><span class="material-symbols-outlined text-[14px]">open_in_new</span></a>
+          <a href="https://www.vdlweweler.nl/support/downloads" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 border border-hairline-steel px-3 py-2 text-muted-zinc hover:border-arterial-red hover:text-bright-alloy transition-colors"><span data-ko-only>자료 다운로드</span><span data-en-only>DOWNLOADS</span><span class="material-symbols-outlined text-[14px]">open_in_new</span></a>
+          <a href="/resources" class="inline-flex items-center gap-1.5 bg-arterial-red px-3 py-2 text-bright-alloy hover:bg-arterial-red-dim transition-colors"><span class="material-symbols-outlined text-[14px]">import_contacts</span><span data-ko-only>카탈로그</span><span data-en-only>CATALOGS</span></a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 02 AXLE -->
+  <!-- 02 AXLE + LANDING LEG -->
   <section id="axle" class="border-b border-hairline-steel scroll-mt-16">
     <div class="max-w-container mx-auto px-gutter py-section-v">
       <div class="grid md:grid-cols-2 gap-8 lg:gap-16 items-center mb-16">
         <div class="order-2 render-stage border border-hairline-steel bg-graphite-surface p-8 flex items-center justify-center" data-reveal-x>
-          <img src="/assets/img/valx_disc500.gif" alt="VALX 액슬" class="w-full max-h-[200px] object-contain" />
+          <img src="/assets/img/valx_disk_hub.png" alt="VALX DISK 디스크 브레이크 액슬" class="w-full max-h-[300px] object-contain" />
         </div>
         <div class="order-1 flex flex-col items-start gap-5 border-l border-hairline-steel pl-8" data-reveal>
-          <span class="font-mono text-[13px] text-arterial-red">02 / AXLES · VALX</span>
-          <h2 class="font-display font-bold text-[clamp(1.8rem,4vw,2.6rem)] text-bright-alloy tracking-tightest"><span data-ko-only>액슬</span><span data-en-only>Axles</span></h2>
+          <span class="font-mono text-[13px] text-arterial-red">02 / AXLES &amp; LANDING LEGS · VALX</span>
+          <h2 class="font-display font-bold text-[clamp(1.8rem,4vw,2.6rem)] text-bright-alloy tracking-tightest"><span data-ko-only>액슬 · 랜딩 레그</span><span data-en-only>Axles &amp; Landing Legs</span></h2>
           <p class="text-muted-zinc leading-relaxed max-w-md">
-            <span data-ko-only>유럽 최고 기술로 설계·제작된 네덜란드 VALX 액슬. 드럼 브레이크는 Textar, 디스크는 WABCO, 씰은 SKF, 메인베어링은 TIMKEN 등 각 부품의 세계적 브랜드를 채택했습니다.</span>
-            <span data-en-only>VALX axles engineered in the Netherlands — Textar for drum brakes, WABCO for disc, SKF seals, and TIMKEN main bearings.</span>
+            <span data-ko-only>네덜란드에서 설계·시험된 푸와-발랙스(FUWA-VALX) 디스크 브레이크 액슬. 벤틸레이티드 디스크로 탁월한 냉각·내마모 성능을 확보하고, 평생 윤활(maintenance-free) 설계로 관리 비용을 최소화했습니다. 캘리퍼는 현장 교체형 WABCO 싱글피스톤(PAN 22-1 / 19-1)을 표준 장착합니다.</span>
+            <span data-en-only>FUWA-VALX disc-brake axles, designed and tested in the Netherlands. Ventilated discs deliver outstanding brake cooling and wear behavior, while the maintenance-free design with lifetime lubrication maximizes cost-effectiveness. Field-replaceable WABCO single-piston callipers (PAN 22-1 / 19-1) are fitted as standard.</span>
           </p>
         </div>
       </div>
 
-      <div class="mb-14" data-reveal>
-        <div class="flex items-center gap-4 mb-4"><img src="/assets/img/valx_drum100.gif" alt="drum" class="h-12 w-auto" /><h3 class="font-display font-bold text-xl text-bright-alloy">VALX Drum Brake Axles</h3></div>
-        <div class="overflow-x-auto">
-          <table class="spec-table min-w-[560px]">
-            <thead><tr><th><span data-ko-only>항목</span><span data-en-only>Spec</span></th><th class="is-featured">DRUM 420</th><th>DRUM 360</th></tr></thead>
-            <tbody>
-              <tr><th>Axle load</th><td>9000 kg</td><td>9000 kg</td></tr>
-              <tr><th>Wheel size</th><td>22.5"</td><td>19.5"</td></tr>
-              <tr><th>Axle beam</th><td>Ø146×10</td><td>Ø146×10</td></tr>
-              <tr><th>Hub offset</th><td>0 mm</td><td>0 mm</td></tr>
-              <tr><th>Wheel bolts</th><td>10 ~ M22×1.5</td><td>8–10 ~ M22×1.5</td></tr>
-              <tr><th>Bolt circle</th><td>335 mm</td><td>275 / 335 mm</td></tr>
-              <tr><th>Brake</th><td>VALX Drum</td><td>VALX Drum</td></tr>
-              <tr><th>Brake dim.</th><td>420×180 mm</td><td>360×200 mm</td></tr>
-              <tr><th>Bearings</th><td>Timken B-145662~B-145649</td><td>Timken B-145662~B-145649</td></tr>
-              <tr><th>Seal</th><td>SKF 4 lip</td><td>SKF 4 lip</td></tr>
-              <tr><th>Air suspension</th><td>Weweler MBS</td><td>Weweler MBS</td></tr>
-              <tr><th>Ride height</th><td>210–420 mm</td><td>210–420 mm</td></tr>
-              <tr><th>Air spring Ø</th><td>300 / 335 mm</td><td>300 / 335 mm</td></tr>
-              <tr><th>Air spring offset</th><td>0/25/50/65/90 mm</td><td>0/25/50/65/90 mm</td></tr>
-              <tr><th>Axle lift</th><td>Optional</td><td>Optional</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div data-reveal>
-        <div class="flex items-center gap-4 mb-4"><img src="/assets/img/valx_disc100.gif" alt="disc" class="h-12 w-auto" /><h3 class="font-display font-bold text-xl text-bright-alloy">VALX Disc Brake Axles</h3></div>
+      <div class="mb-16" data-reveal>
+        <div class="flex items-center gap-4 mb-4"><img src="/assets/img/valx_disc100.gif" alt="disc" class="h-12 w-auto" /><h3 class="font-display font-bold text-xl text-bright-alloy">VALX DISK 430 / 370</h3></div>
         <div class="overflow-x-auto">
           <table class="spec-table min-w-[560px]">
             <thead><tr><th><span data-ko-only>항목</span><span data-en-only>Spec</span></th><th class="is-featured">DISK 430</th><th>DISK 370</th></tr></thead>
             <tbody>
               <tr><th>Axle load</th><td>9000 kg</td><td>9000 kg</td></tr>
               <tr><th>Wheel size</th><td>22.5"</td><td>19.5" / 22.5"</td></tr>
-              <tr><th>Axle beam</th><td>Ø146×10</td><td>Ø146×10</td></tr>
-              <tr><th>Hub offset</th><td>120 / 0 mm</td><td>120 / 0 mm</td></tr>
-              <tr><th>Wheel bolts</th><td>10 ~ M22×1.5</td><td>10 ~ M22×1.5</td></tr>
-              <tr><th>Bolt circle</th><td>335 mm</td><td>335 mm</td></tr>
-              <tr><th>Brake</th><td>Wabco</td><td>Wabco</td></tr>
-              <tr><th>Brake dim.</th><td>Pan 22-1</td><td>Pan 19-1</td></tr>
-              <tr><th>Bearings</th><td>Timken B-145662~B-145649</td><td>Timken B-145662~B-145649</td></tr>
-              <tr><th>Seal</th><td>SKF 4 lip</td><td>SKF 4 lip</td></tr>
-              <tr><th>Ride height</th><td>210–420 mm</td><td>210–420 mm</td></tr>
-              <tr><th>Air spring Ø</th><td>300 / 335 mm</td><td>300 / 335 mm</td></tr>
-              <tr><th>L1 / L2</th><td>520 / 320 mm</td><td>520 / 320 mm</td></tr>
-              <tr><th>Air spring offset</th><td>0/25/50/65/90 mm</td><td>0/25/50/65/90 mm</td></tr>
-              <tr><th>Axle lift</th><td>Optional</td><td>Optional</td></tr>
+              <tr><th>Axle beam</th><td>1-piece Ø146 mm</td><td>1-piece Ø146 mm</td></tr>
+              <tr><th>Hub offset</th><td>120 mm</td><td>120 mm</td></tr>
+              <tr><th>Wheel bolt circle</th><td>335 mm</td><td>335 mm</td></tr>
+              <tr><th>Brake dimensions</th><td>430 mm</td><td>370 mm</td></tr>
+              <tr><th>Calliper</th><td>WABCO PAN 22-1</td><td>WABCO PAN 19-1</td></tr>
+              <tr><th>Tyre mounting</th><td>Single</td><td>Single</td></tr>
+              <tr><th>Self-steering axle</th><td>Optional</td><td>—</td></tr>
+              <tr><th>Hubodometer</th><td>Optional</td><td>Optional</td></tr>
             </tbody>
           </table>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- 03 CYLINDER -->
-  <section id="cylinder" class="border-b border-hairline-steel scroll-mt-16">
-    <div class="max-w-container mx-auto px-gutter py-section-v">
-      <div class="grid md:grid-cols-2 gap-8 lg:gap-16 items-center mb-16">
-        <div class="order-2 md:order-1 flex flex-col items-start gap-5 border-l border-hairline-steel pl-8" data-reveal>
-          <span class="font-mono text-[13px] text-arterial-red">03 / HYDRAULIC CYLINDERS · HS PENTA</span>
-          <h2 class="font-display font-bold text-[clamp(1.8rem,4vw,2.6rem)] text-bright-alloy tracking-tightest"><span data-ko-only>유압실린더</span><span data-en-only>Hydraulic Cylinders</span></h2>
-          <p class="text-muted-zinc leading-relaxed max-w-md">
-            <span data-ko-only>이탈리아 HS Penta(Inter Pump Group). 용접 없이 통 강관 내·외경을 직접 가공하고 도금 피스톤로드를 표준 채택하여 수명을 연장한 고강성 다단 실린더입니다.</span>
-            <span data-en-only>Italy's HS Penta (Inter Pump Group). Seamless tubes machined inside and out — no welds — with plated piston rods as standard for extended service life.</span>
-          </p>
+      <!-- LANDING LEG (COMING SOON) -->
+      <div class="grid md:grid-cols-2 gap-px bg-hairline-steel border border-hairline-steel mb-6" data-reveal>
+        <div class="bg-[#F5F5F5] p-8 flex items-center justify-center">
+          <img src="/assets/img/valx_landing_legs.png" alt="VALX 랜딩 레그" class="max-h-[300px] w-auto object-contain" />
         </div>
-        <div class="order-1 md:order-2 render-stage border border-hairline-steel bg-graphite-surface p-8 flex items-center justify-center" data-reveal-x>
-          <img src="/assets/img/penta_cylinders200.png" alt="HS Penta 유압실린더" class="w-full max-h-[320px] object-contain" />
+        <div class="bg-charcoal-void p-8 flex flex-col gap-5">
+          <div class="flex items-center justify-between gap-4 border-b border-hairline-steel pb-4">
+            <h3 class="font-display font-bold text-2xl text-bright-alloy"><span data-ko-only>VALX 랜딩 레그</span><span data-en-only>VALX Landing Leg</span></h3>
+            <span class="font-mono text-[10px] tracking-[0.15em] text-arterial-red border border-arterial-red px-2.5 py-1 whitespace-nowrap"><span data-ko-only>취급 예정</span><span data-en-only>COMING SOON</span></span>
+          </div>
+          <p class="text-muted-zinc text-[15px] leading-relaxed">
+            <span data-ko-only>업계 최고 수준의 정적 하중·인상 능력을 갖춘 견고한 설계. 3년 보증에 3년 무급유(maintenance-free) 설계로 운영 부담을 줄였으며, 프리미엄 E-코팅과 분체 도장으로 뛰어난 방청 성능을 제공합니다. 전동식 랜딩 레그 eLEG도 VALX 라인업에 포함되어 있습니다.</span>
+            <span data-en-only>A robust design with industry-leading static load and lifting capacity. Three-year warranty and a three-year maintenance-free design, with premium E-coating plus powder coating for outstanding corrosion protection. The electric eLEG landing leg is also part of the VALX range.</span>
+          </p>
+          <dl class="font-mono text-[12.5px] flex flex-col gap-2 mt-auto">
+            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>정적 하중</span><span data-en-only>Static load</span></dt><dd class="text-bright-alloy text-right">60 T (Std) / 80 T (HD)</dd></div>
+            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>인상 능력</span><span data-en-only>Lifting capacity</span></dt><dd class="text-bright-alloy text-right">25 T</dd></div>
+            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>기어비 (저속/고속)</span><span data-en-only>Gear ratio (low/high)</span></dt><dd class="text-bright-alloy text-right">1 mm / 12 mm <span data-ko-only>per 회전</span><span data-en-only>per turn</span></dd></div>
+            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>중량</span><span data-en-only>Weight</span></dt><dd class="text-bright-alloy text-right"><span data-ko-only>89 kg부터</span><span data-en-only>from 89 kg</span></dd></div>
+          </dl>
         </div>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-px bg-hairline-steel border border-hairline-steel" data-reveal>
-        <div class="bg-charcoal-void p-7 flex flex-col gap-4">
-          <span class="font-mono text-[13px] text-arterial-red">LIGHT DUTY</span>
-          <h3 class="font-display font-bold text-lg text-bright-alloy"><span data-ko-only>라이트 듀티</span><span data-en-only>Light Duty</span></h3>
-          <ul class="text-muted-zinc text-[14px] leading-relaxed flex flex-col gap-2 list-none">
-            <li><span data-ko-only>이음매 없는 열간 단조 파이프 내·외경 가공</span><span data-en-only>Seamless hot-forged pipe, machined inside &amp; out</span></li>
-            <li><span data-ko-only>넓은 중첩구간으로 지지강도 확보</span><span data-en-only>Wide overlap for added support strength</span></li>
-            <li><span data-ko-only>용접 없는 통파이프 · 최대 220bar</span><span data-en-only>Weld-free tube · up to 220 bar</span></li>
-            <li><span data-ko-only>도금 피스톤로드 표준 채택</span><span data-en-only>Plated piston rod as standard</span></li>
-          </ul>
-          <p class="font-mono text-xs text-arterial-red border-t border-hairline-steel pt-3 mt-auto">10 ~ 20 <span class="text-muted-zinc">톤</span></p>
-        </div>
-        <div class="bg-charcoal-void p-7 flex flex-col gap-4">
-          <span class="font-mono text-[13px] text-arterial-red">HEAVY DUTY</span>
-          <h3 class="font-display font-bold text-lg text-bright-alloy"><span data-ko-only>헤비 듀티</span><span data-en-only>Heavy Duty</span></h3>
-          <ul class="text-muted-zinc text-[14px] leading-relaxed flex flex-col gap-2 list-none">
-            <li><span data-ko-only>열간단조강관 내·외경 + 호닝 가공</span><span data-en-only>Hot-forged tube, machined + honed</span></li>
-            <li><span data-ko-only>이중 탑가이드로 우수한 지지강도</span><span data-en-only>Twin top guides for superior support</span></li>
-            <li><span data-ko-only>동급 대비 탁월한 티핑 능력</span><span data-en-only>Outstanding tipping capacity in its class</span></li>
-            <li><span data-ko-only>최대 스트로크 6,500mm</span><span data-en-only>Max stroke 6,500 mm</span></li>
-          </ul>
-          <p class="font-mono text-xs text-arterial-red border-t border-hairline-steel pt-3 mt-auto">4 ~ 62 <span class="text-muted-zinc">톤</span></p>
-        </div>
-        <div class="bg-charcoal-void p-7 flex flex-col gap-4">
-          <span class="font-mono text-[13px] text-arterial-red">FRONT MOUNT</span>
-          <h3 class="font-display font-bold text-lg text-bright-alloy"><span data-ko-only>프론트 마운트</span><span data-en-only>Front Mount</span></h3>
-          <ul class="text-muted-zinc text-[14px] leading-relaxed flex flex-col gap-2 list-none">
-            <li><span data-ko-only>이음매 없는 열간 단조 파이프 가공</span><span data-en-only>Seamless hot-forged pipe machining</span></li>
-            <li><span data-ko-only>용접 없는 통 강관 고압 작동</span><span data-en-only>Weld-free tube, high-pressure operation</span></li>
-            <li><span data-ko-only>우수한 강도와 정밀 가공</span><span data-en-only>Excellent strength, precision machining</span></li>
-            <li><span data-ko-only>최대 스트로크 10,500mm</span><span data-en-only>Max stroke 10,500 mm</span></li>
-          </ul>
-          <p class="font-mono text-xs text-arterial-red border-t border-hairline-steel pt-3 mt-auto">20 ~ 100 <span class="text-muted-zinc">톤</span></p>
-        </div>
+      <div class="flex flex-wrap items-center gap-3 font-mono text-[12px] justify-end" data-reveal>
+        <span class="text-muted-zinc tracking-[0.15em]">VALX</span>
+        <a href="https://www.valx.eu/en/products/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 border border-hairline-steel px-3 py-2 text-muted-zinc hover:border-arterial-red hover:text-bright-alloy transition-colors"><span data-ko-only>제품 라인업</span><span data-en-only>PRODUCTS</span><span class="material-symbols-outlined text-[14px]">open_in_new</span></a>
+        <a href="https://www.valx.eu/en/service/spare-parts/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 border border-hairline-steel px-3 py-2 text-muted-zinc hover:border-arterial-red hover:text-bright-alloy transition-colors"><span data-ko-only>스페어 파츠</span><span data-en-only>SPARE PARTS</span><span class="material-symbols-outlined text-[14px]">open_in_new</span></a>
+        <a href="https://www.valx.eu/en/service/manuals/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 border border-hairline-steel px-3 py-2 text-muted-zinc hover:border-arterial-red hover:text-bright-alloy transition-colors"><span data-ko-only>매뉴얼</span><span data-en-only>MANUALS</span><span class="material-symbols-outlined text-[14px]">open_in_new</span></a>
+        <a href="/resources" class="inline-flex items-center gap-1.5 bg-arterial-red px-3 py-2 text-bright-alloy hover:bg-arterial-red-dim transition-colors"><span class="material-symbols-outlined text-[14px]">import_contacts</span><span data-ko-only>카탈로그</span><span data-en-only>CATALOGS</span></a>
       </div>
     </div>
   </section>

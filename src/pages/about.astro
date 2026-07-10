@@ -1,9 +1,22 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const history = [
+  { year: '2004', ko: '보고텍 설립 · 시배콘 냅코(CIVACON KNAPPCO, USA) 대리점', en: 'Established BOGOTEC · Distributor of CIVACON KNAPPCO, USA' },
+  { year: '2007', ko: '커스텀 호이스트(Custom Hoists, USA) 대리점', en: 'Distributor of Custom Hoists, USA' },
+  { year: '2009', ko: '펜타(HS PENTA, ITALY) 대리점', en: 'Distributor of HS PENTA, Italy' },
+  { year: '2011', ko: '케이비(주)로 법인 전환 및 상호 변경', en: 'Incorporated and renamed as KB, Inc. (KBI)' },
+  { year: '2012', ko: '베벨러(VDL Weweler, NETHERLANDS) 대리점', en: 'Distributor of VDL Weweler, Netherlands' },
+  { year: '2013', ko: '아이피에이치-하이드로카·하이드로벤(IPH-Hydrocar, Hydroven, ITALY) 대리점', en: 'Distributor of IPH-Hydrocar & Hydroven, Italy' },
+  { year: '2014', ko: '푸와·샌드(FUWA·SAND, CHINA) 및 발랙스(VALX, NETHERLANDS) 대리점', en: 'Distributor of FUWA & SAND, China and VALX, Netherlands' },
+  { year: '2016', ko: '필립스(PHILLIPS Industries, USA) 및 트럭-라이트(Truck-Lite, UK) 대리점', en: 'Distributor of PHILLIPS Industries, USA and Truck-Lite, UK' },
+  { year: '2018', ko: '아살리 스테펜-알오알(Assali Stefen-ROR, ITALY) 대리점', en: 'Distributor of Assali Stefen ROR, Italy' },
+  { year: '2021', ko: '엘에스아이-핫샷츠 시크리트(LSI-Hot Shot’s Secret, USA) 대리점', en: 'Distributor of Lubrication Specialties Inc. (LSI) — Hot Shot’s Secret, USA' },
+];
 ---
 <BaseLayout
   title="회사소개 | 케이비(주) KB Inc."
-  description="케이비(주) 인사말과 사업개요. 유럽·미국의 검증된 특장차 핵심 부품을 국내에 공급합니다."
+  description="케이비(주) 개요와 연혁. 2004년 설립, CIVACON 탱커 부품에서 트레일러 핵심 부품까지 — 검증된 글로벌 브랜드를 국내에 공급합니다."
   active="about"
 >
   <!-- PAGE HEADER -->
@@ -21,27 +34,56 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <!-- GREETING -->
-  <section class="border-b border-hairline-steel">
+  <!-- INTRODUCTION (개요) -->
+  <section id="intro" class="border-b border-hairline-steel scroll-mt-16">
     <div class="max-w-container mx-auto px-gutter py-section-v grid lg:grid-cols-[minmax(0,22rem)_1fr] gap-10 lg:gap-20">
       <div data-reveal>
-        <p class="font-mono text-[13px] text-arterial-red mb-3">01 / GREETING</p>
-        <h2 class="font-display font-bold text-3xl text-bright-alloy"><span data-ko-only>인사말</span><span data-en-only>Greeting</span></h2>
+        <p class="font-mono text-[13px] text-arterial-red mb-3">01 / INTRODUCTION</p>
+        <h2 class="font-display font-bold text-3xl text-bright-alloy"><span data-ko-only>회사 개요</span><span data-en-only>Introduction</span></h2>
       </div>
       <div class="flex flex-col gap-6 text-lg leading-relaxed" data-reveal>
         <p class="text-bright-alloy font-medium">
-          <span data-ko-only>저희 홈페이지를 방문해 주셔서 감사합니다.</span>
-          <span data-en-only>Thank you for visiting KB Inc.</span>
+          <span data-ko-only>케이비(주)(구 보고텍)는 2004년에 설립되어, 도버(DOVER) 그룹 산하 OPW 글로벌의 일부인 시배콘 냅코(CIVACON KNAPPCO) 탱커 제품을 국내 탱크로리 제작업체에 공급하며 출발했습니다.</span>
+          <span data-en-only>KB, Inc. (KBI, formerly BOGOTEC) was established in 2004, supplying tanker components to tanker builders as the distributor of CIVACON KNAPPCO (USA) — part of OPW Global under the Dover group, specialized in products and systems to safely load, monitor, and unload petroleum, dry-bulk, and petrochemical cargo tanks.</span>
         </p>
         <p class="text-muted-zinc">
-          <span data-ko-only>케이비(주)는 오랜 역사와 전통을 지닌 유럽·미국의 검증된 공급처로부터 특장차 핵심 부품을 국내 시장에 안정적으로 공급하는 전문 유통 기업입니다. 최고의 상품과 서비스로 고객 만족을 위해 노력하며, 고객 만족을 최우선으로 최고의 품질, 경쟁력 있는 가격, 책임지는 서비스로 고객 여러분과 함께하겠습니다.</span>
-          <span data-en-only>KB Inc. is a specialist distributor supplying core heavy-vehicle components to the Korean market from established, proven European and American manufacturers. We work to earn our customers' satisfaction through the finest products and service — putting quality, competitive pricing, and accountable support first.</span>
+          <span data-ko-only>시배콘과 함께 정유사들의 하부 적재 시스템(Bottom Loading System)의 한국 표준 제정에 참여하고 탱크로리 제작업체들의 시스템 장착에 협력했으며, 항공(Aviation)·케미칼(Chemical)·드라이 벌크(Dry Bulk)·유류(Petroleum) 및 LPG용 고품질 탱커 부품을 공급하여 왔습니다.</span>
+          <span data-en-only>Together with CIVACON, KBI helped major refineries set the Korean standard for the Bottom Loading System (BLS) and supported tanker builders in installing it — supplying quality tanker components for aviation, chemical, dry-bulk, petroleum, and LPG tankers.</span>
         </p>
         <p class="text-muted-zinc">
-          <span data-ko-only>앞으로도 변함없는 신뢰와 기술력으로 고객의 성공에 기여하는 파트너가 되겠습니다.</span>
-          <span data-en-only>We will remain a partner that contributes to our customers' success through unwavering trust and technical capability.</span>
+          <span data-ko-only>2007년부터는 트레일러 제작업체에 트레일러 부품을 공급하기 시작했습니다. 인터펌프(INTERPUMP) 그룹 산하 IPH의 일부인 텔레스코픽 실린더 전문 제조사 펜타(HS Penta), 트레일러·트럭·버스용 (에어)서스펜션 설계·제작사인 VDL 그룹의 베벨러(VDL Weweler) 제품으로 라인업을 확장했으며, 푸와(FUWA)·알오알(ROR)·발랙스(VALX) 등 우수한 트레일러 액슬과 샌드(SAND) 브레이크 부스터, 트럭-라이트(Truck-Lite) 비전 시스템을 공급하여 왔습니다.</span>
+          <span data-en-only>Since 2007 KBI has gradually shifted to trailer parts — distributing Custom Hoists (US), a leading manufacturer of mobile hydraulic cylinders; HS Penta (IT), telescopic-cylinder specialists now part of IPH under the Interpump Group; and VDL Weweler (NL), a leading designer and manufacturer of (air) suspension solutions for trailers, trucks, and buses. The lineup expanded with proven trailer axles from FUWA (CN), ROR (IT), and VALX (NL), plus SAND (CN) brake chambers and boosters and Truck-Lite (UK) vision systems.</span>
+        </p>
+        <p class="text-muted-zinc">
+          <span data-ko-only>최근에는 루브리케이션 스페셜티(Lubrication Specialties Inc., LSI)의 핫샷츠 시크리트(Hot Shot’s Secret) 브랜드 고성능 첨가제 및 윤활유를 공급하기 시작했습니다.</span>
+          <span data-en-only>Recently, KBI started to distribute Lubrication Specialties Inc. (LSI), maker of the Hot Shot’s Secret brand of performance additives and oils and provider of custom lubricant solutions for industrial clients.</span>
         </p>
       </div>
+    </div>
+  </section>
+
+  <!-- HISTORY (연혁) -->
+  <section id="history" class="border-b border-hairline-steel scroll-mt-16">
+    <div class="max-w-container mx-auto px-gutter py-section-v grid lg:grid-cols-[minmax(0,22rem)_1fr] gap-10 lg:gap-20">
+      <div data-reveal>
+        <p class="font-mono text-[13px] text-arterial-red mb-3">02 / HISTORY</p>
+        <h2 class="font-display font-bold text-3xl text-bright-alloy"><span data-ko-only>연혁</span><span data-en-only>History</span></h2>
+        <p class="text-muted-zinc mt-4 leading-relaxed">
+          <span data-ko-only>2004년 설립 이후, 세계적 브랜드들과의 파트너십을 꾸준히 넓혀 왔습니다.</span>
+          <span data-en-only>Since 2004, we have steadily broadened our partnerships with world-class brands.</span>
+        </p>
+      </div>
+      <ol class="relative border-l border-hairline-steel flex flex-col">
+        {history.map((h) => (
+          <li class="relative pl-10 py-5 group hover:bg-graphite-surface/40 transition-colors" data-reveal>
+            <span class="absolute left-0 top-[2.05rem] -translate-x-1/2 w-2 h-2 bg-arterial-red rotate-45 group-hover:scale-125 transition-transform"></span>
+            <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-8">
+              <span class="font-mono text-arterial-red text-lg font-bold tracking-tight shrink-0 w-16">{h.year}</span>
+              <p class="text-bright-alloy leading-relaxed"><span data-ko-only>{h.ko}</span><span data-en-only>{h.en}</span></p>
+            </div>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
 
@@ -49,7 +91,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="border-b border-hairline-steel">
     <div class="max-w-container mx-auto px-gutter py-section-v">
       <div class="mb-14" data-reveal>
-        <p class="font-mono text-[13px] text-arterial-red mb-3">02 / BUSINESS</p>
+        <p class="font-mono text-[13px] text-arterial-red mb-3">03 / BUSINESS</p>
         <h2 class="font-display font-bold text-3xl text-bright-alloy"><span data-ko-only>사업개요</span><span data-en-only>Business Overview</span></h2>
       </div>
       <div class="grid md:grid-cols-3 gap-px bg-hairline-steel border border-hairline-steel">
@@ -62,19 +104,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </p>
         </div>
         <div class="bg-charcoal-void p-8 flex flex-col gap-4" data-reveal>
-          <span class="font-mono text-[13px] text-arterial-red">B / AXLES</span>
-          <h3 class="font-display font-bold text-xl text-bright-alloy"><span data-ko-only>액슬</span><span data-en-only>Axles</span></h3>
+          <span class="font-mono text-[13px] text-arterial-red">B / AXLES &amp; LANDING LEGS</span>
+          <h3 class="font-display font-bold text-xl text-bright-alloy"><span data-ko-only>액슬 · 랜딩 레그</span><span data-en-only>Axles &amp; Landing Legs</span></h3>
           <p class="text-muted-zinc leading-relaxed text-[15px]">
-            <span data-ko-only>유럽 최고 기술로 설계·제작된 고품질 액슬을 네덜란드 VALX사로부터 공급합니다. Textar(드럼), WABCO(디스크), SKF(씰), TIMKEN(베어링) 등 세계적 브랜드 부품으로 신뢰도를 높였습니다.</span>
-            <span data-en-only>High-quality axles engineered in the Netherlands by VALX, built with world-class components — Textar (drum), WABCO (disc), SKF (seals), and TIMKEN (bearings).</span>
+            <span data-ko-only>네덜란드에서 설계·시험된 푸와-발랙스(FUWA-VALX)의 디스크 브레이크 액슬(DISK 430/370)을 공급합니다. 유지보수 프리 설계에 WABCO 캘리퍼를 표준 장착했으며, VALX 랜딩 레그도 취급 예정입니다.</span>
+            <span data-en-only>FUWA-VALX disc-brake axles (DISK 430/370), designed and tested in the Netherlands — maintenance-free with WABCO callipers as standard. VALX landing legs are coming soon.</span>
           </p>
         </div>
         <div class="bg-charcoal-void p-8 flex flex-col gap-4" data-reveal>
-          <span class="font-mono text-[13px] text-arterial-red">C / HYDRAULIC CYLINDERS</span>
-          <h3 class="font-display font-bold text-xl text-bright-alloy"><span data-ko-only>유압실린더</span><span data-en-only>Hydraulic Cylinders</span></h3>
+          <span class="font-mono text-[13px] text-arterial-red">C / FULL LINEUP</span>
+          <h3 class="font-display font-bold text-xl text-bright-alloy"><span data-ko-only>전체 라인업</span><span data-en-only>Full Lineup</span></h3>
           <p class="text-muted-zinc leading-relaxed text-[15px]">
-            <span data-ko-only>이탈리아 HS Penta(Inter Pump Group)의 다단 유압실린더. 유럽 시장 점유율 30% 이상, 용접 없이 내·외경 전 부분을 직접 가공해 대부분 200bar에서 사용 가능한 고강성 제품입니다.</span>
-            <span data-en-only>Multi-stage cylinders from Italy's HS Penta (Inter Pump Group). A 30%+ European market share, fully machined without welds and rated for most applications at 200 bar.</span>
+            <span data-ko-only>자매회사 파코(PKI)와 함께 첨가제·윤활유(Hot Shot’s Secret), 브레이크 부스터(SAND), 하네스·라이팅(PHILLIPS, Truck-Lite), 타이어·휠, 탱커 부품(CIVACON) 등 폭넓은 제품군을 공급합니다.</span>
+            <span data-en-only>Together with sister company PKI, we supply a broad range — additives &amp; oils (Hot Shot’s Secret), brake boosters (SAND), harness &amp; lighting (PHILLIPS, Truck-Lite), tires &amp; wheels, and tanker equipment (CIVACON).</span>
           </p>
         </div>
       </div>
@@ -84,7 +126,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <!-- CORE VALUES -->
   <section class="border-b border-hairline-steel">
     <div class="max-w-container mx-auto px-gutter py-16 border-b border-hairline-steel" data-reveal>
-      <p class="font-mono text-[13px] text-arterial-red mb-3">03 / CORE VALUES</p>
+      <p class="font-mono text-[13px] text-arterial-red mb-3">04 / CORE VALUES</p>
       <h2 class="font-display font-bold text-bright-alloy tracking-tightest text-[clamp(1.8rem,4vw,2.8rem)]">
         <span data-ko-only>세 가지 약속</span><span data-en-only>Three Commitments</span>
       </h2>

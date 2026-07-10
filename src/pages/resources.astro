@@ -1,0 +1,269 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const catalogs = [
+  {
+    file: '/catalogs/valx-product-brochure-2023.pdf',
+    logo: '/assets/img/valx_logo.gif',
+    logoAlt: 'VALX',
+    brand: 'VALX',
+    ko: 'VALX 제품 카탈로그',
+    en: 'VALX Product Brochure',
+    descKo: '드럼·디스크 액슬 전 라인업 사양과 적용 가이드',
+    descEn: 'Full drum & disc axle lineup — specs and application guide',
+    year: '2023',
+    pages: 10,
+    size: '5.1 MB',
+  },
+  {
+    file: '/catalogs/vdl-weweler-mbs-omega-flyer-2024.pdf',
+    logo: '/assets/img/VDL_Weweler_logo.gif',
+    logoAlt: 'VDL Weweler',
+    brand: 'VDL WEWELER',
+    ko: 'MBS 오메가 플라이어',
+    en: 'MBS Omega Flyer',
+    descKo: '트레일러용 MBS 오메가 에어서스펜션 소개 자료',
+    descEn: 'MBS Omega air-suspension system for trailers',
+    year: '2024',
+    pages: 2,
+    size: '0.7 MB',
+  },
+  {
+    file: '/catalogs/vdl-weweler-truck-bus-flyer-2024.pdf',
+    logo: '/assets/img/VDL_Weweler_logo.gif',
+    logoAlt: 'VDL Weweler',
+    brand: 'VDL WEWELER',
+    ko: '트럭·버스 플라이어',
+    en: 'Truck & Bus Flyer',
+    descKo: '트럭·버스용 서스펜션 솔루션 소개 자료',
+    descEn: 'Suspension solutions for trucks and buses',
+    year: '2024',
+    pages: 2,
+    size: '0.7 MB',
+  },
+];
+---
+<BaseLayout
+  title="자료실 | 케이비(주) KB Inc. — 제품 카탈로그"
+  description="케이비(주) 제품 카탈로그 자료실. VALX 액슬, VDL Weweler 에어서스펜션 카탈로그를 열람하고 다운로드하세요."
+  active="resources"
+>
+  <!-- PAGE HEADER -->
+  <section class="border-b border-hairline-steel relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-1/2 h-full bg-graphite-surface opacity-40 -skew-x-12 translate-x-1/3 pointer-events-none"></div>
+    <div class="relative z-10 max-w-container mx-auto px-gutter pt-20 pb-16" data-reveal>
+      <p class="font-mono text-[13px] text-arterial-red mb-4 flex items-center gap-3"><span class="w-8 h-px bg-arterial-red"></span>자료실 / RESOURCES</p>
+      <h1 class="font-display font-bold text-bright-alloy tracking-tightest text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.1]">
+        <span data-ko-only>제품 카탈로그</span><span data-en-only>Product Catalogs</span>
+      </h1>
+      <p class="text-muted-zinc text-lg mt-5 max-w-2xl leading-relaxed">
+        <span data-ko-only>브랜드별 공식 카탈로그를 사이트에서 바로 열람하거나 PDF로 다운로드하실 수 있습니다.</span>
+        <span data-en-only>Browse official brand catalogs right on the site, or download them as PDF.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- CATALOG GRID -->
+  <section class="border-b border-hairline-steel">
+    <div class="max-w-container mx-auto px-gutter py-section-v">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-hairline-steel border border-hairline-steel">
+        {catalogs.map((c) => (
+          <article class="bg-charcoal-void flex flex-col group" data-reveal>
+            <a
+              href={c.file}
+              target="_blank"
+              rel="noopener"
+              data-pdf
+              data-title-ko={c.ko}
+              data-title-en={c.en}
+              data-brand={c.brand}
+              class="relative h-44 bg-[#F5F5F5] flex items-center justify-center overflow-hidden cursor-pointer"
+              aria-label={`${c.brand} ${c.ko} 열람`}
+            >
+              <img src={c.logo} alt={c.logoAlt} class="max-h-12 w-auto opacity-90 group-hover:scale-105 transition-transform duration-500" />
+              <span class="absolute inset-0 bg-charcoal-void/0 group-hover:bg-charcoal-void/55 transition-colors flex items-center justify-center">
+                <span class="opacity-0 group-hover:opacity-100 transition-opacity inline-flex items-center gap-2 font-mono text-[13px] text-bright-alloy border border-bright-alloy px-5 py-2.5">
+                  <span class="material-symbols-outlined text-[18px]">visibility</span>
+                  <span data-ko-only>바로 보기</span><span data-en-only>VIEW</span>
+                </span>
+              </span>
+              <span class="absolute top-3 left-3 font-mono text-[10px] tracking-[0.15em] text-charcoal-void/60 border border-charcoal-void/20 px-2 py-0.5">PDF</span>
+            </a>
+            <div class="p-7 flex flex-col gap-3 flex-grow">
+              <p class="font-mono text-[11px] tracking-[0.2em] text-arterial-red">{c.brand} · {c.year}</p>
+              <h2 class="font-display font-bold text-xl text-bright-alloy leading-snug">
+                <span data-ko-only>{c.ko}</span><span data-en-only>{c.en}</span>
+              </h2>
+              <p class="text-muted-zinc text-[14.5px] leading-relaxed">
+                <span data-ko-only>{c.descKo}</span><span data-en-only>{c.descEn}</span>
+              </p>
+              <p class="font-mono text-[12px] text-muted-zinc mt-1">
+                {c.pages}<span data-ko-only>페이지</span><span data-en-only> pages</span> · {c.size}
+              </p>
+              <div class="flex items-stretch gap-3 mt-4 pt-4 border-t border-hairline-steel">
+                <a
+                  href={c.file}
+                  target="_blank"
+                  rel="noopener"
+                  data-pdf
+                  data-title-ko={c.ko}
+                  data-title-en={c.en}
+                  data-brand={c.brand}
+                  class="flex-grow inline-flex items-center justify-center gap-2 bg-arterial-red text-bright-alloy font-mono text-[13px] px-5 py-3 hover:bg-arterial-red-dim active:translate-y-px transition-all"
+                >
+                  <span class="material-symbols-outlined text-[18px]">import_contacts</span>
+                  <span data-ko-only>바로 보기</span><span data-en-only>VIEW</span>
+                </a>
+                <a
+                  href={c.file}
+                  download
+                  class="inline-flex items-center justify-center gap-2 border border-hairline-steel text-muted-zinc font-mono text-[13px] px-4 py-3 hover:border-arterial-red hover:text-bright-alloy active:translate-y-px transition-all"
+                  aria-label={`${c.brand} ${c.ko} 다운로드`}
+                >
+                  <span class="material-symbols-outlined text-[18px]">download</span>
+                  <span data-ko-only>다운로드</span><span data-en-only>DOWNLOAD</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <p class="font-mono text-[13px] text-muted-zinc mt-8 flex items-center gap-2" data-reveal>
+        <span class="material-symbols-outlined text-[16px]">info</span>
+        <span data-ko-only>필요한 자료가 더 있으신가요? <a href="/contact" class="text-bright-alloy underline underline-offset-4 hover:text-arterial-red transition-colors">문의하기</a>로 요청해 주세요.</span>
+        <span data-en-only>Need more materials? <a href="/contact" class="text-bright-alloy underline underline-offset-4 hover:text-arterial-red transition-colors">Contact us</a> and we'll send them over.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- OFFICIAL BRAND LINKS -->
+  <section class="border-b border-hairline-steel">
+    <div class="max-w-container mx-auto px-gutter py-section-v">
+      <div class="mb-12" data-reveal>
+        <p class="font-mono text-[13px] text-arterial-red mb-3">OFFICIAL LINKS</p>
+        <h2 class="font-display font-bold text-3xl text-bright-alloy tracking-tightest">
+          <span data-ko-only>브랜드 공식 자료</span><span data-en-only>Official brand resources</span>
+        </h2>
+        <p class="text-muted-zinc mt-4 max-w-2xl leading-relaxed">
+          <span data-ko-only>제조사 공식 홈페이지에서 최신 개발 소식, 기술 자료, 매뉴얼을 확인하실 수 있습니다.</span>
+          <span data-en-only>Find the latest developments, technical documents, and manuals on the manufacturers' official websites.</span>
+        </p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-px bg-hairline-steel border border-hairline-steel" data-reveal>
+        <div class="bg-charcoal-void p-8 flex flex-col gap-5">
+          <div class="h-12 flex items-center"><img src="/assets/img/VDL_Weweler_logo.gif" alt="VDL Weweler" class="max-h-8 w-auto bg-[#F5F5F5] px-3 py-1.5" /></div>
+          <div class="flex flex-col">
+            <a href="https://www.vdlweweler.nl/products/developments" target="_blank" rel="noopener" class="group flex items-center justify-between gap-4 border-t border-hairline-steel py-4 font-mono text-[13px] text-muted-zinc hover:text-bright-alloy transition-colors">
+              <span><span data-ko-only>제품 개발 동향</span><span data-en-only>Product developments</span></span>
+              <span class="material-symbols-outlined text-[16px] group-hover:text-arterial-red group-hover:translate-x-0.5 transition-all">open_in_new</span>
+            </a>
+            <a href="https://www.vdlweweler.nl/services/rolling-road" target="_blank" rel="noopener" class="group flex items-center justify-between gap-4 border-t border-hairline-steel py-4 font-mono text-[13px] text-muted-zinc hover:text-bright-alloy transition-colors">
+              <span><span data-ko-only>롤링 로드 테스트 서비스</span><span data-en-only>Rolling road test service</span></span>
+              <span class="material-symbols-outlined text-[16px] group-hover:text-arterial-red group-hover:translate-x-0.5 transition-all">open_in_new</span>
+            </a>
+            <a href="https://www.vdlweweler.nl/support/downloads" target="_blank" rel="noopener" class="group flex items-center justify-between gap-4 border-t border-hairline-steel py-4 font-mono text-[13px] text-muted-zinc hover:text-bright-alloy transition-colors">
+              <span><span data-ko-only>기술 자료 다운로드</span><span data-en-only>Technical downloads</span></span>
+              <span class="material-symbols-outlined text-[16px] group-hover:text-arterial-red group-hover:translate-x-0.5 transition-all">open_in_new</span>
+            </a>
+          </div>
+        </div>
+        <div class="bg-charcoal-void p-8 flex flex-col gap-5">
+          <div class="h-12 flex items-center"><img src="/assets/img/valx_logo.gif" alt="VALX" class="max-h-9 w-auto bg-[#F5F5F5] px-3 py-1.5" /></div>
+          <div class="flex flex-col">
+            <a href="https://www.valx.eu/en/products/" target="_blank" rel="noopener" class="group flex items-center justify-between gap-4 border-t border-hairline-steel py-4 font-mono text-[13px] text-muted-zinc hover:text-bright-alloy transition-colors">
+              <span><span data-ko-only>제품 라인업</span><span data-en-only>Product lineup</span></span>
+              <span class="material-symbols-outlined text-[16px] group-hover:text-arterial-red group-hover:translate-x-0.5 transition-all">open_in_new</span>
+            </a>
+            <a href="https://www.valx.eu/en/service/spare-parts/" target="_blank" rel="noopener" class="group flex items-center justify-between gap-4 border-t border-hairline-steel py-4 font-mono text-[13px] text-muted-zinc hover:text-bright-alloy transition-colors">
+              <span><span data-ko-only>스페어 파츠</span><span data-en-only>Spare parts</span></span>
+              <span class="material-symbols-outlined text-[16px] group-hover:text-arterial-red group-hover:translate-x-0.5 transition-all">open_in_new</span>
+            </a>
+            <a href="https://www.valx.eu/en/service/manuals/" target="_blank" rel="noopener" class="group flex items-center justify-between gap-4 border-t border-hairline-steel py-4 font-mono text-[13px] text-muted-zinc hover:text-bright-alloy transition-colors">
+              <span><span data-ko-only>매뉴얼</span><span data-en-only>Manuals</span></span>
+              <span class="material-symbols-outlined text-[16px] group-hover:text-arterial-red group-hover:translate-x-0.5 transition-all">open_in_new</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PDF VIEWER MODAL -->
+  <div id="pdf-modal" class="fixed inset-0 z-[100] hidden flex-col bg-charcoal-void/90 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="pdf-modal-title">
+    <div class="flex items-center justify-between gap-4 h-16 px-5 md:px-8 border-b border-hairline-steel bg-charcoal-void shrink-0">
+      <div class="flex items-baseline gap-4 min-w-0">
+        <span id="pdf-modal-brand" class="font-mono text-[11px] tracking-[0.2em] text-arterial-red whitespace-nowrap"></span>
+        <h2 id="pdf-modal-title" class="font-display font-bold text-bright-alloy text-base md:text-lg truncate"></h2>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <a id="pdf-modal-download" href="#" download class="inline-flex items-center gap-2 font-mono text-[12px] text-muted-zinc border border-hairline-steel px-4 py-2 hover:border-arterial-red hover:text-bright-alloy transition-colors">
+          <span class="material-symbols-outlined text-[16px]">download</span>
+          <span class="hidden sm:inline"><span data-ko-only>다운로드</span><span data-en-only>DOWNLOAD</span></span>
+        </a>
+        <a id="pdf-modal-newtab" href="#" target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-mono text-[12px] text-muted-zinc border border-hairline-steel px-4 py-2 hover:border-arterial-red hover:text-bright-alloy transition-colors" aria-label="새 탭에서 열기">
+          <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+        </a>
+        <button id="pdf-modal-close" class="inline-flex items-center justify-center text-bright-alloy border border-hairline-steel w-9 h-9 hover:border-arterial-red hover:text-arterial-red transition-colors" aria-label="닫기">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+    </div>
+    <div class="flex-grow relative bg-graphite-surface">
+      <p id="pdf-modal-loading" class="absolute inset-0 flex items-center justify-center font-mono text-[13px] text-muted-zinc pointer-events-none">
+        <span data-ko-only>불러오는 중…</span><span data-en-only>Loading…</span>
+      </p>
+      <iframe id="pdf-frame" title="PDF 카탈로그 뷰어" class="relative w-full h-full border-0"></iframe>
+    </div>
+  </div>
+
+  <script>
+    // In-site PDF viewer: on desktop, intercept catalog links into a full-screen
+    // modal (browser-native PDF rendering). On small/touch screens the links keep
+    // their default target=_blank behavior, which is more reliable on mobile.
+    const modal = document.getElementById('pdf-modal') as HTMLElement;
+    const frame = document.getElementById('pdf-frame') as HTMLIFrameElement;
+    const titleEl = document.getElementById('pdf-modal-title') as HTMLElement;
+    const brandEl = document.getElementById('pdf-modal-brand') as HTMLElement;
+    const dlEl = document.getElementById('pdf-modal-download') as HTMLAnchorElement;
+    const ntEl = document.getElementById('pdf-modal-newtab') as HTMLAnchorElement;
+    const loadingEl = document.getElementById('pdf-modal-loading') as HTMLElement;
+    const closeBtn = document.getElementById('pdf-modal-close') as HTMLButtonElement;
+
+    function openViewer(url: string, ko: string, en: string, brand: string) {
+      const isEn = document.documentElement.classList.contains('lang-en');
+      titleEl.textContent = isEn ? en : ko;
+      brandEl.textContent = brand;
+      dlEl.href = url;
+      ntEl.href = url;
+      loadingEl.style.display = '';
+      frame.src = url + '#view=FitH';
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+    function closeViewer() {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      frame.src = '';
+      document.body.style.overflow = '';
+    }
+
+    frame.addEventListener('load', () => { if (frame.src) loadingEl.style.display = 'none'; });
+
+    document.querySelectorAll<HTMLAnchorElement>('[data-pdf]').forEach((a) => {
+      a.addEventListener('click', (e) => {
+        if (!window.matchMedia('(min-width: 768px)').matches) return; // mobile: new tab
+        e.preventDefault();
+        openViewer(a.getAttribute('href') || '', a.dataset.titleKo || '', a.dataset.titleEn || '', a.dataset.brand || '');
+      });
+    });
+
+    closeBtn.addEventListener('click', closeViewer);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeViewer(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeViewer();
+    });
+  </script>
+</BaseLayout>

@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="뉴스 | 케이비(주) KB Inc."
+  description="케이비(주)의 새로운 소식과 공지사항."
+  active="news"
+>
+  <!-- PAGE HEADER -->
+  <section class="border-b border-hairline-steel relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-1/2 h-full bg-graphite-surface opacity-40 -skew-x-12 translate-x-1/3 pointer-events-none"></div>
+    <div class="relative z-10 max-w-container mx-auto px-gutter pt-20 pb-16" data-reveal>
+      <p class="font-mono text-[13px] text-arterial-red mb-4 flex items-center gap-3"><span class="w-8 h-px bg-arterial-red"></span>뉴스 / NEWS</p>
+      <h1 class="font-display font-bold text-bright-alloy tracking-tightest text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.1]">
+        <span data-ko-only>새로운 소식</span><span data-en-only>News</span>
+      </h1>
+      <p class="text-muted-zinc text-lg mt-5 max-w-2xl leading-relaxed">
+        <span data-ko-only>케이비(주)의 신규 취급 브랜드, 제품 출시, 공지사항을 전해드립니다.</span>
+        <span data-en-only>Updates on new brands, product launches, and announcements from KB Inc.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- EMPTY STATE -->
+  <section class="border-b border-hairline-steel">
+    <div class="max-w-container mx-auto px-gutter py-section-v">
+      <div class="border border-dashed border-hairline-steel bg-graphite-surface/40 px-8 py-24 flex flex-col items-center text-center gap-5" data-reveal>
+        <span class="material-symbols-outlined text-[40px] text-muted-zinc">campaign</span>
+        <h2 class="font-display font-bold text-2xl text-bright-alloy">
+          <span data-ko-only>등록된 소식을 준비 중입니다</span><span data-en-only>News coming soon</span>
+        </h2>
+        <p class="text-muted-zinc leading-relaxed max-w-md">
+          <span data-ko-only>새로운 소식이 준비되는 대로 이곳에 게시됩니다. 제품이나 자료에 대한 문의는 언제든 환영합니다.</span>
+          <span data-en-only>New posts will appear here as they're published. In the meantime, we welcome any questions about our products and materials.</span>
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-2">
+          <a href="/resources" class="inline-flex items-center gap-2 border border-hairline-steel text-muted-zinc font-mono text-[13px] px-6 py-3 hover:border-arterial-red hover:text-bright-alloy transition-colors">
+            <span class="material-symbols-outlined text-[16px]">import_contacts</span>
+            <span data-ko-only>카탈로그 보기</span><span data-en-only>VIEW CATALOGS</span>
+          </a>
+          <a href="/contact" class="inline-flex items-center gap-2 bg-arterial-red text-bright-alloy font-mono text-[13px] px-6 py-3 hover:bg-arterial-red-dim active:translate-y-px transition-all">
+            <span data-ko-only>문의하기</span><span data-en-only>CONTACT US</span>
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
