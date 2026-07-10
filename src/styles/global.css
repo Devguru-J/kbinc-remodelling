@@ -4,6 +4,9 @@
 
 :root { color-scheme: dark; }
 html { scroll-behavior: smooth; }
+/* Reveal animations translate elements sideways before they enter the
+   viewport — clip so they never create page-level horizontal scroll. */
+html, body { overflow-x: clip; }
 
 /* Unified typography — Pretendard everywhere */
 body {

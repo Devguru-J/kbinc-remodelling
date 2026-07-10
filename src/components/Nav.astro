@@ -13,8 +13,8 @@ const items = [
     <a href="/" class="flex items-center gap-3 font-display font-bold text-lg tracking-tightest text-bright-alloy">
       <img src="/assets/img/kbi_logo.gif" alt="케이비(주) 로고" class="h-8 w-auto" />
       <span class="h-6 w-px bg-hairline-steel"></span>
-      <span>케이비<span class="text-muted-zinc">(주)</span></span>
-      <span class="text-muted-zinc font-mono text-xs tracking-widest pt-0.5">KB INC.</span>
+      <span class="whitespace-nowrap">케이비<span class="text-muted-zinc">(주)</span></span>
+      <span class="hidden sm:inline text-muted-zinc font-mono text-xs tracking-widest pt-0.5 whitespace-nowrap">KB INC.</span>
     </a>
     <nav class="hidden md:flex items-center gap-9 font-mono text-[13px]">
       {items.map((it) => (
@@ -29,7 +29,7 @@ const items = [
       ))}
     </nav>
     <div class="flex items-center gap-4">
-      <button data-lang-toggle class="font-mono text-xs tracking-widest border-l border-hairline-steel pl-4" aria-label="Toggle language">
+      <button data-lang-toggle class="font-mono text-xs tracking-widest border-l border-hairline-steel pl-4 whitespace-nowrap" aria-label="Toggle language">
         <span data-ko class="text-bright-alloy">KO</span><span class="text-muted-zinc"> / </span><span data-en class="text-muted-zinc">EN</span>
       </button>
       <button data-menu-toggle class="md:hidden text-bright-alloy" aria-label="Toggle menu">
