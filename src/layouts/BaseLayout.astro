@@ -52,9 +52,13 @@ const {
     // Language toggle, mobile menu, staggered scroll reveal.
     const root = document.documentElement;
     // The edge middleware (functions/_middleware.js) pre-sets lang-en for
-    // non-Korean visitors; a saved toggle choice must win in both directions.
+    // non-Korean visitors. A toggle choice only lasts for the browsing
+    // session (sessionStorage) — a fresh visit starts from the geo default.
     let saved = null;
-    try { saved = localStorage.getItem('kb-lang'); } catch (e) {}
+    try {
+      saved = sessionStorage.getItem('kb-lang');
+      localStorage.removeItem('kb-lang'); // drop the old persistent value
+    } catch (e) {}
     if (saved === 'en') root.classList.add('lang-en');
     else if (saved === 'ko') root.classList.remove('lang-en');
 
@@ -71,7 +75,7 @@ const {
     document.querySelectorAll('[data-lang-toggle]').forEach((btn) => {
       btn.addEventListener('click', () => {
         root.classList.toggle('lang-en');
-        try { localStorage.setItem('kb-lang', root.classList.contains('lang-en') ? 'en' : 'ko'); } catch (e) {}
+        try { sessionStorage.setItem('kb-lang', root.classList.contains('lang-en') ? 'en' : 'ko'); } catch (e) {}
         syncToggle();
       });
     });
