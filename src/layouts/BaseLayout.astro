@@ -51,9 +51,12 @@ const {
   <script>
     // Language toggle, mobile menu, staggered scroll reveal.
     const root = document.documentElement;
+    // The edge middleware (functions/_middleware.js) pre-sets lang-en for
+    // non-Korean visitors; a saved toggle choice must win in both directions.
     let saved = null;
     try { saved = localStorage.getItem('kb-lang'); } catch (e) {}
     if (saved === 'en') root.classList.add('lang-en');
+    else if (saved === 'ko') root.classList.remove('lang-en');
 
     function syncToggle() {
       const en = root.classList.contains('lang-en');
