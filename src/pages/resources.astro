@@ -42,10 +42,48 @@ const catalogs = [
     size: '0.7 MB',
   },
 ];
+
+const hssGroups = [
+  {
+    key: 'FUEL SIDE',
+    ko: '연료 시스템',
+    en: 'Fuel system',
+    docs: [
+      { file: '/catalogs/hss-diesel-maintenance-plan.pdf', ko: '디젤 유지관리 플랜 (3-Step)', en: 'Diesel Maintenance Plan (3-Step)', size: '0.9 MB' },
+      { file: '/catalogs/hss-diesel-additive-comparison.pdf', ko: '디젤 첨가제 성분 비교 차트', en: 'Diesel Additive Comparison Chart', size: '2.7 MB' },
+      { file: '/catalogs/hss-diesel-extreme-cetane-comparison.pdf', ko: 'Diesel Extreme 세탄 부스트 비교', en: 'Diesel Extreme Cetane Comparison', size: '2.5 MB' },
+      { file: '/catalogs/hss-edt-additive-comparison.pdf', ko: 'EDT 첨가제 비교 차트', en: 'EDT Additive Comparison Chart', size: '0.1 MB' },
+      { file: '/catalogs/hss-de-motortrend-review.pdf', ko: 'MotorTrend 디젤 첨가제 리뷰', en: 'MotorTrend Diesel Additive Review', size: '0.2 MB' },
+    ],
+  },
+  {
+    key: 'OIL SIDE',
+    ko: '오일 시스템',
+    en: 'Oil system',
+    docs: [
+      { file: '/catalogs/hss-fr3-friction-reducer.pdf', ko: 'FR3 프릭션 리듀서 소개', en: 'FR3 Friction Reducer', size: '2.4 MB' },
+      { file: '/catalogs/hss-fr3-nano-technology.pdf', ko: 'FR3 나노 테크놀로지', en: 'FR3 Nano Technology', size: '1.1 MB' },
+      { file: '/catalogs/hss-stiction-removal-astm-test.pdf', ko: '스틱션 세정력 제3자 시험 (ASTM D4828)', en: 'Stiction Removal — 3rd-Party ASTM Test', size: '2.8 MB' },
+      { file: '/catalogs/hss-se-3rd-party-testing.pdf', ko: 'Stiction Eliminator 제3자 시험 기사', en: 'Stiction Eliminator 3rd-Party Testing', size: '2.5 MB' },
+      { file: '/catalogs/hss-se-tested-proven.pdf', ko: 'Stiction Eliminator 성능 검증 자료', en: 'Stiction Eliminator — Tested & Proven', size: '2.8 MB' },
+      { file: '/catalogs/hss-se-dyno-proven.pdf', ko: 'Stiction Eliminator 다이노 시험 결과', en: 'Stiction Eliminator — Dyno Proven', size: '1.7 MB' },
+    ],
+  },
+  {
+    key: '2-STEP',
+    ko: '2-Step 프로그램',
+    en: '2-Step program',
+    docs: [
+      { file: '/catalogs/hss-2step-complete-protection.pdf', ko: '2-Step 토탈 케어 프로그램', en: '2-Step Complete Protection', size: '1.3 MB' },
+      { file: '/catalogs/hss-2step-oil-fuel-treatment.pdf', ko: '2-Step 연료·오일 트리트먼트', en: '2-Step Fuel & Oil Treatment', size: '1.1 MB' },
+      { file: '/catalogs/hss-fuel-economy-study.pdf', ko: '연비 개선 실증 시험 (오하이오 주립대)', en: 'Fuel-Economy Study (Ohio State Univ.)', size: '1.0 MB' },
+    ],
+  },
+];
 ---
 <BaseLayout
-  title="자료실 | 케이비(주) KB Inc. — 제품 카탈로그"
-  description="케이비(주) 제품 카탈로그 자료실. VALX 액슬, VDL Weweler 에어서스펜션 카탈로그를 열람하고 다운로드하세요."
+  title="자료실 | 케이비(주) KB Inc. — 제품 카탈로그·기술 자료"
+  description="케이비(주) 자료실. VALX 액슬, VDL Weweler 에어서스펜션 카탈로그와 Hot Shot's Secret 디젤 첨가제 기술 자료를 열람하고 다운로드하세요."
   active="resources"
 >
   <!-- PAGE HEADER -->
@@ -133,6 +171,73 @@ const catalogs = [
         <span class="material-symbols-outlined text-[16px]">info</span>
         <span data-ko-only>필요한 자료가 더 있으신가요? <a href="/contact" class="text-bright-alloy underline underline-offset-4 hover:text-arterial-red transition-colors">문의하기</a>로 요청해 주세요.</span>
         <span data-en-only>Need more materials? <a href="/contact" class="text-bright-alloy underline underline-offset-4 hover:text-arterial-red transition-colors">Contact us</a> and we'll send them over.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- HOT SHOT'S SECRET TECH LIBRARY -->
+  <section id="hss" class="border-b border-hairline-steel scroll-mt-16">
+    <div class="max-w-container mx-auto px-gutter py-section-v">
+      <div class="mb-12" data-reveal>
+        <p class="font-mono text-[13px] text-arterial-red mb-3">HOT SHOT'S SECRET</p>
+        <h2 class="font-display font-bold text-3xl text-bright-alloy tracking-tightest">
+          <span data-ko-only>디젤 첨가제 기술 자료</span><span data-en-only>Diesel additive tech library</span>
+        </h2>
+        <p class="text-muted-zinc mt-4 max-w-2xl leading-relaxed">
+          <span data-ko-only>Hot Shot's Secret 제품별 소개 자료와 제3자 시험 결과, 경쟁 제품 비교 차트를 확인하실 수 있습니다. 제품 상세는 <a href="/products#additives" class="text-bright-alloy underline underline-offset-4 hover:text-arterial-red transition-colors">제품소개</a>에서 보실 수 있습니다.</span>
+          <span data-en-only>Product literature, third-party test results, and competitor comparison charts for Hot Shot's Secret. See the <a href="/products#additives" class="text-bright-alloy underline underline-offset-4 hover:text-arterial-red transition-colors">products page</a> for details.</span>
+        </p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-hairline-steel border border-hairline-steel" data-reveal>
+        {hssGroups.map((g) => (
+          <div class="bg-charcoal-void p-8 flex flex-col">
+            <p class="font-mono text-[11px] tracking-[0.2em] text-arterial-red mb-1">{g.key}</p>
+            <h3 class="font-display font-bold text-lg text-bright-alloy mb-4"><span data-ko-only>{g.ko}</span><span data-en-only>{g.en}</span></h3>
+            <div class="flex flex-col">
+              {g.docs.map((d) => (
+                <div class="flex items-center justify-between gap-3 border-t border-hairline-steel py-3.5">
+                  <a
+                    href={d.file}
+                    target="_blank"
+                    rel="noopener"
+                    data-pdf
+                    data-title-ko={d.ko}
+                    data-title-en={d.en}
+                    data-brand="HOT SHOT'S SECRET"
+                    class="group flex-grow min-w-0 cursor-pointer"
+                  >
+                    <span class="block font-mono text-[13px] text-muted-zinc group-hover:text-bright-alloy transition-colors leading-snug"><span data-ko-only>{d.ko}</span><span data-en-only>{d.en}</span></span>
+                    <span class="block font-mono text-[11px] text-muted-zinc/60 mt-0.5">PDF · {d.size}</span>
+                  </a>
+                  <div class="flex items-center gap-1.5 shrink-0">
+                    <a
+                      href={d.file}
+                      target="_blank"
+                      rel="noopener"
+                      data-pdf
+                      data-title-ko={d.ko}
+                      data-title-en={d.en}
+                      data-brand="HOT SHOT'S SECRET"
+                      class="inline-flex items-center justify-center w-9 h-9 border border-hairline-steel text-muted-zinc hover:border-arterial-red hover:text-bright-alloy transition-colors"
+                      aria-label={`${d.ko} 열람`}
+                    ><span class="material-symbols-outlined text-[16px]">visibility</span></a>
+                    <a
+                      href={d.file}
+                      download
+                      class="inline-flex items-center justify-center w-9 h-9 border border-hairline-steel text-muted-zinc hover:border-arterial-red hover:text-bright-alloy transition-colors"
+                      aria-label={`${d.ko} 다운로드`}
+                    ><span class="material-symbols-outlined text-[16px]">download</span></a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <p class="font-mono text-[12px] text-muted-zinc mt-6 flex items-center gap-2" data-reveal>
+        <span class="material-symbols-outlined text-[15px]">language</span>
+        <span data-ko-only>원문 자료(영문) — 제조사 LSI(Lubrication Specialties Inc.) 제공. 공식 홈페이지: <a href="https://hotshotsecret.com/" target="_blank" rel="noopener" class="text-bright-alloy underline underline-offset-4 hover:text-arterial-red transition-colors">hotshotsecret.com</a></span>
+        <span data-en-only>Original materials in English, provided by LSI (Lubrication Specialties Inc.). Official site: <a href="https://hotshotsecret.com/" target="_blank" rel="noopener" class="text-bright-alloy underline underline-offset-4 hover:text-arterial-red transition-colors">hotshotsecret.com</a></span>
       </p>
     </div>
   </section>
