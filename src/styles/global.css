@@ -21,6 +21,11 @@ body {
   font-feature-settings: "tnum";
 }
 
+/* Icon font guard: icons stay invisible (layout preserved) until the
+   Material Symbols font is ready, so ligature names never flash as text.
+   BaseLayout adds .ms-ready via document.fonts, with a 2s failsafe. */
+html:not(.ms-ready) .material-symbols-outlined { visibility: hidden; }
+
 /* Language toggle: show one language at a time */
 .lang-en [data-ko-only] { display: none !important; }
 html:not(.lang-en) [data-en-only] { display: none !important; }
