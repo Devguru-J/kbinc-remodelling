@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const lineup = [
   { ko: '액슬 및 서스펜션',        en: 'Axles & Suspensions',         brands: 'FUWA · ROR · VALX · VDL Weweler',      pki: false },
-  { ko: '첨가제 및 윤활유',        en: 'Additives & Oils',            brands: 'LSI — Hot Shot’s Secret',              pki: false },
+  { ko: '전동 유압 펌프',          en: 'Electric Pumps',              brands: 'Hydroven',                             pki: false },
   { ko: '브레이크 챔버·부스터',    en: 'Brake Chambers & Boosters',   brands: 'SAND',                                 pki: false },
   { ko: '하네스 및 라이팅',        en: 'Harness & Lighting',          brands: 'PHILLIPS · Truck-Lite',                pki: false },
   { ko: '머드가드 및 툴박스',      en: 'Mudguards & Toolboxes',       brands: 'CO.PAR. · PARLOK',                     pki: true },
@@ -12,8 +12,8 @@ const lineup = [
 ];
 ---
 <BaseLayout
-  title="제품소개 | 케이비(주) KB Inc. — 에어서스펜션·액슬·디젤 첨가제"
-  description="VDL Weweler MBS Omega 에어서스펜션·Truck & Bus 보조 액슬 솔루션, VALX DISK 액슬 상세 스펙, VALX 랜딩 레그(취급 예정), Hot Shot's Secret 디젤 첨가제."
+  title="제품소개 | 케이비(주) KB Inc. — 에어서스펜션·액슬·랜딩 레그"
+  description="VDL Weweler MBS Omega 에어서스펜션·Truck & Bus 보조 액슬 솔루션, VALX DISK 액슬 상세 스펙, VALX 랜딩 레그(취급 예정)."
   active="products"
 >
   <!-- PAGE HEADER + SUBNAV -->
@@ -25,15 +25,14 @@ const lineup = [
         <span data-ko-only>특장차 핵심 부품</span><span data-en-only>Core components</span>
       </h1>
       <p class="text-muted-zinc text-lg mt-5 max-w-2xl leading-relaxed">
-        <span data-ko-only>에어서스펜션 · 액슬 · 랜딩 레그 · 디젤 첨가제 — 해외 최고 브랜드의 검증된 제품군.</span>
-        <span data-en-only>Air suspension · axles · landing legs · diesel additives — proven ranges from the world's leading brands.</span>
+        <span data-ko-only>에어서스펜션 · 액슬 · 랜딩 레그 — 해외 최고 브랜드의 검증된 제품군.</span>
+        <span data-en-only>Air suspension · axles · landing legs — proven ranges from the world's leading brands.</span>
       </p>
     </div>
     <div class="relative z-10 max-w-container mx-auto px-gutter pb-6 flex flex-wrap gap-3 font-mono text-[13px]">
       <a href="#lineup" class="px-4 py-2 border border-hairline-steel text-muted-zinc hover:border-arterial-red hover:text-bright-alloy transition-colors"><span data-ko-only>전체 라인업</span><span data-en-only>FULL LINEUP</span></a>
       <a href="#suspension" class="px-4 py-2 border border-hairline-steel text-muted-zinc hover:border-arterial-red hover:text-bright-alloy transition-colors"><span data-ko-only>에어서스펜션</span><span data-en-only>AIR SUSPENSION</span></a>
       <a href="#axle" class="px-4 py-2 border border-hairline-steel text-muted-zinc hover:border-arterial-red hover:text-bright-alloy transition-colors"><span data-ko-only>액슬 · 랜딩 레그</span><span data-en-only>AXLES · LANDING LEGS</span></a>
-      <a href="#additives" class="px-4 py-2 border border-hairline-steel text-muted-zinc hover:border-arterial-red hover:text-bright-alloy transition-colors"><span data-ko-only>첨가제 · 윤활유</span><span data-en-only>ADDITIVES · OILS</span></a>
     </div>
   </section>
 
@@ -75,8 +74,8 @@ const lineup = [
           <span class="font-mono text-[13px] text-arterial-red">01 / AIR SUSPENSION · VDL WEWELER</span>
           <h2 class="font-display font-bold text-[clamp(1.8rem,4vw,2.6rem)] text-bright-alloy tracking-tightest"><span data-ko-only>에어서스펜션</span><span data-en-only>Air Suspension</span></h2>
           <p class="text-muted-zinc leading-relaxed max-w-md">
-            <span data-ko-only>100년 역사의 네덜란드 VDL Weweler. 유럽 시장 점유율 30% 이상, 완전 자동화된 최신 생산시설에서 생산되어 전 세계 모든 대륙에 수출·사용되고 있습니다. 현재 케이비가 취급·공급하는 라인업은 MBS Omega와 Truck &amp; Bus 보조 액슬 솔루션입니다.</span>
-            <span data-en-only>Netherlands-based VDL Weweler — 100 years of history, a 30%+ European market share, fully automated production, exported across every continent. KBI currently carries the MBS Omega range and the Truck &amp; Bus auxiliary axle solutions.</span>
+            <span data-ko-only>100년이 넘는 역사의 네덜란드 VDL Weweler. 유럽 시장 점유율 30% 이상, 완전 자동화된 최신 생산시설에서 생산되어 전 세계 모든 대륙에 수출·사용되고 있습니다. 현재 케이비가 취급·공급하는 라인업은 MBS Omega와 Truck &amp; Bus 보조 액슬 솔루션입니다.</span>
+            <span data-en-only>Netherlands-based VDL Weweler — over 100 years of history, a 30%+ European market share, fully automated production, exported across every continent. KBI currently carries the MBS Omega range and the Truck &amp; Bus auxiliary axle solutions.</span>
           </p>
         </div>
         <div class="order-1 md:order-2 render-stage border border-hairline-steel bg-graphite-surface p-8 flex items-center justify-center" data-reveal-x>
@@ -208,119 +207,6 @@ const lineup = [
         <a href="https://www.valx.eu/en/service/spare-parts/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 border border-hairline-steel px-3 py-2 text-muted-zinc hover:border-arterial-red hover:text-bright-alloy transition-colors"><span data-ko-only>스페어 파츠</span><span data-en-only>SPARE PARTS</span><span class="material-symbols-outlined text-[14px]">open_in_new</span></a>
         <a href="https://www.valx.eu/en/service/manuals/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 border border-hairline-steel px-3 py-2 text-muted-zinc hover:border-arterial-red hover:text-bright-alloy transition-colors"><span data-ko-only>매뉴얼</span><span data-en-only>MANUALS</span><span class="material-symbols-outlined text-[14px]">open_in_new</span></a>
         <a href="/resources" class="inline-flex items-center gap-1.5 bg-arterial-red px-3 py-2 text-bright-alloy hover:bg-arterial-red-dim transition-colors"><span class="material-symbols-outlined text-[14px]">import_contacts</span><span data-ko-only>카탈로그</span><span data-en-only>CATALOGS</span></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 03 ADDITIVES & OILS -->
-  <section id="additives" class="border-b border-hairline-steel scroll-mt-16">
-    <div class="max-w-container mx-auto px-gutter py-section-v">
-      <div class="grid md:grid-cols-2 gap-8 lg:gap-16 items-center mb-16">
-        <div class="order-2 md:order-1 flex flex-col items-start gap-5 border-l border-hairline-steel pl-8" data-reveal>
-          <span class="font-mono text-[13px] text-arterial-red">03 / ADDITIVES &amp; OILS · HOT SHOT'S SECRET</span>
-          <h2 class="font-display font-bold text-[clamp(1.8rem,4vw,2.6rem)] text-bright-alloy tracking-tightest"><span data-ko-only>첨가제 · 윤활유</span><span data-en-only>Additives &amp; Oils</span></h2>
-          <p class="text-muted-zinc leading-relaxed max-w-md">
-            <span data-ko-only>미국 LSI(Lubrication Specialties Inc.)의 핫샷 시크릿(Hot Shot's Secret)은 'Powered by Science'를 내세우는 디젤 엔진 첨가제 전문 브랜드입니다. 오일 사이드와 연료 사이드를 각각 2단계로 관리하는 2-Step 프로그램으로 엔진 성능을 회복·유지하며, 성능은 ASTM 규격의 제3자 시험으로 검증되었습니다.</span>
-            <span data-en-only>Hot Shot's Secret by LSI (Lubrication Specialties Inc., USA) is a "Powered by Science" diesel-additive brand. Its 2-Step program treats the oil side and the fuel side in two stages each, restoring and maintaining engine performance — with results verified by third-party ASTM testing.</span>
-          </p>
-          <div class="flex flex-wrap gap-2 font-mono text-[11px] text-muted-zinc">
-            <span class="border border-hairline-steel px-2.5 py-1">OIL SIDE — 1. STICTION ELIMINATOR → 2. FR3</span>
-            <span class="border border-hairline-steel px-2.5 py-1">FUEL SIDE — 1. DIESEL EXTREME → 2. EDT</span>
-          </div>
-        </div>
-        <div class="order-1 md:order-2 border border-hairline-steel bg-[#F5F5F5] p-8 flex items-end justify-center gap-4" data-reveal-x>
-          <img src="/assets/img/hss_stiction_eliminator.png" alt="Hot Shot's Secret Stiction Eliminator" class="max-h-[240px] w-auto object-contain" />
-          <img src="/assets/img/hss_diesel_extreme.png" alt="Hot Shot's Secret Diesel Extreme" class="max-h-[190px] w-auto object-contain" />
-          <img src="/assets/img/hss_fr3.png" alt="Hot Shot's Secret FR3" class="max-h-[210px] w-auto object-contain" />
-          <img src="/assets/img/hss_edt.png" alt="Hot Shot's Secret EDT" class="max-h-[160px] w-auto object-contain" />
-        </div>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-px bg-hairline-steel border border-hairline-steel" data-reveal>
-        <!-- STICTION ELIMINATOR -->
-        <article class="bg-charcoal-void p-8 flex flex-col gap-6">
-          <div class="bg-[#F5F5F5] h-48 flex items-center justify-center"><img src="/assets/img/hss_stiction_eliminator.png" alt="Hot Shot's Secret Stiction Eliminator" class="max-h-40 object-contain" /></div>
-          <div class="flex items-baseline justify-between gap-3 border-b border-hairline-steel pb-4">
-            <h3 class="font-display font-bold text-2xl text-bright-alloy">STICTION ELIMINATOR</h3>
-            <span class="font-mono text-xs text-arterial-red whitespace-nowrap">OIL · STEP 1</span>
-          </div>
-          <p class="text-muted-zinc text-[15px] leading-relaxed">
-            <span data-ko-only>오일 시스템 전체를 클리닝하는 첫 단계. 터보 베어링·인젝터·피스톤 링·오일 펌프에 눌어붙은 오일 찌꺼기(스틱션)를 제거해 엔진 본래의 성능을 되살립니다. 오일 교환 3회마다 사용합니다.</span>
-            <span data-en-only>The initial clean-up for the entire oil system — removes stiction (burnt-oil residue) from turbo bearings, injectors, piston rings, and the oil pump to restore original performance. Use every third oil change.</span>
-          </p>
-          <dl class="font-mono text-[12.5px] flex flex-col gap-2 mt-auto">
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>마모 감소</span><span data-en-only>Wear reduction</span></dt><dd class="text-bright-alloy text-right"><span data-ko-only>최대 62% (ASTM 제3자 시험)</span><span data-en-only>Up to 62% (3rd-party ASTM)</span></dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>스틱션 세정력</span><span data-en-only>Stiction removal</span></dt><dd class="text-bright-alloy text-right"><span data-ko-only>ASTM D4828 시험 92% 세정</span><span data-en-only>92% clean — ASTM D4828</span></dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>인젝터 복원</span><span data-en-only>Injector recovery</span></dt><dd class="text-bright-alloy text-right"><span data-ko-only>불량 HEUI 인젝터 10개 중 9개</span><span data-en-only>9 of 10 failing HEUI injectors</span></dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>사용 주기</span><span data-en-only>Interval</span></dt><dd class="text-bright-alloy text-right"><span data-ko-only>오일 교환 3회마다</span><span data-en-only>Every 3rd oil change</span></dd></div>
-          </dl>
-        </article>
-        <!-- FR3 -->
-        <article class="bg-charcoal-void p-8 flex flex-col gap-6">
-          <div class="bg-[#F5F5F5] h-48 flex items-center justify-center"><img src="/assets/img/hss_fr3.png" alt="Hot Shot's Secret FR3 Friction Reducer" class="max-h-40 object-contain" /></div>
-          <div class="flex items-baseline justify-between gap-3 border-b border-hairline-steel pb-4">
-            <h3 class="font-display font-bold text-2xl text-bright-alloy">FR3 FRICTION REDUCER</h3>
-            <span class="font-mono text-xs text-arterial-red whitespace-nowrap">OIL · STEP 2</span>
-          </div>
-          <p class="text-muted-zinc text-[15px] leading-relaxed">
-            <span data-ko-only>특허 3건의 100% 합성 프릭션 리듀서. 카본 나노 입자가 금속 표면의 미세한 요철을 채워 더 매끄러운 유막을 형성하고, 마찰·마모·오일 온도를 낮춥니다. 2·3번째 오일 교환 시 사용합니다.</span>
-            <span data-en-only>A 100% synthetic friction reducer with three patented technologies. Carbon nano-particles fill microscopic irregularities in machined surfaces for a smoother oil film — cutting friction, wear, and oil temperature. Use during the 2nd and 3rd oil changes.</span>
-          </p>
-          <dl class="font-mono text-[12.5px] flex flex-col gap-2 mt-auto">
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>연비 개선</span><span data-en-only>Fuel economy</span></dt><dd class="text-bright-alloy text-right"><span data-ko-only>최대 5% (ASTM 제3자 시험)</span><span data-en-only>Up to +5% (3rd-party ASTM)</span></dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>엔진 마모</span><span data-en-only>Engine wear</span></dt><dd class="text-bright-alloy text-right"><span data-ko-only>최대 43% 감소</span><span data-en-only>Up to −43%</span></dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>오일 온도</span><span data-en-only>Oil temperature</span></dt><dd class="text-bright-alloy text-right"><span data-ko-only>작동 온도 저감</span><span data-en-only>Lower operating temp</span></dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>사용 주기</span><span data-en-only>Interval</span></dt><dd class="text-bright-alloy text-right"><span data-ko-only>2·3번째 오일 교환 시</span><span data-en-only>2nd &amp; 3rd oil changes</span></dd></div>
-          </dl>
-        </article>
-        <!-- DIESEL EXTREME -->
-        <article class="bg-charcoal-void p-8 flex flex-col gap-6">
-          <div class="bg-[#F5F5F5] h-48 flex items-center justify-center"><img src="/assets/img/hss_diesel_extreme.png" alt="Hot Shot's Secret Diesel Extreme" class="max-h-40 object-contain" /></div>
-          <div class="flex items-baseline justify-between gap-3 border-b border-hairline-steel pb-4">
-            <h3 class="font-display font-bold text-2xl text-bright-alloy">DIESEL EXTREME</h3>
-            <span class="font-mono text-xs text-arterial-red whitespace-nowrap">FUEL · STEP 1</span>
-          </div>
-          <p class="text-muted-zinc text-[15px] leading-relaxed">
-            <span data-ko-only>연료 시스템 전체를 클리닝하는 첫 단계. 고농축 세탄 부스터와 강력한 솔벤트 세정제가 인젝터 내부 침착물(IDID)까지 제거하고, 군용 등급 수분 분산제가 탱크와 라인을 보호합니다. 6개월마다 사용합니다.</span>
-            <span data-en-only>The initial treatment for the entire fuel system. A highly concentrated cetane booster and strong solvent cleaner remove even internal diesel injector deposits (IDID), while a military-grade moisture dispersant protects the tank and lines. Use once every six months.</span>
-          </p>
-          <dl class="font-mono text-[12.5px] flex flex-col gap-2 mt-auto">
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>주행 성능</span><span data-en-only>Performance</span></dt><dd class="text-bright-alloy text-right"><span data-ko-only>스로틀 응답 회복</span><span data-en-only>Restores throttle response</span></dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>배기·시동</span><span data-en-only>Exhaust &amp; starting</span></dt><dd class="text-bright-alloy text-right"><span data-ko-only>검은 매연 제거 · 냉간 시동 개선</span><span data-en-only>No black smoke · better cold starts</span></dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>DPF 재생 주기</span><span data-en-only>DPF regen cycles</span></dt><dd class="text-bright-alloy text-right"><span data-ko-only>최대 50% 감소</span><span data-en-only>Up to −50%</span></dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>사용 주기</span><span data-en-only>Interval</span></dt><dd class="text-bright-alloy text-right"><span data-ko-only>6개월마다</span><span data-en-only>Every 6 months</span></dd></div>
-          </dl>
-        </article>
-        <!-- EDT -->
-        <article class="bg-charcoal-void p-8 flex flex-col gap-6">
-          <div class="bg-[#F5F5F5] h-48 flex items-center justify-center"><img src="/assets/img/hss_edt.png" alt="Hot Shot's Secret EDT (Everyday Diesel Treatment)" class="max-h-40 object-contain" /></div>
-          <div class="flex items-baseline justify-between gap-3 border-b border-hairline-steel pb-4">
-            <h3 class="font-display font-bold text-2xl text-bright-alloy">EDT <span class="font-mono text-sm text-muted-zinc font-normal">EVERYDAY DIESEL TREATMENT</span></h3>
-            <span class="font-mono text-xs text-arterial-red whitespace-nowrap">FUEL · STEP 2</span>
-          </div>
-          <p class="text-muted-zinc text-[15px] leading-relaxed">
-            <span data-ko-only>매 주유 시 소량 첨가하는 일상 관리용 고농축 세탄 부스터. 연료 내 수분과 침전물 축적을 막아 연료 품질과 연소 상태를 유지하고, 인젝터를 깨끗하게 지켜줍니다.</span>
-            <span data-en-only>A concentrated cetane booster for everyday care — added in small doses at every fill-up. Prevents water and deposits from gathering in the fuel system, keeping injectors clean and combustion at its best.</span>
-          </p>
-          <dl class="font-mono text-[12.5px] flex flex-col gap-2 mt-auto">
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>세탄가</span><span data-en-only>Cetane</span></dt><dd class="text-bright-alloy text-right"><span data-ko-only>최대 7포인트 상승</span><span data-en-only>Up to +7 points</span></dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>인젝터</span><span data-en-only>Injectors</span></dt><dd class="text-bright-alloy text-right"><span data-ko-only>청결 상태 유지</span><span data-en-only>Kept clean</span></dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>효과</span><span data-en-only>Benefits</span></dt><dd class="text-bright-alloy text-right"><span data-ko-only>연비·출력·윤활성 향상</span><span data-en-only>Economy · power · lubricity</span></dd></div>
-            <div class="flex justify-between gap-4"><dt class="text-muted-zinc"><span data-ko-only>사용 주기</span><span data-en-only>Interval</span></dt><dd class="text-bright-alloy text-right"><span data-ko-only>매 주유 시</span><span data-en-only>Every tank fill</span></dd></div>
-          </dl>
-        </article>
-      </div>
-
-      <div class="mt-6 flex flex-col sm:flex-row sm:items-center gap-4 justify-between" data-reveal>
-        <p class="font-mono text-[13px] text-muted-zinc">
-          <span data-ko-only>오일 사이드와 연료 사이드를 함께 사용하면 엔진 전체를 보호하는 2-Step 토탈 케어가 완성됩니다.</span>
-          <span data-en-only>Use the oil side and fuel side together for complete 2-Step engine protection.</span>
-        </p>
-        <div class="flex flex-wrap items-center gap-3 font-mono text-[12px]">
-          <span class="text-muted-zinc tracking-[0.15em]">HOT SHOT'S SECRET</span>
-          <a href="https://hotshotsecret.com/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 border border-hairline-steel px-3 py-2 text-muted-zinc hover:border-arterial-red hover:text-bright-alloy transition-colors"><span data-ko-only>공식 홈페이지</span><span data-en-only>OFFICIAL SITE</span><span class="material-symbols-outlined text-[14px]">open_in_new</span></a>
-          <a href="/resources#hss" class="inline-flex items-center gap-1.5 bg-arterial-red px-3 py-2 text-bright-alloy hover:bg-arterial-red-dim transition-colors"><span class="material-symbols-outlined text-[14px]">import_contacts</span><span data-ko-only>기술 자료</span><span data-en-only>TECH LIBRARY</span></a>
-        </div>
       </div>
     </div>
   </section>
