@@ -7,6 +7,7 @@
 //   CONTACT_TO       recipient (default: kbi@kbinc.kr)
 //   CONTACT_FROM     verified sender, e.g. "KB Inc. <no-reply@kbinc.kr>"
 //                    (the domain must be verified in Resend)
+//   TURNSTILE_SECRET_KEY  Cloudflare Turnstile secret key (bot protection)
 //
 // If RESEND_API_KEY is not set, this returns 503 and the client form
 // gracefully falls back to opening the visitor's mail client (mailto).
@@ -30,6 +31,35 @@ export async function onRequestPost({ request, env }) {
     return json({ error: 'invalid_body' }, 400);
   }
 
+  // ── Bot defenses ────────────────────────────────────────────────
+  // 1) Origin check: reject browser POSTs from foreign origins.
+  //    (Missing Origin passes — some privacy tools strip it; Turnstile
+  //    below is the real gate.)
+  const origin = request.headers.get('origin');
+  if (origin) {
+    let host = '';
+    try { host = new URL(origin).hostname; } catch { /* malformed → treat as foreign */ }
+    const allowed =
+      host === 'kbinc.kr' || host.endsWith('.kbinc.kr') ||
+      host === 'kbinc-remodelling.pages.dev' || host.endsWith('.kbinc-remodelling.pages.dev') ||
+      host === 'localhost' || host === '127.0.0.1';
+    if (!allowed) return json({ error: 'forbidden_origin' }, 403);
+  }
+
+  // 2) Honeypot: hidden "website" field — humans never see it. If a bot
+  //    filled it, reply with a fake success so it doesn't learn and adapt.
+  if ((data.website || '').toString().trim()) {
+    return json({ ok: true });
+  }
+
+  // 3) Time trap: the form stamps its load time into "ts". Submissions
+  //    faster than 3 s are bots. (Missing/garbled ts passes — Turnstile
+  //    still gates below.)
+  const ts = Number(data.ts);
+  if (ts > 0 && Date.now() - ts < 3000) {
+    return json({ error: 'too_fast' }, 422);
+  }
+
   const name = (data.name || '').toString().trim();
   const email = (data.email || '').toString().trim();
   const message = (data.message || '').toString().trim();
@@ -42,6 +72,35 @@ export async function onRequestPost({ request, env }) {
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return json({ error: 'invalid_email' }, 422);
+  }
+
+  // 4) Turnstile: verify the widget token server-side. This is the hard
+  //    gate — direct API POSTs have no token and stop here.
+  const turnstileSecret = env.TURNSTILE_SECRET_KEY;
+  if (!turnstileSecret) {
+    // Misconfiguration → 503 so the client falls back to mailto and no
+    // inquiry is lost while the gate is down.
+    return json({ error: 'turnstile_not_configured' }, 503);
+  }
+  const token = (data['cf-turnstile-response'] || '').toString();
+  if (!token) return json({ error: 'turnstile_failed' }, 403);
+  let outcome;
+  try {
+    const verify = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        secret: turnstileSecret,
+        response: token,
+        remoteip: request.headers.get('cf-connecting-ip') || undefined,
+      }),
+    });
+    outcome = await verify.json();
+  } catch {
+    return json({ error: 'turnstile_error' }, 502);
+  }
+  if (!outcome || outcome.success !== true) {
+    return json({ error: 'turnstile_failed' }, 403);
   }
 
   const apiKey = env.RESEND_API_KEY;
