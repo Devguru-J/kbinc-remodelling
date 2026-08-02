@@ -54,7 +54,7 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEEX6mFoHBSP28eu';
         <!-- Honeypot: invisible to humans; bots that fill it are silently dropped -->
         <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
           <label for="website">Website</label>
-          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          <input id="website" name="website" type="text" tabindex="-1" autocomplete="new-password" />
         </div>
         <input type="hidden" name="ts" value="" />
         <div class="grid sm:grid-cols-2 gap-6">
@@ -131,6 +131,7 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEEX6mFoHBSP28eu';
     const status = document.getElementById('form-status');
     const tsField = form?.elements.namedItem('ts') as HTMLInputElement | null;
     if (tsField) tsField.value = String(Date.now());
+    let consecutive403 = 0;
     function val(n: string) { const el = form?.elements.namedItem(n) as HTMLInputElement | null; return el ? el.value.trim() : ''; }
     function mailtoFallback() {
       const subject = '[웹문의] ' + (val('product') || '제품 문의') + ' - ' + val('name');
@@ -143,6 +144,14 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEEX6mFoHBSP28eu';
       e.preventDefault();
       const tokenEl = form.querySelector('input[name="cf-turnstile-response"]') as HTMLInputElement | null;
       if (!tokenEl || !tokenEl.value) {
+        if (!(window as any).turnstile) {
+          // Turnstile script itself never loaded (blocked/offline) — no
+          // amount of waiting will produce a token. Fall back to mailto.
+          mailtoFallback();
+          if (status) { status.textContent = '메일 앱으로 전송합니다…'; status.className = 'font-mono text-[13px] text-muted-zinc'; }
+          return;
+        }
+        // Widget loaded but still solving — ask the visitor to wait/retry.
         if (status) { status.textContent = '보안 확인이 아직 완료되지 않았습니다. 잠시 후 다시 시도해주세요.'; status.className = 'font-mono text-[13px] text-arterial-red'; }
         return;
       }
@@ -152,6 +161,7 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEEX6mFoHBSP28eu';
       try {
         const res = await fetch('/api/contact', { method: 'POST', body: new FormData(form) });
         if (res.ok) {
+          consecutive403 = 0;
           form.reset();
           (window as any).turnstile?.reset();
           if (tsField) tsField.value = String(Date.now());
@@ -160,10 +170,19 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEEX6mFoHBSP28eu';
           mailtoFallback();
           if (status) status.textContent = '메일 앱으로 전송합니다…';
         } else if (res.status === 403) {
-          // Turnstile rejected the token (expired/invalid). Ask for a retry
-          // instead of mailto — a fresh token usually fixes it.
-          if (status) { status.textContent = '보안 확인에 실패했습니다. 잠시 후 다시 시도해주세요.'; status.className = 'font-mono text-[13px] text-arterial-red'; }
+          consecutive403++;
           (window as any).turnstile?.reset();
+          if (consecutive403 >= 2) {
+            // Repeated Turnstile rejection (e.g. VPN/Tor/hardened privacy
+            // setup) — stop asking for a retry that keeps failing and let
+            // the visitor send anyway.
+            mailtoFallback();
+            if (status) { status.textContent = '메일 앱으로 전송합니다…'; status.className = 'font-mono text-[13px] text-muted-zinc'; }
+          } else {
+            // Turnstile rejected the token (expired/invalid). Ask for a retry
+            // instead of mailto — a fresh token usually fixes it.
+            if (status) { status.textContent = '보안 확인에 실패했습니다. 잠시 후 다시 시도해주세요.'; status.className = 'font-mono text-[13px] text-arterial-red'; }
+          }
         } else {
           throw new Error('bad status');
         }
