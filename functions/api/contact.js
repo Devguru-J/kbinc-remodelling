@@ -56,7 +56,8 @@ export async function onRequestPost({ request, env }) {
   //    faster than 3 s are bots. (Missing/garbled ts passes — Turnstile
   //    still gates below.)
   const ts = Number(data.ts);
-  if (ts > 0 && Date.now() - ts < 3000) {
+  const age = Date.now() - ts;
+  if (ts > 0 && age >= 0 && age < 3000) {
     return json({ error: 'too_fast' }, 422);
   }
 
@@ -95,6 +96,7 @@ export async function onRequestPost({ request, env }) {
         remoteip: request.headers.get('cf-connecting-ip') || undefined,
       }),
     });
+    if (!verify.ok) return json({ error: 'turnstile_error' }, 502);
     outcome = await verify.json();
   } catch {
     return json({ error: 'turnstile_error' }, 502);
