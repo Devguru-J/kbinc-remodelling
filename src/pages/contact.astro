@@ -51,7 +51,9 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEEX6mFoHBSP28eu';
       </div>
 
       <form id="inquiry-form" class="flex flex-col gap-6" data-reveal action="/api/contact" method="POST">
-        <!-- Honeypot: invisible to humans; bots that fill it are silently dropped -->
+        <!-- Honeypot: invisible to humans. A filled value no longer drops the
+             inquiry — the server delivers it with a [검토필요] subject prefix,
+             because an autofill extension can trip this on a real person. -->
         <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
           <label for="website">Website</label>
           <input id="website" name="website" type="text" tabindex="-1" autocomplete="new-password" />
@@ -88,7 +90,18 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEEX6mFoHBSP28eu';
           <label for="message" class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc"><span data-ko-only>문의 내용 *</span><span data-en-only>MESSAGE *</span></label>
           <textarea id="message" name="message" rows="6" required class="bg-steel-panel border border-hairline-steel text-bright-alloy px-4 py-3 focus:border-arterial-red focus:ring-1 focus:ring-arterial-red outline-none transition-colors resize-y"></textarea>
         </div>
-        <div class="cf-turnstile" data-sitekey={TURNSTILE_SITEKEY} data-theme="dark" data-language="auto" data-error-callback="onTurnstileFailure" data-timeout-callback="onTurnstileFailure"></div>
+        <div class="cf-turnstile" data-sitekey={TURNSTILE_SITEKEY} data-theme="dark" data-language="auto" data-callback="onTurnstileSuccess" data-error-callback="onTurnstileFailure" data-timeout-callback="onTurnstileFailure"></div>
+        <noscript>
+          <div class="border border-hairline-steel bg-steel-panel px-4 py-4 font-mono text-[13px] leading-relaxed">
+            <p class="text-arterial-red mb-2">
+              <span data-ko-only>이 문의 양식은 JavaScript가 필요합니다.</span><span data-en-only>This inquiry form requires JavaScript.</span>
+            </p>
+            <p class="text-muted-zinc">
+              <span data-ko-only>브라우저에서 JavaScript를 켜신 후 다시 시도하시거나, kbi@kbinc.kr 로 메일 주시거나 031-357-4250 으로 전화 주세요.</span>
+              <span data-en-only>Please enable JavaScript and try again, or email kbi@kbinc.kr / call 031-357-4250 directly.</span>
+            </p>
+          </div>
+        </noscript>
         <div class="flex items-center gap-4 flex-wrap">
           <button type="submit" class="inline-flex items-center gap-2 bg-arterial-red text-bright-alloy font-mono text-sm px-8 py-4 hover:bg-arterial-red-dim active:translate-y-px transition-all disabled:opacity-50">
             <span data-ko-only>문의 보내기</span><span data-en-only>SEND INQUIRY</span><span class="material-symbols-outlined text-[18px]">send</span>
@@ -134,11 +147,36 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEEX6mFoHBSP28eu';
     let consecutive403 = 0;
     let consecutiveEmptyToken = 0;
     let turnstileFailed = false;
+    let turnstileErrors = 0;
     // Turnstile's implicit-render callbacks are looked up as globals; this
     // <script> is an Astro module, so attach explicitly to window.
-    (window as any).onTurnstileFailure = () => { turnstileFailed = true; };
+    // Per Cloudflare's docs the error-callback's return value controls
+    // retry: returning false lets Turnstile retry automatically, true means
+    // "handled, stop retrying". Allow two automatic retries, then stop.
+    (window as any).onTurnstileFailure = () => {
+      turnstileFailed = true;
+      turnstileErrors++;
+      return turnstileErrors > 2;
+    };
+    // A token arrived — the widget is healthy again, so clear the sticky
+    // failure state instead of condemning the rest of the page load to the
+    // mailto fallback after one transient blip.
+    (window as any).onTurnstileSuccess = () => {
+      turnstileFailed = false;
+      turnstileErrors = 0;
+      consecutiveEmptyToken = 0;
+    };
     function val(n: string) { const el = form?.elements.namedItem(n) as HTMLInputElement | null; return el ? el.value.trim() : ''; }
+    // Safety net for every path where the API can't be used. The mailto is
+    // attempted, but it silently does nothing on a machine with no mail
+    // client (common in Korea, where webmail dominates), so the status must
+    // stand on its own and offer a working alternative. The form is never
+    // cleared here — the visitor has to be able to copy what they typed.
     function mailtoFallback() {
+      if (status) {
+        status.textContent = '전송에 실패했습니다. kbi@kbinc.kr 로 메일 주시거나 031-357-4250 으로 전화 주세요.';
+        status.className = 'font-mono text-[13px] text-arterial-red';
+      }
       const subject = '[웹문의] ' + (val('product') || '제품 문의') + ' - ' + val('name');
       const body =
         '이름: ' + val('name') + '\n회사명: ' + val('company') + '\n이메일: ' + val('email') +
@@ -153,7 +191,6 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEEX6mFoHBSP28eu';
           // Turnstile script itself never loaded (blocked/offline) — no
           // amount of waiting will produce a token. Fall back to mailto.
           mailtoFallback();
-          if (status) { status.textContent = '메일 앱으로 전송합니다…'; status.className = 'font-mono text-[13px] text-muted-zinc'; }
           return;
         }
         consecutiveEmptyToken++;
@@ -163,7 +200,6 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEEX6mFoHBSP28eu';
           // challenge sub-host is likely unreachable on this network.
           // Waiting longer won't help; fall back to mailto.
           mailtoFallback();
-          if (status) { status.textContent = '메일 앱으로 전송합니다…'; status.className = 'font-mono text-[13px] text-muted-zinc'; }
           return;
         }
         // Widget loaded but still solving (1st attempt) — ask the visitor to wait/retry.
@@ -184,16 +220,17 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEEX6mFoHBSP28eu';
           if (status) { status.textContent = '문의가 접수되었습니다. 감사합니다.'; status.className = 'font-mono text-[13px] text-bright-alloy'; }
         } else if (res.status === 503) {
           mailtoFallback();
-          if (status) status.textContent = '메일 앱으로 전송합니다…';
         } else if (res.status === 403) {
           consecutive403++;
           (window as any).turnstile?.reset();
-          if (consecutive403 >= 2) {
+          // 403 is also returned for forbidden_origin, so only claim a
+          // security-check failure when the server actually said so.
+          const reason = await res.json().then((b: any) => b && b.error).catch(() => '');
+          if (consecutive403 >= 2 || reason !== 'turnstile_failed') {
             // Repeated Turnstile rejection (e.g. VPN/Tor/hardened privacy
-            // setup) — stop asking for a retry that keeps failing and let
-            // the visitor send anyway.
+            // setup), or a rejection a retry cannot fix — stop asking for a
+            // retry that keeps failing and give the visitor a real route.
             mailtoFallback();
-            if (status) { status.textContent = '메일 앱으로 전송합니다…'; status.className = 'font-mono text-[13px] text-muted-zinc'; }
           } else {
             // Turnstile rejected the token (expired/invalid). Ask for a retry
             // instead of mailto — a fresh token usually fixes it.
@@ -204,7 +241,6 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEEX6mFoHBSP28eu';
         }
       } catch (err) {
         mailtoFallback();
-        if (status) { status.textContent = '메일 앱으로 전송합니다…'; status.className = 'font-mono text-[13px] text-muted-zinc'; }
       } finally {
         btn.disabled = false;
       }

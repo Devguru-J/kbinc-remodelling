@@ -30,13 +30,21 @@ export async function onRequestPost({ request, env }) {
   } catch {
     return json({ error: 'invalid_body' }, 400);
   }
+  // A body of literal `null`, a bare string or an array is syntactically
+  // valid JSON but not a field map — reject it as invalid_body rather than
+  // letting the first `data.…` access throw an unhandled 500.
+  if (!data || typeof data !== 'object' || Array.isArray(data)) {
+    return json({ error: 'invalid_body' }, 400);
+  }
 
   // ── Bot defenses ────────────────────────────────────────────────
   // 1) Origin check: reject browser POSTs from foreign origins.
   //    (Missing Origin passes — some privacy tools strip it; Turnstile
-  //    below is the real gate.)
+  //    below is the real gate. A literal "null" Origin, which sandboxed
+  //    iframes and some privacy tools send, counts as missing: it carries
+  //    no host to compare, so failing it open matches the stated intent.)
   const origin = request.headers.get('origin');
-  if (origin) {
+  if (origin && origin !== 'null') {
     let host = '';
     try { host = new URL(origin).hostname; } catch { /* malformed → treat as foreign */ }
     const allowed =
@@ -46,11 +54,14 @@ export async function onRequestPost({ request, env }) {
     if (!allowed) return json({ error: 'forbidden_origin' }, 403);
   }
 
-  // 2) Honeypot: hidden "website" field — humans never see it. If a bot
-  //    filled it, reply with a fake success so it doesn't learn and adapt.
-  if ((data.website || '').toString().trim()) {
-    return json({ ok: true });
-  }
+  // 2) Honeypot: hidden "website" field — humans never see it. It is read
+  //    here but NOT acted on yet: Turnstile (step 4) already stops every
+  //    observed bot, so in practice a filled honeypot on an otherwise
+  //    verified request means an over-eager password manager or autofill
+  //    extension, i.e. a real person. Discarding it here would silently
+  //    destroy a genuine inquiry, so the decision is deferred until after
+  //    Turnstile has told us whether a human is behind the request.
+  const honeypot = !!(data.website || '').toString().trim();
 
   // 3) Time trap: the form stamps its load time into "ts". Submissions
   //    faster than 3 s are bots. (Missing/garbled ts passes — Turnstile
@@ -105,6 +116,27 @@ export async function onRequestPost({ request, env }) {
     return json({ error: 'turnstile_failed' }, 403);
   }
 
+  // 5) Hostname binding: the widget's allowed-domain list includes
+  //    localhost, and Turnstile honours that from anyone's machine. Without
+  //    this check an attacker could host the public sitekey on their own
+  //    localhost, harvest valid tokens headlessly and POST them here with
+  //    no Origin header (which fails open above). siteverify reports the
+  //    hostname the token was issued for, so pin it to ours.
+  const selfHost = (() => { try { return new URL(request.url).hostname; } catch { return ''; } })();
+  const localRequest = selfHost === 'localhost' || selfHost === '127.0.0.1';
+  const tokenHost = (outcome.hostname || '').toString();
+  const hostOk =
+    tokenHost === 'kbinc.kr' || tokenHost.endsWith('.kbinc.kr') ||
+    tokenHost === 'kbinc-remodelling.pages.dev' ||
+    tokenHost.endsWith('.kbinc-remodelling.pages.dev') ||
+    // Local dev only: a localhost-issued token can never satisfy a
+    // production request. The always-pass test secret reports its own
+    // dummy hostname, so accept anything while serving from localhost.
+    localRequest;
+  if (!hostOk) {
+    return json({ error: 'turnstile_failed' }, 403);
+  }
+
   const apiKey = env.RESEND_API_KEY;
   if (!apiKey) {
     // Not configured yet → tell the client to use its mailto fallback.
@@ -133,7 +165,10 @@ export async function onRequestPost({ request, env }) {
       from,
       to: [to],
       reply_to: email,
-      subject: `[웹문의] ${product || '제품 문의'} - ${name}`,
+      // Honeypot filled but Turnstile verified → treat as a human whose
+      // autofill tripped the trap: still deliver, just flag it for a
+      // human eyeball instead of silently dropping a real inquiry.
+      subject: `${honeypot ? '[검토필요] ' : ''}[웹문의] ${product || '제품 문의'} - ${name}`,
       html,
     }),
   });
