@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 const mapSrc = 'https://www.google.com/maps?q=' + encodeURIComponent('경기도 화성시 마도면 청원로 136-18') + '&z=15&output=embed';
 const naverSrc = 'https://map.naver.com/p/search/' + encodeURIComponent('경기도 화성시 마도면 청원로 136-18');
+const TURNSTILE_SITEKEY = '0x4AAAAAAEEX6mFoHBSP28eu';
 ---
 <BaseLayout
   title="연락처 | 케이비(주) KB Inc."
@@ -50,6 +51,12 @@ const naverSrc = 'https://map.naver.com/p/search/' + encodeURIComponent('경기�
       </div>
 
       <form id="inquiry-form" class="flex flex-col gap-6" data-reveal action="/api/contact" method="POST">
+        <!-- Honeypot: invisible to humans; bots that fill it are silently dropped -->
+        <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
+          <label for="website">Website</label>
+          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+        <input type="hidden" name="ts" value="" />
         <div class="grid sm:grid-cols-2 gap-6">
           <div class="flex flex-col gap-2">
             <label for="name" class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc"><span data-ko-only>이름 *</span><span data-en-only>NAME *</span></label>
@@ -81,6 +88,7 @@ const naverSrc = 'https://map.naver.com/p/search/' + encodeURIComponent('경기�
           <label for="message" class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc"><span data-ko-only>문의 내용 *</span><span data-en-only>MESSAGE *</span></label>
           <textarea id="message" name="message" rows="6" required class="bg-steel-panel border border-hairline-steel text-bright-alloy px-4 py-3 focus:border-arterial-red focus:ring-1 focus:ring-arterial-red outline-none transition-colors resize-y"></textarea>
         </div>
+        <div class="cf-turnstile" data-sitekey={TURNSTILE_SITEKEY} data-theme="dark" data-language="auto"></div>
         <div class="flex items-center gap-4 flex-wrap">
           <button type="submit" class="inline-flex items-center gap-2 bg-arterial-red text-bright-alloy font-mono text-sm px-8 py-4 hover:bg-arterial-red-dim active:translate-y-px transition-all disabled:opacity-50">
             <span data-ko-only>문의 보내기</span><span data-en-only>SEND INQUIRY</span><span class="material-symbols-outlined text-[18px]">send</span>
@@ -121,6 +129,8 @@ const naverSrc = 'https://map.naver.com/p/search/' + encodeURIComponent('경기�
     // opening the visitor's mail client so an inquiry is never lost.
     const form = document.getElementById('inquiry-form') as HTMLFormElement | null;
     const status = document.getElementById('form-status');
+    const tsField = form?.elements.namedItem('ts') as HTMLInputElement | null;
+    if (tsField) tsField.value = String(Date.now());
     function val(n: string) { const el = form?.elements.namedItem(n) as HTMLInputElement | null; return el ? el.value.trim() : ''; }
     function mailtoFallback() {
       const subject = '[웹문의] ' + (val('product') || '제품 문의') + ' - ' + val('name');
@@ -131,6 +141,11 @@ const naverSrc = 'https://map.naver.com/p/search/' + encodeURIComponent('경기�
     }
     form?.addEventListener('submit', async (e) => {
       e.preventDefault();
+      const tokenEl = form.querySelector('input[name="cf-turnstile-response"]') as HTMLInputElement | null;
+      if (!tokenEl || !tokenEl.value) {
+        if (status) { status.textContent = '보안 확인이 아직 완료되지 않았습니다. 잠시 후 다시 시도해주세요.'; status.className = 'font-mono text-[13px] text-arterial-red'; }
+        return;
+      }
       const btn = form.querySelector('button[type=submit]') as HTMLButtonElement;
       btn.disabled = true;
       if (status) { status.textContent = '전송 중…'; status.className = 'font-mono text-[13px] text-muted-zinc'; }
@@ -138,10 +153,17 @@ const naverSrc = 'https://map.naver.com/p/search/' + encodeURIComponent('경기�
         const res = await fetch('/api/contact', { method: 'POST', body: new FormData(form) });
         if (res.ok) {
           form.reset();
+          (window as any).turnstile?.reset();
+          if (tsField) tsField.value = String(Date.now());
           if (status) { status.textContent = '문의가 접수되었습니다. 감사합니다.'; status.className = 'font-mono text-[13px] text-bright-alloy'; }
         } else if (res.status === 503) {
           mailtoFallback();
           if (status) status.textContent = '메일 앱으로 전송합니다…';
+        } else if (res.status === 403) {
+          // Turnstile rejected the token (expired/invalid). Ask for a retry
+          // instead of mailto — a fresh token usually fixes it.
+          if (status) { status.textContent = '보안 확인에 실패했습니다. 잠시 후 다시 시도해주세요.'; status.className = 'font-mono text-[13px] text-arterial-red'; }
+          (window as any).turnstile?.reset();
         } else {
           throw new Error('bad status');
         }
@@ -153,4 +175,5 @@ const naverSrc = 'https://map.naver.com/p/search/' + encodeURIComponent('경기�
       }
     });
   </script>
+  <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </BaseLayout>
