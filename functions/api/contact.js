@@ -16,6 +16,17 @@
 // If RESEND_API_KEY is not set, this returns 503 and the client form
 // gracefully falls back to opening the visitor's mail client (mailto).
 
+// Subject lines are plain text, not HTML, so escapeHtml is the wrong tool:
+// strip the characters that break a header instead. Newlines and control
+// characters would fold or truncate the subject in a mail client; the
+// fields are already length-capped, so only the shape needs fixing here.
+const cleanSubject = (s) =>
+  String(s || '')
+    // eslint-disable-next-line no-control-regex
+    .replace(/[\x00-\x1F\x7F]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
 const escapeHtml = (s) =>
   String(s || '').replace(/[&<>"']/g, (c) =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])
@@ -88,6 +99,19 @@ export async function onRequestPost({ request, env }) {
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return json({ error: 'invalid_email' }, 422);
+  }
+
+  // Length caps. The form's own maxlength attributes stop honest typists
+  // long before this, so anything arriving oversized is a direct POST —
+  // an unbounded body would otherwise bloat the mailbox or blow past
+  // Resend's size limit and fail the send. Checked before Turnstile so a
+  // junk payload never costs a siteverify round-trip. Limits are generous
+  // enough that no real inquiry can hit them.
+  const LIMITS = { name: 100, company: 100, email: 254, phone: 40, product: 100, message: 5000 };
+  const tooLong = Object.entries({ name, company, email, phone, product, message })
+    .find(([field, value]) => value.length > LIMITS[field]);
+  if (tooLong) {
+    return json({ error: 'too_long', field: tooLong[0], limit: LIMITS[tooLong[0]] }, 422);
   }
 
   // 4) Turnstile: verify the widget token server-side. This is the hard
@@ -186,14 +210,18 @@ export async function onRequestPost({ request, env }) {
       // Honeypot filled but Turnstile verified → treat as a human whose
       // autofill tripped the trap: still deliver, just flag it for a
       // human eyeball instead of silently dropping a real inquiry.
-      subject: `${honeypot ? '[검토필요] ' : ''}[웹문의] ${product || '제품 문의'} - ${name}`,
+      subject: `${honeypot ? '[검토필요] ' : ''}[웹문의] ${cleanSubject(product) || '제품 문의'} - ${cleanSubject(name)}`,
       html,
     }),
   });
 
   if (!res.ok) {
+    // Resend's message can name the sending domain, the key's state or
+    // internal limits — useful in the deploy logs, not something to hand
+    // back to an anonymous caller. Log it, return the bare error code.
     const detail = await res.text().catch(() => '');
-    return json({ error: 'send_failed', detail }, 502);
+    console.error('resend send failed', res.status, detail);
+    return json({ error: 'send_failed' }, 502);
   }
   return json({ ok: true });
 }
