@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 const mapSrc = 'https://www.google.com/maps?q=' + encodeURIComponent('경기도 화성시 마도면 청원로 136-18') + '&z=15&output=embed';
 const naverSrc = 'https://map.naver.com/p/search/' + encodeURIComponent('경기도 화성시 마도면 청원로 136-18');
-const TURNSTILE_SITEKEY = '0x4AAAAAAEEX6mFoHBSP28eu';
 ---
 <BaseLayout
   title="연락처 | 케이비(주) KB Inc."
@@ -17,100 +16,47 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEEX6mFoHBSP28eu';
         <span data-ko-only>제품·견적 문의</span><span data-en-only>Product &amp; quote inquiry</span>
       </h1>
       <p class="text-muted-zinc text-lg mt-5 max-w-2xl leading-relaxed">
-        <span data-ko-only>필요하신 제품과 사양을 남겨주시면 담당자가 신속히 회신드립니다.</span>
-        <span data-en-only>Tell us the product and specification you need — our team will respond promptly.</span>
+        <span data-ko-only>전화 또는 이메일로 연락 주시면 담당자가 신속히 안내드립니다.</span>
+        <span data-en-only>Call or email us — our team will get back to you promptly.</span>
       </p>
     </div>
   </section>
 
   <section class="border-b border-hairline-steel">
-    <div class="max-w-container mx-auto px-gutter py-section-v grid lg:grid-cols-[minmax(0,20rem)_1fr] gap-10 lg:gap-20">
-      <div class="flex flex-col gap-8" data-reveal>
+    <div class="max-w-container mx-auto px-gutter py-section-v">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10" data-reveal>
         <div>
           <p class="font-mono text-[13px] text-arterial-red mb-3">DIRECT</p>
-          <h2 class="font-display font-bold text-2xl text-bright-alloy"><span data-ko-only>바로 연락하기</span><span data-en-only>Reach us directly</span></h2>
+          <h2 class="font-display font-bold text-3xl text-bright-alloy"><span data-ko-only>바로 연락하기</span><span data-en-only>Reach us directly</span></h2>
         </div>
-        <div class="flex flex-col gap-5">
-          <a href="tel:0313574250" class="border-t border-hairline-steel pt-4 group">
-            <span class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc block mb-2">TEL</span>
-            <span class="font-mono text-lg text-bright-alloy group-hover:text-arterial-red transition-colors">031-357-4250</span>
+        <div class="flex flex-wrap gap-3">
+          <a href="tel:0313574250" class="inline-flex items-center gap-2 bg-arterial-red text-bright-alloy font-mono text-sm px-8 py-4 hover:bg-arterial-red-dim active:translate-y-px transition-all">
+            <span class="material-symbols-outlined text-[18px]">call</span><span data-ko-only>전화 걸기</span><span data-en-only>CALL US</span>
           </a>
-          <div class="border-t border-hairline-steel pt-4">
-            <span class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc block mb-2">FAX</span>
-            <span class="font-mono text-lg text-bright-alloy">031-357-7250</span>
-          </div>
-          <a href="mailto:kbi@kbinc.kr" class="border-t border-hairline-steel pt-4 group">
-            <span class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc block mb-2">EMAIL</span>
-            <span class="font-mono text-lg text-bright-alloy group-hover:text-arterial-red transition-colors">kbi@kbinc.kr</span>
-          </a>
-          <div class="border-t border-hairline-steel pt-4">
-            <span class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc block mb-2"><span data-ko-only>주소</span><span data-en-only>ADDRESS</span></span>
-            <span class="text-[15px] text-bright-alloy leading-relaxed"><span data-ko-only>경기도 화성시 만세구 마도면 청원로 136-18<br />(청원리, 3동) 우18543</span><span data-en-only>Bldg #3, 136-18 Cheongwon-ro, Mado-myeon,<br />Manse-gu, Hwaseong-si, Gyeonggi-do, 18543 Korea</span></span>
-          </div>
         </div>
       </div>
 
-      <form id="inquiry-form" class="flex flex-col gap-6" data-reveal action="/api/contact" method="POST">
-        <!-- Honeypot: invisible to humans. A filled value no longer drops the
-             inquiry — the server delivers it with a [검토필요] subject prefix,
-             because an autofill extension can trip this on a real person. -->
-        <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
-          <label for="website">Website</label>
-          <input id="website" name="website" type="text" tabindex="-1" autocomplete="new-password" />
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-8" data-reveal>
+        <a href="tel:0313574250" class="border-t border-hairline-steel pt-4 group">
+          <span class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc block mb-2">TEL</span>
+          <span class="font-mono text-lg text-bright-alloy group-hover:text-arterial-red transition-colors">031-357-4250</span>
+        </a>
+        <div class="border-t border-hairline-steel pt-4">
+          <span class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc block mb-2">FAX</span>
+          <span class="font-mono text-lg text-bright-alloy">031-357-7250</span>
         </div>
-        <input type="hidden" name="ts" value="" />
-        <div class="grid sm:grid-cols-2 gap-6">
-          <div class="flex flex-col gap-2">
-            <label for="name" class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc"><span data-ko-only>이름 *</span><span data-en-only>NAME *</span></label>
-            <input id="name" name="name" required maxlength="100" class="bg-steel-panel border border-hairline-steel text-bright-alloy px-4 py-3 focus:border-arterial-red focus:ring-1 focus:ring-arterial-red outline-none transition-colors" />
-          </div>
-          <div class="flex flex-col gap-2">
-            <label for="company" class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc"><span data-ko-only>회사명</span><span data-en-only>COMPANY</span></label>
-            <input id="company" name="company" maxlength="100" class="bg-steel-panel border border-hairline-steel text-bright-alloy px-4 py-3 focus:border-arterial-red focus:ring-1 focus:ring-arterial-red outline-none transition-colors" />
-          </div>
-          <div class="flex flex-col gap-2">
-            <label for="email" class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc">EMAIL *</label>
-            <input id="email" name="email" type="email" required maxlength="254" class="bg-steel-panel border border-hairline-steel text-bright-alloy px-4 py-3 focus:border-arterial-red focus:ring-1 focus:ring-arterial-red outline-none transition-colors" />
-          </div>
-          <div class="flex flex-col gap-2">
-            <label for="phone" class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc"><span data-ko-only>연락처</span><span data-en-only>PHONE</span></label>
-            <input id="phone" name="phone" maxlength="40" class="bg-steel-panel border border-hairline-steel text-bright-alloy px-4 py-3 focus:border-arterial-red focus:ring-1 focus:ring-arterial-red outline-none transition-colors" />
-          </div>
+        <a href="mailto:kbi@kbinc.kr" class="border-t border-hairline-steel pt-4 group">
+          <span class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc block mb-2">EMAIL</span>
+          <span class="font-mono text-lg text-bright-alloy group-hover:text-arterial-red transition-colors">kbi@kbinc.kr</span>
+        </a>
+        <div class="border-t border-hairline-steel pt-4">
+          <span class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc block mb-2"><span data-ko-only>주소</span><span data-en-only>ADDRESS</span></span>
+          <span class="text-[15px] text-bright-alloy leading-relaxed"><span data-ko-only>경기도 화성시 만세구 마도면 청원로 136-18<br />(청원리, 3동) 우18543</span><span data-en-only>Bldg #3, 136-18 Cheongwon-ro, Mado-myeon,<br />Manse-gu, Hwaseong-si, Gyeonggi-do, 18543 Korea</span></span>
         </div>
-        <div class="flex flex-col gap-2">
-          <label for="product" class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc"><span data-ko-only>관심 제품</span><span data-en-only>PRODUCT OF INTEREST</span></label>
-          <select id="product" name="product" class="bg-steel-panel border border-hairline-steel text-bright-alloy px-4 py-3 focus:border-arterial-red focus:ring-1 focus:ring-arterial-red outline-none transition-colors">
-            <option value="">선택하세요 / Select</option>
-            <option value="Air Suspension">에어서스펜션 (VDL Weweler MBS Omega · Truck &amp; Bus)</option>
-            <option value="Axles">액슬 · 랜딩 레그 (VALX)</option>
-            <option value="Other">기타 / Other</option>
-          </select>
-        </div>
-        <div class="flex flex-col gap-2">
-          <label for="message" class="font-mono text-[11px] tracking-[0.2em] text-muted-zinc"><span data-ko-only>문의 내용 *</span><span data-en-only>MESSAGE *</span></label>
-          <textarea id="message" name="message" rows="6" required maxlength="5000" class="bg-steel-panel border border-hairline-steel text-bright-alloy px-4 py-3 focus:border-arterial-red focus:ring-1 focus:ring-arterial-red outline-none transition-colors resize-y"></textarea>
-        </div>
-        <div class="cf-turnstile" data-sitekey={TURNSTILE_SITEKEY} data-theme="dark" data-language="auto" data-callback="onTurnstileSuccess" data-error-callback="onTurnstileFailure" data-timeout-callback="onTurnstileFailure"></div>
-        <noscript>
-          <div class="border border-hairline-steel bg-steel-panel px-4 py-4 font-mono text-[13px] leading-relaxed">
-            <p class="text-arterial-red mb-2">
-              <span data-ko-only>이 문의 양식은 JavaScript가 필요합니다.</span><span data-en-only>This inquiry form requires JavaScript.</span>
-            </p>
-            <p class="text-muted-zinc">
-              <span data-ko-only>브라우저에서 JavaScript를 켜신 후 다시 시도하시거나, kbi@kbinc.kr 로 메일 주시거나 031-357-4250 으로 전화 주세요.</span>
-              <span data-en-only>Please enable JavaScript and try again, or email kbi@kbinc.kr / call 031-357-4250 directly.</span>
-            </p>
-          </div>
-        </noscript>
-        <div class="flex items-center gap-4 flex-wrap">
-          <button type="submit" class="inline-flex items-center gap-2 bg-arterial-red text-bright-alloy font-mono text-sm px-8 py-4 hover:bg-arterial-red-dim active:translate-y-px transition-all disabled:opacity-50">
-            <span data-ko-only>문의 보내기</span><span data-en-only>SEND INQUIRY</span><span class="material-symbols-outlined text-[18px]">send</span>
-          </button>
-          <p id="form-status" class="font-mono text-[13px] text-muted-zinc"></p>
-        </div>
-      </form>
+      </div>
     </div>
   </section>
+
 
   <!-- LOCATION MAP -->
   <section class="border-b border-hairline-steel">
@@ -136,126 +82,4 @@ const TURNSTILE_SITEKEY = '0x4AAAAAAEEX6mFoHBSP28eu';
     </div>
   </section>
 
-  <script>
-    // Progressive enhancement: POST to the Cloudflare Pages Function at /api/contact.
-    // If the endpoint isn't configured yet (503) or the network fails, fall back to
-    // opening the visitor's mail client so an inquiry is never lost.
-    const form = document.getElementById('inquiry-form') as HTMLFormElement | null;
-    const status = document.getElementById('form-status');
-    const tsField = form?.elements.namedItem('ts') as HTMLInputElement | null;
-    if (tsField) tsField.value = String(Date.now());
-    let consecutive403 = 0;
-    let consecutiveEmptyToken = 0;
-    let turnstileFailed = false;
-    let turnstileErrors = 0;
-    // Turnstile's implicit-render callbacks are looked up as globals; this
-    // <script> is an Astro module, so attach explicitly to window.
-    // Per Cloudflare's docs the error-callback's return value controls
-    // retry: returning false lets Turnstile retry automatically, true means
-    // "handled, stop retrying". Allow two automatic retries, then stop.
-    (window as any).onTurnstileFailure = () => {
-      turnstileFailed = true;
-      turnstileErrors++;
-      return turnstileErrors > 2;
-    };
-    // A token arrived — the widget is healthy again, so clear the sticky
-    // failure state instead of condemning the rest of the page load to the
-    // mailto fallback after one transient blip.
-    (window as any).onTurnstileSuccess = () => {
-      turnstileFailed = false;
-      turnstileErrors = 0;
-      consecutiveEmptyToken = 0;
-    };
-    function val(n: string) { const el = form?.elements.namedItem(n) as HTMLInputElement | null; return el ? el.value.trim() : ''; }
-    // Safety net for every path where the API can't be used. The mailto is
-    // attempted, but it silently does nothing on a machine with no mail
-    // client (common in Korea, where webmail dominates), so the status must
-    // stand on its own and offer a working alternative. The form is never
-    // cleared here — the visitor has to be able to copy what they typed.
-    function mailtoFallback() {
-      if (status) {
-        status.textContent = '전송에 실패했습니다. kbi@kbinc.kr 로 메일 주시거나 031-357-4250 으로 전화 주세요.';
-        status.className = 'font-mono text-[13px] text-arterial-red';
-      }
-      const subject = '[웹문의] ' + (val('product') || '제품 문의') + ' - ' + val('name');
-      const body =
-        '이름: ' + val('name') + '\n회사명: ' + val('company') + '\n이메일: ' + val('email') +
-        '\n연락처: ' + val('phone') + '\n관심 제품: ' + val('product') + '\n\n문의 내용:\n' + val('message') + '\n';
-      window.location.href = 'mailto:kbi@kbinc.kr?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-    }
-    form?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const tokenEl = form.querySelector('input[name="cf-turnstile-response"]') as HTMLInputElement | null;
-      if (!tokenEl || !tokenEl.value) {
-        if (!(window as any).turnstile) {
-          // Turnstile script itself never loaded (blocked/offline) — no
-          // amount of waiting will produce a token. Fall back to mailto.
-          mailtoFallback();
-          return;
-        }
-        consecutiveEmptyToken++;
-        if (turnstileFailed || consecutiveEmptyToken >= 2) {
-          // Turnstile itself signaled failure (error/timeout callback), or
-          // the token has stayed empty across repeated attempts — the
-          // challenge sub-host is likely unreachable on this network.
-          // Waiting longer won't help; fall back to mailto.
-          mailtoFallback();
-          return;
-        }
-        // Widget loaded but still solving (1st attempt) — ask the visitor to wait/retry.
-        if (status) { status.textContent = '보안 확인이 아직 완료되지 않았습니다. 잠시 후 다시 시도해주세요.'; status.className = 'font-mono text-[13px] text-arterial-red'; }
-        return;
-      }
-      const btn = form.querySelector('button[type=submit]') as HTMLButtonElement;
-      btn.disabled = true;
-      if (status) { status.textContent = '전송 중…'; status.className = 'font-mono text-[13px] text-muted-zinc'; }
-      try {
-        const res = await fetch('/api/contact', { method: 'POST', body: new FormData(form) });
-        if (res.ok) {
-          consecutive403 = 0;
-          consecutiveEmptyToken = 0;
-          form.reset();
-          (window as any).turnstile?.reset();
-          if (tsField) tsField.value = String(Date.now());
-          if (status) { status.textContent = '문의가 접수되었습니다. 감사합니다.'; status.className = 'font-mono text-[13px] text-bright-alloy'; }
-        } else if (res.status === 503) {
-          mailtoFallback();
-        } else if (res.status === 403) {
-          consecutive403++;
-          (window as any).turnstile?.reset();
-          // 403 is also returned for forbidden_origin, so only claim a
-          // security-check failure when the server actually said so.
-          const reason = await res.json().then((b: any) => b && b.error).catch(() => '');
-          if (consecutive403 >= 2 || reason !== 'turnstile_failed') {
-            // Repeated Turnstile rejection (e.g. VPN/Tor/hardened privacy
-            // setup), or a rejection a retry cannot fix — stop asking for a
-            // retry that keeps failing and give the visitor a real route.
-            mailtoFallback();
-          } else {
-            // Turnstile rejected the token (expired/invalid). Ask for a retry
-            // instead of mailto — a fresh token usually fixes it.
-            if (status) { status.textContent = '보안 확인에 실패했습니다. 잠시 후 다시 시도해주세요.'; status.className = 'font-mono text-[13px] text-arterial-red'; }
-          }
-        } else if (res.status === 422) {
-          // The maxlength attributes make this unreachable through the form
-          // itself, so it only fires if a field slipped past them. mailto is
-          // the wrong fallback here — an oversized body silently fails to
-          // open a mail client — so name the problem and let them shorten it.
-          const body = await res.json().catch(() => null);
-          if (body && body.error === 'too_long') {
-            if (status) { status.textContent = '입력 내용이 너무 깁니다. 문의 내용을 줄여서 다시 시도해주세요.'; status.className = 'font-mono text-[13px] text-arterial-red'; }
-          } else {
-            mailtoFallback();
-          }
-        } else {
-          throw new Error('bad status');
-        }
-      } catch (err) {
-        mailtoFallback();
-      } finally {
-        btn.disabled = false;
-      }
-    });
-  </script>
-  <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </BaseLayout>

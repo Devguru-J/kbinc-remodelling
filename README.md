@@ -29,7 +29,7 @@ public/
   assets/img/                 제품 렌더 · 브랜드 로고 (실제 자산)
   favicon.svg
 functions/
-  api/contact.js              Cloudflare Pages Function — 문의 폼 → 이메일
+  _middleware.js              Cloudflare Pages 미들웨어 — 방문 국가별 기본 언어(KR 외 영문)
 tailwind.config.mjs           디자인 토큰(색상·폰트·간격)
 DESIGN.md                     디자인 시스템 정의
 _source/                      기존 사이트 원본 HTML + 원본 이미지 29종 (아카이브)
@@ -57,22 +57,18 @@ npm run preview  # 빌드 결과 미리보기
    - **Framework preset:** `Astro`
    - **Build command:** `npm run build`
    - **Build output directory:** `dist`
-3. 배포. `functions/` 디렉터리는 Pages가 자동 인식하여 `/api/*` 로 서빙합니다.
+3. 배포. `functions/` 디렉터리는 Pages가 자동 인식하여 엣지에서 실행합니다.
 
-## 문의 폼 이메일 연동
+## 문의 접수 방식
 
-`functions/api/contact.js` 는 [Resend](https://resend.com)로 `kbi@kbinc.kr` 에 메일을 보냅니다.
-Cloudflare Pages → Settings → **Environment variables** 에 아래를 설정하세요:
+웹 문의 폼은 2026-08-03 자로 제거되었습니다 (봇 스팸 유입 + 운영 부담).
+`/contact` 페이지는 전화·팩스·이메일·주소와 지도만 안내하며, 문의는 전화(031-357-4250)
+또는 메일(kbi@kbinc.kr)로 직접 받습니다.
 
-| 변수 | 설명 |
-|------|------|
-| `RESEND_API_KEY` | Resend API 키 |
-| `CONTACT_TO` | 수신 주소, 쉼표로 여러 명 가능 (기본 `kbi@kbinc.kr`) — 예: `kbi@kbinc.kr, hjk94610@gmail.com` |
-| `CONTACT_BCC` | (선택) 숨은참조 수신 주소, 쉼표 구분. 받는사람 줄에 노출되지 않는 보관용 사본 |
-| `CONTACT_FROM` | 인증된 발신자, 예: `KB Inc. <no-reply@kbinc.kr>` (도메인 Resend 인증 필요) |
-
-> `RESEND_API_KEY` 미설정 시 폼은 자동으로 방문자의 메일 앱을 여는 `mailto` 방식으로 폴백하므로,
-> 이메일 연동 전에도 문의가 유실되지 않습니다.
+폼과 함께 제거된 것: `functions/api/contact.js` (Resend 발송 + Turnstile 검증),
+Turnstile 위젯, `/api/contact` 대상 WAF 레이트리밋 룰, Pages 환경변수
+`RESEND_API_KEY` / `CONTACT_TO` / `CONTACT_BCC` / `CONTACT_FROM` / `TURNSTILE_SECRET_KEY`.
+되살릴 경우 git 히스토리의 `3568edf` 시점 코드를 참고하세요.
 
 ## 연락처
 
