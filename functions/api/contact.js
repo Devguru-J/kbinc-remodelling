@@ -4,7 +4,11 @@
 //
 // Setup (Cloudflare dashboard → Pages → Settings → Environment variables):
 //   RESEND_API_KEY   your Resend API key (https://resend.com)
-//   CONTACT_TO       recipient (default: kbi@kbinc.kr)
+//   CONTACT_TO       recipient(s), comma-separated (default: kbi@kbinc.kr)
+//                    e.g. "kbi@kbinc.kr, hjk94610@gmail.com"
+//   CONTACT_BCC      optional hidden copy recipient(s), comma-separated —
+//                    use this instead of CONTACT_TO for a personal archive
+//                    copy that does not show up in the visible To: line
 //   CONTACT_FROM     verified sender, e.g. "KB Inc. <no-reply@kbinc.kr>"
 //                    (the domain must be verified in Resend)
 //   TURNSTILE_SECRET_KEY  Cloudflare Turnstile secret key (bot protection)
@@ -143,7 +147,20 @@ export async function onRequestPost({ request, env }) {
     return json({ error: 'email_not_configured' }, 503);
   }
 
-  const to = env.CONTACT_TO || 'kbi@kbinc.kr';
+  // Recipients are comma-separated so extra inboxes can be added from the
+  // dashboard without a code change. Blank entries (a trailing comma, a
+  // stray space) are dropped so they never reach Resend as "" and fail the
+  // whole send — one typo must not cost a real inquiry.
+  const addresses = (value, fallback = []) => {
+    const list = String(value || '')
+      .split(',')
+      .map((a) => a.trim())
+      .filter(Boolean);
+    return list.length ? list : fallback;
+  };
+
+  const to = addresses(env.CONTACT_TO, ['kbi@kbinc.kr']);
+  const bcc = addresses(env.CONTACT_BCC);
   const from = env.CONTACT_FROM || 'KB Inc. <onboarding@resend.dev>';
 
   const html = `
@@ -163,7 +180,8 @@ export async function onRequestPost({ request, env }) {
     headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
       from,
-      to: [to],
+      to,
+      ...(bcc.length ? { bcc } : {}),
       reply_to: email,
       // Honeypot filled but Turnstile verified → treat as a human whose
       // autofill tripped the trap: still deliver, just flag it for a

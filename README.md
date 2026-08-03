@@ -67,7 +67,8 @@ Cloudflare Pages → Settings → **Environment variables** 에 아래를 설정
 | 변수 | 설명 |
 |------|------|
 | `RESEND_API_KEY` | Resend API 키 |
-| `CONTACT_TO` | 수신 주소 (기본 `kbi@kbinc.kr`) |
+| `CONTACT_TO` | 수신 주소, 쉼표로 여러 명 가능 (기본 `kbi@kbinc.kr`) — 예: `kbi@kbinc.kr, hjk94610@gmail.com` |
+| `CONTACT_BCC` | (선택) 숨은참조 수신 주소, 쉼표 구분. 받는사람 줄에 노출되지 않는 보관용 사본 |
 | `CONTACT_FROM` | 인증된 발신자, 예: `KB Inc. <no-reply@kbinc.kr>` (도메인 Resend 인증 필요) |
 
 > `RESEND_API_KEY` 미설정 시 폼은 자동으로 방문자의 메일 앱을 여는 `mailto` 방식으로 폴백하므로,
