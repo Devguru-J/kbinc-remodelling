@@ -8,6 +8,42 @@ const {
   description = '케이비(주)는 VDL Weweler 에어서스펜션(MBS Omega·Truck & Bus), VALX 디스크 액슬·랜딩 레그 등 유럽 선진국의 검증된 특장차 핵심 부품을 국내에 공급합니다.',
   active = null,
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+// Organization + WebSite structured data — company facts as shown in the footer.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://kbinc.kr/#organization',
+      name: '케이비(주)',
+      alternateName: 'KB Inc.',
+      url: 'https://kbinc.kr/',
+      logo: 'https://kbinc.kr/assets/img/kbi_logo.gif',
+      email: 'kbi@kbinc.kr',
+      telephone: '+82-31-357-4250',
+      faxNumber: '+82-31-357-7250',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '만세구 마도면 청원로 136-18',
+        addressLocality: '화성시',
+        addressRegion: '경기도',
+        postalCode: '18543',
+        addressCountry: 'KR',
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://kbinc.kr/#website',
+      url: 'https://kbinc.kr/',
+      name: '케이비(주) KB Inc.',
+      inLanguage: 'ko',
+      publisher: { '@id': 'https://kbinc.kr/#organization' },
+    },
+  ],
+};
 ---
 <!DOCTYPE html>
 <html class="dark" lang="ko">
@@ -23,7 +59,9 @@ const {
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
+  <meta property="og:url" content={canonical} />
+  <link rel="canonical" href={canonical} />
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
