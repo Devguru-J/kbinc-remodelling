@@ -7,6 +7,7 @@ const {
   title = '케이비(주) KB Inc.',
   description = '케이비(주)는 VDL Weweler 에어서스펜션(MBS Omega·Truck & Bus), VALX 디스크 액슬·랜딩 레그 등 유럽 선진국의 검증된 특장차 핵심 부품을 국내에 공급합니다.',
   active = null,
+  noindex = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -61,14 +62,17 @@ const jsonLd = {
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta property="og:url" content={canonical} />
-  <link rel="canonical" href={canonical} />
+  {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet" />
+  <!-- icon_names subsets the icon font to just these glyphs (~3 KB instead of
+       ~310 KB). Using a new icon? Add its name here, kept in alphabetical order,
+       or it will render as plain text. -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=add,arrow_forward,call,campaign,close,download,import_contacts,info,mail,map,menu,open_in_new,remove,visibility&display=block" rel="stylesheet" />
   <script is:inline>
     // Material Symbols renders its ligature text (e.g. "arrow_forward") until the
     // icon font arrives; keep icons invisible until the font is ready, with a
