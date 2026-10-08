@@ -1,0 +1,12 @@
+# Browser caching. Pages' default is max-age=0 (revalidate every request).
+# Astro's bundled CSS/JS have content hashes in their names, so they can be
+# cached forever. Images and PDFs keep fixed names, so they get a week —
+# when replacing one, give it a new file name to bust caches immediately.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*
+  Cache-Control: public, max-age=604800
+
+/catalogs/*
+  Cache-Control: public, max-age=604800
